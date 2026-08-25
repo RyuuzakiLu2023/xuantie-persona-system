@@ -1,0 +1,31 @@
+# XTMEM 插件配置示例（阶段 1.7）
+# 实际文件：$HERMES_HOME/xtmem.yaml（每个 profile 一份；不存在则全部用默认值）
+# 默认值见 provider.py：DEFAULT_SHARED_DB / DEFAULT_NAMESPACE / DEFAULT_PROJECT
+
+# 共享物理库（默认：E:\2222\3333\mimox-data\.hermes\memory\vector_store.db —— 龙崎拍板基准）
+# 测试期可用 XTMEM_DB_PATH 环境变量覆盖，优先级高于本文件。
+db_path: "E:\\2222\\3333\\mimox-data\\.hermes\\memory\\vector_store.db"
+
+# namespace 自动分域：优先用 initialize 的 agent_identity，此处仅作显式覆盖
+# namespace: "xuantie_lark"
+# project: ""
+
+# context_window（引擎默认 128k）
+# context_window: 128000
+
+# 可选：覆盖 config.yaml 的 memory_advanced 段（不写则自动读取本 profile config.yaml）
+# memory_advanced:
+#   embedding:
+#     model: bge-m3
+#     base_url: http://127.0.0.1:11434
+#     timeout: 30
+#   retrieval:
+#     top_k: 10
+#     token_budget: 2000
+#     relevance_threshold: 0.15
+#   compression:
+#     enabled: true
+#     max_entries: 10000
+#     trigger_ratio: 0.9
+#   prefetch_only: false
+#   rest_api: false

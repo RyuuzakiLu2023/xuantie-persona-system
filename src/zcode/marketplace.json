@@ -1,0 +1,14 @@
+{
+  "name": "xtmem-local",
+  "plugins": [
+    {
+      "name": "xtmem",
+      "source": ".",
+      "version": "0.1.0",
+      "description": "XTMEM 共享记忆：MCP 三工具 + UserPromptSubmit 检索注入 + Stop 观察写入；零人格逻辑。",
+      "author": {
+        "name": "WorkBuddy"
+      }
+    }
+  ]
+}

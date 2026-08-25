@@ -1,0 +1,5 @@
+name: xtmem
+version: "0.1.0"
+description: "XTMEM — 玄铁通用记忆系统：MIMOX（0.19 自建 memory 包）平移为 0.20.5 MemoryProvider，全局共享 SQLite 记忆库，按 profile namespace 分域；零人格逻辑。"
+pip_dependencies:
+  - jieba

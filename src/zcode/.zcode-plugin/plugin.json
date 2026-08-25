@@ -1,0 +1,21 @@
+{
+  "name": "xtmem",
+  "version": "0.1.0",
+  "description": "XTMEM 共享记忆：Z老师端直接读写全局记忆库（MCP 三工具 + UserPromptSubmit 检索注入 + Stop 观察写入）；零人格逻辑。",
+  "author": {
+    "name": "WorkBuddy"
+  },
+  "license": "MIT",
+  "mcpServers": {
+    "xtmem": {
+      "command": "C:/Users/Ryuuzaki/AppData/Local/Programs/Python/Python311/python.exe",
+      "args": [
+        "${ZCODE_PLUGIN_ROOT}/mcp/xtmem_mcp.py"
+      ],
+      "cwd": "${ZCODE_PROJECT_DIR}",
+      "env": {
+        "XTMEM_PLUGIN_ROOT": "${ZCODE_PLUGIN_ROOT}"
+      }
+    }
+  }
+}
