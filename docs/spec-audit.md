@@ -1,6 +1,6 @@
 # XTMEM 实施规格书 v1.0 · 审计报告
 
-> 审计对象：`F:\Ryuuzaki\Documents\XTMEM-实施规格书-v1.0.md`
+> 审计对象：`<DOCS>/XTMEM-实施规格书-v1.0.md`
 > 方法：ai-code-audit-handbook（文档对账模式：声称 vs 实况，全部结论带行号/实测证据）
 > 审计人：江北（WorkBuddy）· 2026-08-25 15:2x
 > **一句话结论：spec 骨架扎实（事实表大头全对），但 v2.3 改版留下两处决策级残留矛盾，provider 接口认知漏了 6 个方法，且环境是活的（审计期间 mimox.py 已被并行会话修改）——修完 5 处可放心开工。评分 ★★★☆☆（3.5/5）**
@@ -24,7 +24,7 @@
 | ~2300 行官方文件改动（L24） | 双树全量 diff（CRLF 修正）实测 ✅ |
 | xuantie-webui 1142 行（L29） | wc -l 实测 ✅ |
 | 引用文档 6/6 存在（附录 C） | 逐个 ls 实测 ✅ |
-| mimox-data/plugins 与 profile plugins 双目录并存（L83） | ls 实测 ✅ |
+| <HERMES_HOME>/plugins 与 profile plugins 双目录并存（L83） | ls 实测 ✅ |
 | zcode 插件体系/本地 marketplace（L30） | marketplace.json source=directory 实测 ✅ |
 
 ### 🟠 严重（2 项——决策级矛盾，新会话按 spec 执行会走错方向）
@@ -54,7 +54,7 @@
 
 ### ⚠️ 活环境警告（审计期间的意外发现）
 
-- **mimox.py 已于今天 14:06 被修改**（mtime 实锤）：原"硬编码 v1 死路径"（`E:\2222\3333\hermes-agent-main\hermes-agent-main`——实测该目录**不存在**，原 mimox.py 本已损坏）被改为 `XTMEM_HERMES_ROOT` 环境变量 + 默认指 v2 生产路径，注释标"XTMEM 阶段1.5"。
+- **mimox.py 已于今天 14:06 被修改**（mtime 实锤）：原"硬编码 v1 死路径"（`<PROJECT_ROOT>/hermes-agent-main\hermes-agent-main`——实测该目录**不存在**，原 mimox.py 本已损坏）被改为 `XTMEM_HERMES_ROOT` 环境变量 + 默认指 v2 生产路径，注释标"XTMEM 阶段1.5"。
 - 判定：**存在并行执行会话在按 spec 干活**（改法与 spec §4.2/阶段 1.5 设计吻合）。spec L26"硬编码 v1 老路径待盘点"**已过时**（实况自愈）。
 - 含义：① spec 声称的"实测"带时间戳效力，环境会演进；② 建议 spec 头加一行「勘查时点 2026-08-25；环境由并行会话推进，冲突时以实况为准并回写本 spec」；③ 0.1 步骤的 git init 变得**更紧迫**（改动已在发生，再不收编基线就飘了）。
 

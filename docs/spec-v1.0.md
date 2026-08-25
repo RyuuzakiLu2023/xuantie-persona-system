@@ -19,16 +19,16 @@
 | 项 | 值 |
 |---|---|
 | OS | Windows（Git Bash），AMD RX6750GRE（仅 Vulkan） |
-| 共享记忆库 | `E:\2222\3333\mimox-data\.hermes\memory\vector_store.db`（SQLite，450 条，WAL，FTS5+bge-m3@Ollama:11434；memory_advanced 已启用） |
-| 记忆孤岛 | `E:\hermes-webui (2)\.hermes\memory\vector_store.db`（**1503 条**，止于 2026-07-29，7 月底前历史——待 absorb 收编） |
-| 在用 hermes 源码 | `E:\2222\3333\hermes-agent-main-v2\hermes-agent-main`（0.19.0 + 自建 memory/ 包 + ~2300 行官方文件改动，**无 git**） |
-| 原版 0.19 / 新源码 | `E:\git项目源码\hermes-agent-main0.19`（diff 基准）/ `E:\git项目源码\hermes-agent-mainv0.21`（**实际 0.20.5**，升级目标） |
-| mimox 启动器 | `E:\2222\3333\mimox\mimox.py`（设 HERMES_HOME=mimox-data；⚠️ 其内硬编码 v1 老路径待盘点） |
-| 玄铁人格母本 | `E:\2222\3333\mimox-data\profiles\xuantie_lark\SOUL.md`（玄铁亲笔维护，自动快照 20 份） |
-| 好感度 | `mimox-data\affection\affection.yaml`（79.5 分，已两端共享）+ `quotes.yaml`（8 阶段台词）+ `memory_bridge.py`/`affection_bridge.py` |
-| DSH | xuantie profile 在 `C:\Users\Ryuuzaki\.dsh\profiles\xuantie\`（xuantie-webui 插件 1142 行，runBridge 模式 68 行起）；preset 机制样例 `.dsh\.agent-presets\liangshen\`（AGENT-PLANE/realm 隔离） |
+| 共享记忆库 | `<HERMES_HOME>/.hermes\memory\vector_store.db`（SQLite，450 条，WAL，FTS5+bge-m3@Ollama:11434；memory_advanced 已启用） |
+| 记忆孤岛 | `<ISOLATED>/hermes-webui (2)/.hermes\memory\vector_store.db`（**1503 条**，止于 2026-07-29，7 月底前历史——待 absorb 收编） |
+| 在用 hermes 源码 | `<PROJECT_ROOT>/hermes-agent-main-v2\hermes-agent-main`（0.19.0 + 自建 memory/ 包 + ~2300 行官方文件改动，**无 git**） |
+| 原版 0.19 / 新源码 | `<GIT_SOURCE>/hermes-agent-main0.19`（diff 基准）/ `<GIT_SOURCE>/hermes-agent-mainv0.21`（**实际 0.20.5**，升级目标） |
+| mimox 启动器 | `<PROJECT_ROOT>/mimox\mimox.py`（设 HERMES_HOME=mimox-data；⚠️ 其内硬编码 v1 老路径待盘点） |
+| 玄铁人格母本 | `<HERMES_HOME>/profiles\xuantie_lark\SOUL.md`（玄铁亲笔维护，自动快照 20 份） |
+| 好感度 | `<HERMES_HOME>/affection\affection.yaml`（79.5 分，已两端共享）+ `quotes.yaml`（8 阶段台词）+ `memory_bridge.py`/`affection_bridge.py` |
+| DSH | xuantie profile 在 `<USER_HOME>/.dsh\profiles\xuantie\`（xuantie-webui 插件 1142 行，runBridge 模式 68 行起）；preset 机制样例 `.dsh\.agent-presets\liangshen\`（AGENT-PLANE/realm 隔离） |
 | zcode | 记忆目录 `~/.zcode/cli/memories/projects/<name>-<hash16>\memory\`（kebab-case 文件+[[双链]]索引）；**插件体系**：`.zcode-plugin/plugin.json`（兼容 .claude-plugin），组件 commands/skills/hooks/mcpServers/userConfig，本地 marketplace 可装 |
-| cron 任务群 | `mimox-data/cron/jobs.json` **13 个任务**（记忆维护 6 + 知识代谢 1 + 会话杂项 6），ticker 心跳活跃 |
+| cron 任务群 | `<HERMES_HOME>/cron/jobs.json` **13 个任务**（记忆维护 6 + 知识代谢 1 + 会话杂项 6），ticker 心跳活跃 |
 | 关键常量 | MEMORY.md 硬顶 2200 字 / USER.md 1375 字 / 压缩 threshold 0.5、target 0.2、protect 20+3 |
 | 飞书卡片包 | hermes_feishu_card（外部包，位置待运行时定位）；挂载点补丁清单 `.hermes_feishu_card_manifest`（sha256） |
 
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS xtmem_state (
 
 ### 4.2 xtmem.py CLI
 
-- `E:\2222\3333\mimox-data\xtmem\xtmem.py`，零依赖单文件，Python 3.11
+- `<HERMES_HOME>/xtmem\xtmem.py`，零依赖单文件，Python 3.11
 - 手法：`sys.path.insert(HERMES_ROOT)` import 引擎（memory_bridge.py 同款；spawn 时 rest_api 必须关闭——多实例抢 20000 端口仅 warning）；升级前 HERMES_ROOT 指向现生产源码，升级后指向插件 engine/（用环境变量 `XTMEM_HERMES_ROOT` 覆盖）
 - 命令：`migrate` / `store` / `observe` / `recall` / `lookup --cross`（跨全 agent/project，结果带 [namespace/project] 标签）/ `forget`（软删+WAL 清痕）/ `export --zcode`（匹配 `<name>-<hash16>` 已存在目录，非 mem- 条目整行保留含 [[双链]]）/ `import --zcode`（台账增量）/ **`absorb --db <孤岛库> --namespace hermes-webui`**（1503 条收编，原库只读保留）/ `sync` / `agents.md`（v2.1）——**无 soul 命令**（v2.3 独立人格）
 - 防循环三件套：xtmem_state 台账增量 + import 带 host_origin 自痕迹跳过 + 文件名分区（`mem-` 前缀=XTMEM 生成区，非 `mem-`=zcode/用户区）
@@ -80,9 +80,9 @@ CREATE TABLE IF NOT EXISTS xtmem_state (
 
 ### 4.3 hermes 插件（0.20.5 MemoryProvider 实现）
 
-- **位置（拍板 D3）：全局插件目录 `mimox-data/plugins/xtmem/`（预计，⚠️ 步骤 1.1 必须实测 HERMES_HOME 真实落点后确认——mimox-data/plugins/ 与 profiles/xuantie_lark/plugins/ 两目录并存，放错层=部分 profile 不可见）**
+- **位置（拍板 D3）：全局插件目录 `<HERMES_HOME>/plugins/xtmem/`（预计，⚠️ 步骤 1.1 必须实测 HERMES_HOME 真实落点后确认——<HERMES_HOME>/plugins/ 与 profiles/xuantie_lark/plugins/ 两目录并存，放错层=部分 profile 不可见）**
 - 结构：`__init__.py`（class XtmemMemoryProvider(MemoryProvider)，目录含 MemoryProvider 字样即被识别）+ `provider.py` + `engine/`（0.19 memory/ 包平移）+ 可选 plugin.yaml（仅 name/version/description/pip_dependencies:[jieba]，**无 kind 字段**）+ 可选 config_schema.py
-- 激活：**全局 config**（mimox-data/config.yaml）加 `memory.provider: xtmem`（单选唯一引擎；profile config 不单独设）
+- 激活：**全局 config**（<HERMES_HOME>/config.yaml）加 `memory.provider: xtmem`（单选唯一引擎；profile config 不单独设）
 - 注册器事实：四源扫描 bundled > user($HERMES_HOME/plugins/) > project > pip entry_points；bundled-wins；builtin MEMORY.md/CoreMemory 与外部 provider 并存
 - **provider 职责三栏（定稿）**：
 
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS xtmem_state (
 
 | 层 | 挂载 | 范围 |
 |---|---|---|
-| 工具层 | `C:\Users\Ryuuzaki\.dsh\profiles\xuantie\xtmem-tools\`（profile 级插件，照 xuantie-webui 安装方式；web profile 可选同装）。三工具 `xtmem_recall/xtmem_store/xtmem_lookup_cross` = spawn xtmem.py（runBridge 模式） | 该 profile 下**所有 preset/会话/玄铁所有模式** |
+| 工具层 | `<USER_HOME>/.dsh\profiles\xuantie\xtmem-tools\`（profile 级插件，照 xuantie-webui 安装方式；web profile 可选同装）。三工具 `xtmem_recall/xtmem_store/xtmem_lookup_cross` = spawn xtmem.py（runBridge 模式） | 该 profile 下**所有 preset/会话/玄铁所有模式** |
 | 注入层 | **分角色记忆摘要注入（仅本角色 namespace，不 cross）**；不注入 SOUL/USER 人设（零人格 D5） | 仅本端会话（记忆摘要另入系统提示词非人格） |
 
 **角色→域映射（分角色注入规则，2026-08-25 用户拍板）**：hermes=profile 名（agent_identity 自动）；DSH 工具层默认域 `dsh`（D指导，可配 `namespace`）；zcode 域 `zcode`（Z老师）。注入永远**只取本角色域**；跨角色必须用工具显式查询（recall/lookup --cross 或 xtmem_lookup_cross），不自动注入他人记忆。
@@ -121,7 +121,7 @@ cwd→project 走映射表（显式配置，禁裸名兜底）。不动：xuanti
 | ③ 文件轨（可选） | export/import 投影（匹配已存在 `<name>-<hash16>` 目录；hash16 公式已被用户侧破解：sha256(path.lower())[:16]） | 与内建 Memory 互通 |
 
 - 人格（Z老师）：zcode 保持自己现有 AGENTS.md/插件 persona，XTMEM 插件**不注入任何人格**（v2.3）
-- 插件源码目录 `E:\2222\3333\xtmem-zcode-plugin\`，本地 marketplace 安装。manifest 名 `xtmem`（正则 `^[a-z0-9][a-z0-9._-]{0,127}$`）。
+- 插件源码目录 `<PROJECT_ROOT>/xtmem-zcode-plugin\`，本地 marketplace 安装。manifest 名 `xtmem`（正则 `^[a-z0-9][a-z0-9._-]{0,127}$`）。
 
 ### 4.6 各端独立人格 与 孤岛收编（v2.3）
 
@@ -143,8 +143,8 @@ context_compressor(494)/memory_tool(441)/system_prompt(113) 合并时：① 从 
 
 ### ⭐ 工作流总则（D12，龙崎拍板 2026-08-25：开发-测试-手动切换三段式）
 
-1. **所有改动只在 `E:\git项目源码\hermes-agent-mainv0.21`（新源码）上进行**——它是开发环境；生产目录 `E:\2222\3333\hermes-agent-main-v2\hermes-agent-main` 在切换前**一律不动**（玄铁现链路持续在跑）。
-2. **每步改动配测试，测试文件永久留存**（`E:\git项目源码\hermes-agent-mainv0.21\tests\` 下命名 `xtmem_*.py`，参照既有 test_p1_features.py 惯例）——它们是后续升级 0.21 的回归资产。
+1. **所有改动只在 `<GIT_SOURCE>/hermes-agent-mainv0.21`（新源码）上进行**——它是开发环境；生产目录 `<PROJECT_ROOT>/hermes-agent-main-v2\hermes-agent-main` 在切换前**一律不动**（玄铁现链路持续在跑）。
+2. **每步改动配测试，测试文件永久留存**（`<GIT_SOURCE>/hermes-agent-mainv0.21\tests\` 下命名 `xtmem_*.py`，参照既有 test_p1_features.py 惯例）——它们是后续升级 0.21 的回归资产。
 3. **全部改动验收通过后，由龙崎亲自执行源码替换**（新源码目录 → 原目录位置；AI 不擅自切换）。替换前 AI 须先出一份"切换清单"（替换步骤 + 回滚方法 + 路径硬编码改点核对），龙崎点头才算。
 4. **测试期数据保护**：涉及写库的测试一律用 `vector_store.db` 的**副本**（拷到临时路径，引擎 db_path 指副本）；纯读测试可用真库。生产库在切换完成前不接任何新写入。
 5. 测试跑新源码的方式：临时启动器（仿 mimox.py，HERMES_HOME 指向独立测试数据目录或 mimox-data 只读场景），实施时定，原则=不污染生产。
@@ -214,6 +214,6 @@ context_compressor(494)/memory_tool(441)/system_prompt(113) 合并时：① 从 
 
 - **A 命名**：见 D9。MIMOX=引擎血统称呼（0.19 自建包），mimox-data=数据目录历史名不改。
 - **B 禁改清单**：xuantie preset / xuantie-webui 插件 / memory_bridge.py / affection 全套 / quotes.yaml / 各 profile SOUL.md（XTMEM 插件零人格逻辑）/ 共享库现有 450 条。
-- **C 参考文档**（同目录）：《hermes升级-补丁验尸与路线-v1.md》（升级工程权威，§6.3 插件形态/§七 钩子裁剪）、《通用记忆系统-同步实施方案-v2.0.md》（v2.3，本 spec 母本）、《多角色玩法增强 spec》（v2.4 起独立）、《XTMEM-skill-sync方案-v1.0.md》（同目录）、《XTMEM方案-v2.0评估.md》（用户侧评估，含拍板 A/B/C）、《通用记忆系统-方案评估-v1.0.md》（早期验证）、《玄铁记忆系统架构文档 .md》（E:\2222\3333\new\，玄铁亲笔，注意 daily_log_heartbeat"死代码"结论已被 cron 任务实证推翻待修正）。
+- **C 参考文档**（同目录）：《hermes升级-补丁验尸与路线-v1.md》（升级工程权威，§6.3 插件形态/§七 钩子裁剪）、《通用记忆系统-同步实施方案-v2.0.md》（v2.3，本 spec 母本）、《多角色玩法增强 spec》（v2.4 起独立）、《XTMEM-skill-sync方案-v1.0.md》（同目录）、《XTMEM方案-v2.0评估.md》（用户侧评估，含拍板 A/B/C）、《通用记忆系统-方案评估-v1.0.md》（早期验证）、《玄铁记忆系统架构文档 .md》（<PROJECT_ROOT>/new\，玄铁亲笔，注意 daily_log_heartbeat"死代码"结论已被 cron 任务实证推翻待修正）。
 
 *江北（WorkBuddy）整合 · 2026-08-25 · 素材：全天全链路实地勘查 + 龙崎六轮拍板（XTMEM 命名/记忆全局通/人格分层→独立人格/第一目标核对→多角色天团/开发测试切换）*

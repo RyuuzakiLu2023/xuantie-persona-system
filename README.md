@@ -26,17 +26,17 @@
 
 | 本仓库路径 | 本地源路径（实机） | 职责 |
 |---|---|---|
-| `src/cli/xtmem.py` | `E:/2222/3333/mimox-data/xtmem/xtmem.py` | 外部端 CLI：migrate/store/observe/recall/lookup/forget/absorb/export/import/reembed/agents/agents.md/sync/whisper/reveal/msg/relations/reflect |
-| `src/hermes-plugin/` | `E:/2222/3333/mimox-data/plugins/xtmem/` | 0.20.5 MemoryProvider 插件（__init__/provider/recall_policy/memory 引擎/plugin.yaml/xtmem.yaml.example） |
+| `src/cli/xtmem.py` | `<HERMES_HOME>/xtmem/xtmem.py` | 外部端 CLI：migrate/store/observe/recall/lookup/forget/absorb/export/import/reembed/agents/agents.md/sync/whisper/reveal/msg/relations/reflect |
+| `src/hermes-plugin/` | `<HERMES_HOME>/plugins/xtmem/` | 0.20.5 MemoryProvider 插件（__init__/provider/recall_policy/memory 引擎/plugin.yaml/xtmem.yaml.example） |
 | `src/hermes-plugin/memory/` | 同左（0.19 memory/ 包平移，原名 engine/） | 记忆引擎：上下文构建、WAL、混合检索、成本压缩、LLM 提取、每日日志、AutoDream、静态面板 |
-| `src/dsh/xtmem-tools/index.mjs` | `C:/Users/Ryuuzaki/.dsh/profiles/{web,xuantie}/xtmem-tools/index.mjs` | DSH profile 插件：xtmem_recall/store/lookup_cross + 分角色记忆注入 + cwd→project 映射 |
-| `src/dsh/cordis.patch.example.yml` | `C:/Users/Ryuuzaki/.dsh/profiles/web/cordis.patch.yml` | 挂载示例（含小 D 全局人格 persona 块） |
-| `src/zcode/` | `E:/2222/3333/xtmem-zcode-plugin/` | zcode 官方插件：mcp/xtmem_mcp.py（stdio MCP 三工具）+ hooks（UserPromptSubmit 注入 / Stop 观察）+ marketplace.json |
-| `src/scripts/` | `E:/2222/3333/mimox-data/scripts/` | cron 脚本：xtmem-sync（5 分钟台账收敛）/ xtmem-autodream（每周蒸馏）/ monthly_knowledge_metabolism（月度报告） |
-| `src/skills-shared/` | `E:/2222/3333/skills-shared/` | 技能母本库 + skill-sync.py（单源分发到 WorkBuddy/hermes/DSH/玄铁 profile） |
+| `src/dsh/xtmem-tools/index.mjs` | `<USER_HOME>/.dsh/profiles/{web,xuantie}/xtmem-tools/index.mjs` | DSH profile 插件：xtmem_recall/store/lookup_cross + 分角色记忆注入 + cwd→project 映射 |
+| `src/dsh/cordis.patch.example.yml` | `<USER_HOME>/.dsh/profiles/web/cordis.patch.yml` | 挂载示例（含小 D 全局人格 persona 块） |
+| `src/zcode/` | `<PROJECT_ROOT>/xtmem-zcode-plugin/` | zcode 官方插件：mcp/xtmem_mcp.py（stdio MCP 三工具）+ hooks（UserPromptSubmit 注入 / Stop 观察）+ marketplace.json |
+| `src/scripts/` | `<HERMES_HOME>/scripts/` | cron 脚本：xtmem-sync（5 分钟台账收敛）/ xtmem-autodream（每周蒸馏）/ monthly_knowledge_metabolism（月度报告） |
+| `src/skills-shared/` | `<PROJECT_ROOT>/skills-shared/` | 技能母本库 + skill-sync.py（单源分发到 WorkBuddy/hermes/DSH/玄铁 profile） |
 | `patches/hermes_feishu_card_manifest.json` | 生产替换目录 `.hermes_feishu_card_manifest` | 官方飞书卡片包 4.2.8 打补丁清单（sha256 校验） |
 | `tests/` | v0.21 仓库 `tests/xtmem_*.py` | 永久回归：插件 smoke（含 S2 挂点）+ CLI 16 项（含玩法框架） |
-| `docs/` | `F:/Ryuuzaki/Documents/XTMEM-*.md` | 规格书 v1.0 / 玩法增强 / skill-sync / 阶段 1.1/1.4/1.7/1.8 / 阶段 2 验收 / spec 审计 |
+| `docs/` | `<DOCS>/XTMEM-*.md` | 规格书 v1.0 / 玩法增强 / skill-sync / 阶段 1.1/1.4/1.7/1.8 / 阶段 2 验收 / spec 审计 |
 
 ## 2. 关键设计（实现必读）
 

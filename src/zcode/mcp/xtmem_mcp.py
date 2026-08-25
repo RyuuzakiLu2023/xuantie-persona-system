@@ -32,7 +32,7 @@ XTMEM_PY = os.environ.get(
 if not os.path.exists(XTMEM_PY):
     for _cand in (
         Path(PLUGIN_ROOT).parents[1] / "mimox-data" / "xtmem" / "xtmem.py",
-        Path(r"E:\2222\3333\mimox-data\xtmem\xtmem.py"),
+        Path(os.environ.get("XTMEM_SCRIPT", "xtmem/xtmem.py")),
     ):
         if _cand.exists():
             XTMEM_PY = str(_cand)

@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "process",
-            "command": "C:/Users/Ryuuzaki/AppData/Local/Programs/Python/Python311/python.exe",
+            "command": "python",
             "args": [
               "${ZCODE_PLUGIN_ROOT}/hooks/xtmem_hook.py",
               "UserPromptSubmit"
@@ -23,7 +23,7 @@
         "hooks": [
           {
             "type": "process",
-            "command": "C:/Users/Ryuuzaki/AppData/Local/Programs/Python/Python311/python.exe",
+            "command": "python",
             "args": [
               "${ZCODE_PLUGIN_ROOT}/hooks/xtmem_hook.py",
               "Stop"

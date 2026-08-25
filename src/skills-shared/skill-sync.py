@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """skill-sync.py —— XTMEM 资产单源分发：技能母本 → 多端投放（v1）。
 
-- 母本库：E:/2222/3333/skills-shared（git 管理，唯一权威），只扫母本声明的 skill。
+- 母本库：<PROJECT>/skills-shared（git 管理，唯一权威），只扫母本声明的 skill。
 - 方向：单向（母本 → 各端），各端改动不回写。
 - 台账：<母本>/.sync-state.json（每 skill 每端的 dir_hash，增量投放，无变更不写）。
 - 保护：目标同名目录若不在台账管理内 → 跳过+警告；管理内 → 按母本覆盖（首次先自动备份）。
@@ -24,13 +24,13 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-SHARED = Path(os.environ.get("XTMEM_SKILLS_SHARED", r"E:\2222\3333\skills-shared"))
+SHARED = Path(os.environ.get("XTMEM_SKILLS_SHARED", "skills-shared"))
 STATE = SHARED / ".sync-state.json"
 DEFAULT_ROOTS = {
-    "workbuddy": r"C:\Users\Ryuuzaki\.workbuddy\skills",
-    "hermes": r"E:\2222\3333\mimox-data\skills",
-    "dsh": r"C:\Users\Ryuuzaki\.dsh\skills",
-    "hermes-profile": r"E:\2222\3333\mimox-data\profiles\xuantie_lark\skills",
+    "workbuddy": os.environ.get("XTMEM_SKILL_ROOT_WORKBUDDY", "~/.workbuddy/skills"),
+    "hermes": os.environ.get("XTMEM_SKILL_ROOT_HERMES", "<HERMES_HOME>/skills"),
+    "dsh": os.environ.get("XTMEM_SKILL_ROOT_DSH", "~/.dsh/skills"),
+    "hermes-profile": os.environ.get("XTMEM_SKILL_ROOT_HERMES_PROFILE", "<HERMES_HOME>/profiles/xuantie/skills"),
 }
 ROOTS = {**DEFAULT_ROOTS, **(json.loads(os.environ.get("XTMEM_SKILL_ROOTS_JSON", "{}")) if os.environ.get("XTMEM_SKILL_ROOTS_JSON") else {})}
 

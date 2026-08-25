@@ -5,12 +5,12 @@ agent_created: true
 version: 1.0.0
 tags: [code-audit, doc-reconciliation, plugin-verification, security, injection-testing]
 triggers: [文档对账, 审计声称, 核验补丁, patch靶点验证, 修复复审, 对账审计, 实战审计]
-source: E:\2222\3333\new\AI代码审计方法手册.md
+source: <PROJECT_ROOT>/new/AI代码审计方法手册.md
 ---
 
 # AI 代码审计手册（实战版）
 
-> 母本：`E:\2222\3333\new\AI代码审计方法手册.md`（完整命令组与实战案例在母本，本 SKILL 为执行纲要）。实战来源：aiduMEI v19 五轮审计 + mem0-enhanced 插件全量审计。
+> 母本：`<PROJECT_ROOT>/new/AI代码审计方法手册.md`（完整命令组与实战案例在母本，本 SKILL 为执行纲要）。实战来源：aiduMEI v19 五轮审计 + mem0-enhanced 插件全量审计。
 
 ## 审计十诫（每次开工前默诵）
 
@@ -87,4 +87,4 @@ N+1 查询 / 同步阻塞 / 无界增长；skip+mock 占比与**关键路径 0 �
 | 静默吞三分类 | `grep -rnE "except Exception" . -A1` 分头数 debug/pass/warning |
 | SQL 拼接 | `grep -rnE 'execute\(f"\|execute\(.*\+ ' . --include=*.py` |
 
-完整命令组与实战案例见母本：`E:\2222\3333\new\AI代码审计方法手册.md`
+完整命令组与实战案例见母本：`<PROJECT_ROOT>/new/AI代码审计方法手册.md`

@@ -11,8 +11,8 @@ export const name = 'xtmem-tools';
 export const inject = ['tools', 'systemPrompt'];
 
 const DEFAULTS = {
-  python: 'C:/Users/Ryuuzaki/AppData/Local/Programs/Python/Python311/python.exe',
-  script: 'E:/2222/3333/mimox-data/xtmem/xtmem.py',
+  python: process.env.XTMEM_PYTHON || 'python',
+  script: process.env.XTMEM_SCRIPT || 'xtmem/xtmem.py',
   timeoutMs: 30000,
   namespace: 'dsh',
 };

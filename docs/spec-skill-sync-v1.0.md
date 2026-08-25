@@ -11,18 +11,18 @@
 
 | 端 | skills 落点 | 现状 | 格式 |
 |---|---|---|---|
-| WorkBuddy（江北） | `C:\Users\Ryuuzaki\.workbuddy\skills\<name>\SKILL.md` | 已装 ai-code-audit-handbook（本次新建） | SKILL.md（frontmatter name/description/version） |
-| hermes | `E:\2222\3333\mimox-data\skills\<name>\SKILL.md` | 全局库 **39 个 skill**（anysearch 等，标准格式+scripts/） | 同格式 ✅ |
-| DSH | `C:\Users\Ryuuzaki\.dsh\skills\<name>\SKILL.md` | 现有 j-space 先例 | 同格式 ✅（原生吃 Anthropic Skill） |
+| WorkBuddy（江北） | `<USER_HOME>/.workbuddy\skills\<name>\SKILL.md` | 已装 ai-code-audit-handbook（本次新建） | SKILL.md（frontmatter name/description/version） |
+| hermes | `<HERMES_HOME>/skills\<name>\SKILL.md` | 全局库 **39 个 skill**（anysearch 等，标准格式+scripts/） | 同格式 ✅ |
+| DSH | `<USER_HOME>/.dsh\skills\<name>\SKILL.md` | 现有 j-space 先例 | 同格式 ✅（原生吃 Anthropic Skill） |
 | zcode | 无全局 skills 目录 | 走插件 skills 组件（browser-use 插件带 skills/） | 同格式 ✅（兼容 Claude 生态） |
-| 玄铁多 agent 镜像 | `mimox-data\.claude\skills\` `.codebuddy\skills\` 等几十个 `.agent名\skills\` | 已有内容（byted-web-search 等），是给各 agent 喂技能的现成体系 | 同格式 |
+| 玄铁多 agent 镜像 | `<HERMES_HOME>/.claude\skills\` `.codebuddy\skills\` 等几十个 `.agent名\skills\` | 已有内容（byted-web-search 等），是给各 agent 喂技能的现成体系 | 同格式 |
 
 **结论**：四端格式完全一致（SKILL.md 已成事实标准），母本单源多端投放零格式转换成本。
 
 ## 2. 架构：母本单源 + 单向分发 + 台账
 
 ```
-E:\2222\3333\skills-shared\          ← 母本库（git 管理，唯一权威，只放"跨端通用技能"）
+<PROJECT_ROOT>/skills-shared\          ← 母本库（git 管理，唯一权威，只放"跨端通用技能"）
   ├── ai-code-audit-handbook\
   │     ├── SKILL.md
   │     └── references\（可选）
@@ -30,7 +30,7 @@ E:\2222\3333\skills-shared\          ← 母本库（git 管理，唯一权威�
         │
         ↓ skill-sync.py（单向：母本 → 各端，分身永不写回母本）
   ├── WorkBuddy   ~/.workbuddy/skills/<name>/
-  ├── hermes      mimox-data/skills/<name>/
+  ├── hermes      <HERMES_HOME>/skills/<name>/
   ├── DSH         ~/.dsh/skills/<name>/
   └── zcode       （v2：做成 xtmem-skills 小插件的 skills/ 组件）
 ```
@@ -44,10 +44,10 @@ E:\2222\3333\skills-shared\          ← 母本库（git 管理，唯一权威�
 | # | 端 | 落点 | v1 支持 |
 |---|---|---|---|
 | 1 | WorkBuddy | `~/.workbuddy/skills/<name>/SKILL.md` | ✅ 复制 |
-| 2 | hermes | `mimox-data/skills/<name>/SKILL.md` | ✅ 复制 |
+| 2 | hermes | `<HERMES_HOME>/skills/<name>/SKILL.md` | ✅ 复制 |
 | 3 | DSH | `~/.dsh/skills/<name>/SKILL.md` | ✅ 复制 |
 | 4 | zcode | 小插件 `xtmem-skills` 的 `skills/` 组件 | ⏳ v2（需先立插件壳；临时可先手动放） |
-| 5 | （可选）玄铁多 agent 镜像 | `mimox-data\.<agent>\skills\` | ⏳ 按需——那是给 Claude/Augment 等第三方 agent 喂技能的现成体系，skill-sync 可接管投喂 |
+| 5 | （可选）玄铁多 agent 镜像 | `<HERMES_HOME>/.<agent>\skills\` | ⏳ 按需——那是给 Claude/Augment 等第三方 agent 喂技能的现成体系，skill-sync 可接管投喂 |
 
 ## 4. 命令设计
 

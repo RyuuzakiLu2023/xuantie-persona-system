@@ -2,10 +2,10 @@
 """XTMEM plugin smoke test (permanent regression asset, XTMEM spec §7).
 
 Run (from repo root, with the hermes venv python that has deps):
-    cd E:\\git项目源码\\hermes-agent-mainv0.21
-    set PYTHONPATH=E:\\git项目源码\\hermes-agent-mainv0.21
-    set XTMEM_PLUGIN_DIR=E:\\2222\\3333\\mimox-data\\plugins\\xtmem
-    "C:\\...\\python.exe" tests\\xtmem_plugin_smoke.py
+    cd <GIT_SOURCE>/hermes-agent-mainv0.21
+    set PYTHONPATH=<GIT_SOURCE>/hermes-agent-mainv0.21
+    set XTMEM_PLUGIN_DIR=<HERMES_HOME>/plugins/xtmem
+    "<PYTHON>/python.exe" tests\\xtmem_plugin_smoke.py
 
 Covers:
 - XtmemMemoryProvider 能被实例化（MemoryProvider ABC 子类）。
@@ -24,7 +24,7 @@ import tempfile
 import time
 from pathlib import Path
 
-PLUGIN_DIR = os.environ.get("XTMEM_PLUGIN_DIR", r"E:\2222\3333\mimox-data\plugins\xtmem")
+PLUGIN_DIR = os.environ.get("XTMEM_PLUGIN_DIR", "plugins/xtmem")
 
 
 def main() -> int:

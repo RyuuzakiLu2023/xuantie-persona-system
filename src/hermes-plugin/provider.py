@@ -41,7 +41,7 @@ ENGINE_DIR = str(Path(__file__).resolve().parent / "memory")
 PLUGIN_DIR = str(Path(__file__).resolve().parent)
 
 # 规格书定稿的共享物理库（龙崎拍板：以此路径为唯一权威库）
-DEFAULT_SHARED_DB = r"E:\2222\3333\mimox-data\.hermes\memory\vector_store.db"
+DEFAULT_SHARED_DB = os.environ.get("XTMEM_SHARED_DB", "xtmem.db")
 DEFAULT_NAMESPACE = "xuantie_lark"
 DEFAULT_PROJECT = ""
 DEFAULT_HOST_ORIGIN = "hermes"

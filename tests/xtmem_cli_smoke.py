@@ -19,10 +19,10 @@ import tempfile
 from pathlib import Path
 
 PYTHON = sys.executable
-CLI = os.environ.get("XTMEM_CLI", r"E:\2222\3333\mimox-data\xtmem\xtmem.py")
+CLI = os.environ.get("XTMEM_CLI", "xtmem/xtmem.py")
 CANONICAL = os.environ.get(
     "XTMEM_CANONICAL_DB",
-    r"E:\2222\3333\mimox-data\.hermes\memory\vector_store.db",
+    "xtmem.db",
 )
 CHECK = {"migrate": False, "store": False, "lookup": False, "forget": False,
          "export": False, "import": False, "dedupe": False, "agents": False,

@@ -14,7 +14,7 @@
     python xtmem.py migrate --namespace xuantie_lark
     python xtmem.py store --agent dsh --project X --text "..." --importance .8
     python xtmem.py recall --cross --query "部署偏好" --top 6
-    python xtmem.py absorb --db "E:/hermes-webui (2)/.hermes/memory/vector_store.db" --namespace hermes-webui
+    python xtmem.py absorb --db "<ISOLATED>/hermes-webui (2)/.hermes/memory/vector_store.db" --namespace hermes-webui
 """
 
 from __future__ import annotations
@@ -50,7 +50,7 @@ else:
 
 DEFAULT_DB = os.environ.get(
     "XTMEM_DB_PATH",
-    r"E:\2222\3333\mimox-data\.hermes\memory\vector_store.db",
+    "xtmem.db",
 )
 DEFAULT_NAMESPACE = "xuantie_lark"
 

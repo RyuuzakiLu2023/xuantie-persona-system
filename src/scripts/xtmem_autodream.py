@@ -20,11 +20,11 @@ from pathlib import Path
 
 DEFAULT_DB = os.environ.get(
     "XTMEM_DB_PATH",
-    r"E:\2222\3333\mimox-data\.hermes\memory\vector_store.db",
+    "xtmem.db",
 )
 DEFAULT_DREAM_DIR = os.environ.get(
     "XTMEM_DREAM_DIR",
-    r"E:\2222\3333\mimox-data\memories",
+    "memories",
 )
 WEEK = 7 * 24 * 3600
 

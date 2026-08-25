@@ -8,7 +8,7 @@
   "license": "MIT",
   "mcpServers": {
     "xtmem": {
-      "command": "C:/Users/Ryuuzaki/AppData/Local/Programs/Python/Python311/python.exe",
+      "command": "python",
       "args": [
         "${ZCODE_PLUGIN_ROOT}/mcp/xtmem_mcp.py"
       ],
