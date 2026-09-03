@@ -1,0 +1,25 @@
+{
+  "name": "xtmem-cockpit",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "XTMEM 照渊台 — 一渊四灯的共享记忆操作台（契约先行前端）",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "verify": "node scripts/verify-ui.mjs"
+  },
+  "dependencies": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
+    "@vitejs/plugin-react": "6.1.1",
+    "typescript": "5.9.3",
+    "vite": "8.2.2"
+  }
+}

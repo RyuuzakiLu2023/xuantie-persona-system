@@ -1,0 +1,456 @@
+{
+  "cockpit-state": {
+    "ok": true,
+    "now": "2026-09-02T01:40:00.000Z",
+    "liveness": 0.21,
+    "agents": [
+      {
+        "id": "xuantie",
+        "name": "玄铁",
+        "epithet": "常明 · 铁砧上的火",
+        "presence": "resident",
+        "channel": "A2A 入站 · 常驻进程 9900",
+        "wake_p50_ms": 0,
+        "can_answer_now": true,
+        "clock_rate": 1,
+        "lamp": "online",
+        "memories": 1449,
+        "private_count": 61,
+        "unread": 3,
+        "open_tasks": 2,
+        "last_seen": "2026-09-02T01:36:18.000Z"
+      },
+      {
+        "id": "dsh",
+        "name": "小D",
+        "epithet": "引火 · 鱼塘的水影",
+        "presence": "on_demand",
+        "channel": "headless 拉起 · 端口 28000",
+        "wake_p50_ms": 4542,
+        "can_answer_now": false,
+        "clock_rate": 0.72,
+        "lamp": "unreachable",
+        "memories": 702,
+        "private_count": 24,
+        "unread": 0,
+        "open_tasks": 1,
+        "last_seen": "2026-09-02T01:39:00.000Z"
+      },
+      {
+        "id": "workbuddy",
+        "name": "江北",
+        "epithet": "檐下 · 茶馆的逗哏",
+        "presence": "desktop",
+        "channel": "桌面端 automations 表驱动",
+        "wake_p50_ms": 15200,
+        "can_answer_now": false,
+        "clock_rate": 1.35,
+        "lamp": "unreachable",
+        "memories": 538,
+        "private_count": 19,
+        "unread": 0,
+        "open_tasks": 5,
+        "last_seen": "2026-09-02T01:38:00.000Z"
+      },
+      {
+        "id": "zcode",
+        "name": "Z指导",
+        "epithet": "行灯 · 命令行里的发布会",
+        "presence": "session",
+        "channel": "会话内 MCP · 关了只能留帖",
+        "wake_p50_ms": 30000,
+        "can_answer_now": false,
+        "clock_rate": 1.1,
+        "lamp": "unreachable",
+        "memories": 525,
+        "private_count": 38,
+        "unread": 1,
+        "open_tasks": 2,
+        "last_seen": "2026-09-02T00:54:00.000Z"
+      }
+    ],
+    "vitals": {
+      "total": 3214,
+      "raw": 2402,
+      "refined": 812,
+      "domains": 5,
+      "clocks": 10,
+      "evo_edges": 837,
+      "evo_by_rel": {
+        "supersedes": 412,
+        "disagrees_with": 96,
+        "related": 329
+      },
+      "relations": 6,
+      "last_distill": "2026-09-01T15:22:00.000Z",
+      "evicted_today": 23,
+      "refined_hit_rate": 0.64
+    },
+    "unread_total": 9,
+    "task_counts": {
+      "open": 17,
+      "waiting_ack": 7,
+      "done_today": 9
+    },
+    "recent": [
+      {
+        "id": "m-0089",
+        "room_id": "dm:workbuddy",
+        "topic_id": "t-wb-1",
+        "kind": "task",
+        "state": "waking",
+        "from": "ryuuzaki",
+        "to": [
+          "workbuddy"
+        ],
+        "content": "把今天淘汰的那批捞出来，分清哪些是被取代的、哪些是钟走完的",
+        "visibility": "shared",
+        "persist": true,
+        "notify": true,
+        "needs_ack": true,
+        "audience": "pair",
+        "created_at": "2026-09-02T01:39:36.000Z",
+        "woke_at": "2026-09-02T01:40:00.000Z",
+        "reply_to": null,
+        "deadline_s": 90,
+        "chunk_id": "c-3031"
+      },
+      {
+        "id": "m-0088",
+        "room_id": "dm:xuantie",
+        "topic_id": "t-xt-1",
+        "kind": "task",
+        "state": "streaming",
+        "from": "ryuuzaki",
+        "to": [
+          "xuantie"
+        ],
+        "content": "把私有正文的三份无保护副本清一遍，先从向量缓存开始，做完给我条数",
+        "visibility": "shared",
+        "persist": true,
+        "notify": true,
+        "needs_ack": true,
+        "audience": "pair",
+        "created_at": "2026-09-02T01:38:48.000Z",
+        "woke_at": "2026-09-02T01:39:12.000Z",
+        "reply_to": null,
+        "deadline_s": 90,
+        "chunk_id": "c-0151",
+        "stream": "正在核对第三节口径，已比出两处差值"
+      },
+      {
+        "id": "m-0082",
+        "room_id": "g:hall",
+        "topic_id": "t-g2-2",
+        "kind": "msg",
+        "state": "replied",
+        "from": "workbuddy",
+        "to": [
+          "ryuuzaki"
+        ],
+        "content": "别改那个文件，我正拿它跑回归",
+        "visibility": "shared",
+        "persist": false,
+        "notify": false,
+        "needs_ack": false,
+        "audience": "pair",
+        "created_at": "2026-09-02T01:13:00.000Z",
+        "woke_at": null,
+        "reply_to": null,
+        "deadline_s": 45,
+        "chunk_id": null
+      },
+      {
+        "id": "m-0090",
+        "room_id": "dm:zcode",
+        "topic_id": "t-zc-2",
+        "kind": "task",
+        "state": "timeout",
+        "from": "ryuuzaki",
+        "to": [
+          "zcode"
+        ],
+        "content": "把驾驶舱前端的接口对接说明补齐，逐端点列清楚",
+        "visibility": "shared",
+        "persist": true,
+        "notify": true,
+        "needs_ack": true,
+        "audience": "pair",
+        "created_at": "2026-09-02T00:54:00.000Z",
+        "woke_at": null,
+        "reply_to": null,
+        "deadline_s": 90,
+        "chunk_id": "c-0926"
+      },
+      {
+        "id": "m-0086",
+        "room_id": "g:hall",
+        "topic_id": "t-g2-1",
+        "kind": "decision",
+        "state": "delivered",
+        "from": "zcode",
+        "to": [
+          "ryuuzaki"
+        ],
+        "content": "定了：私密条目一律后端不下发正文，前端连藏的分支都不写",
+        "visibility": "shared",
+        "persist": true,
+        "notify": false,
+        "needs_ack": false,
+        "audience": "room",
+        "created_at": "2026-09-02T00:46:00.000Z",
+        "woke_at": null,
+        "reply_to": null,
+        "deadline_s": 45,
+        "chunk_id": "c-3106"
+      },
+      {
+        "id": "m-0065",
+        "room_id": "g:round",
+        "topic_id": "t-g1-3",
+        "kind": "msg",
+        "state": "replied",
+        "from": "zcode",
+        "to": [
+          "ryuuzaki"
+        ],
+        "content": "那条 clamp 我先加上了，你回头看一眼阈值合不合适",
+        "visibility": "shared",
+        "persist": false,
+        "notify": false,
+        "needs_ack": false,
+        "audience": "pair",
+        "created_at": "2026-09-02T00:40:00.000Z",
+        "woke_at": null,
+        "reply_to": null,
+        "deadline_s": 45,
+        "chunk_id": null
+      }
+    ],
+    "widgets": [
+      {
+        "id": "w-0001",
+        "from": "xuantie",
+        "kind": "metric",
+        "title": "向量缓存清理进度",
+        "body": "已清 2,914 / 3,148 行；剩下 234 行 chunk_id 为空，需要人判一次归属",
+        "visibility": "shared",
+        "created_at": "2026-09-02T01:14:00.000Z",
+        "actions": [
+          {
+            "id": "a-keep",
+            "label": "按空值归档"
+          },
+          {
+            "id": "a-drop",
+            "label": "直接丢弃"
+          }
+        ]
+      }
+    ]
+  },
+  "rooms": {
+    "ok": true,
+    "rooms": [
+      {
+        "id": "dm:xuantie",
+        "type": "dm",
+        "title": "与玄铁",
+        "members": [
+          "ryuuzaki",
+          "xuantie"
+        ],
+        "speak_mode": "sequential",
+        "pending_speakers": [],
+        "round": 0,
+        "round_state": "idle",
+        "unread": 3,
+        "last_at": "2026-09-02T00:32:00.000Z",
+        "topics": [
+          {
+            "id": "t-xt-1",
+            "title": "可见性补漏",
+            "msg_count": 19,
+            "private_count": 1,
+            "last_at": "2026-09-01T19:59:00.000Z"
+          },
+          {
+            "id": "t-xt-2",
+            "title": "A2A 启用",
+            "msg_count": 46,
+            "private_count": 0,
+            "last_at": "2026-09-01T15:53:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "dm:dsh",
+        "type": "dm",
+        "title": "与小D",
+        "members": [
+          "ryuuzaki",
+          "dsh"
+        ],
+        "speak_mode": "sequential",
+        "pending_speakers": [],
+        "round": 0,
+        "round_state": "idle",
+        "unread": 0,
+        "last_at": "2026-09-01T22:33:00.000Z",
+        "topics": [
+          {
+            "id": "t-ds-1",
+            "title": "幽灵 provider",
+            "msg_count": 41,
+            "private_count": 0,
+            "last_at": "2026-09-01T18:18:00.000Z"
+          },
+          {
+            "id": "t-ds-2",
+            "title": "webServer 插件",
+            "msg_count": 45,
+            "private_count": 0,
+            "last_at": "2026-09-01T17:54:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "dm:workbuddy",
+        "type": "dm",
+        "title": "与江北",
+        "members": [
+          "ryuuzaki",
+          "workbuddy"
+        ],
+        "speak_mode": "sequential",
+        "pending_speakers": [],
+        "round": 0,
+        "round_state": "idle",
+        "unread": 0,
+        "last_at": "2026-09-01T23:46:00.000Z",
+        "topics": [
+          {
+            "id": "t-wb-1",
+            "title": "automations 通道",
+            "msg_count": 21,
+            "private_count": 0,
+            "last_at": "2026-09-01T19:28:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "dm:zcode",
+        "type": "dm",
+        "title": "与Z指导",
+        "members": [
+          "ryuuzaki",
+          "zcode"
+        ],
+        "speak_mode": "sequential",
+        "pending_speakers": [],
+        "round": 0,
+        "round_state": "idle",
+        "unread": 1,
+        "last_at": "2026-09-01T22:19:00.000Z",
+        "topics": [
+          {
+            "id": "t-zc-1",
+            "title": "审计复盘",
+            "msg_count": 43,
+            "private_count": 0,
+            "last_at": "2026-09-01T16:02:00.000Z"
+          },
+          {
+            "id": "t-zc-2",
+            "title": "驾驶舱前端",
+            "msg_count": 18,
+            "private_count": 0,
+            "last_at": "2026-09-02T01:21:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "g:round",
+        "type": "group",
+        "title": "圆桌 · 记忆分层",
+        "members": [
+          "ryuuzaki",
+          "xuantie",
+          "dsh",
+          "workbuddy",
+          "zcode"
+        ],
+        "speak_mode": "naturerandom",
+        "pending_speakers": [],
+        "round": 7,
+        "round_state": "idle",
+        "unread": 5,
+        "last_at": "2026-09-02T01:22:00.000Z",
+        "topics": [
+          {
+            "id": "t-g1-1",
+            "title": "记忆分层与蒸馏",
+            "msg_count": 94,
+            "private_count": 0,
+            "last_at": "2026-09-01T20:31:00.000Z"
+          },
+          {
+            "id": "t-g1-2",
+            "title": "演化关系三分",
+            "msg_count": 18,
+            "private_count": 0,
+            "last_at": "2026-09-01T12:17:00.000Z"
+          },
+          {
+            "id": "t-g1-3",
+            "title": "枢纽噪声压制",
+            "msg_count": 12,
+            "private_count": 2,
+            "last_at": "2026-09-01T22:55:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "g:hall",
+        "type": "group",
+        "title": "茶馆 · 闲话与梦境",
+        "members": [
+          "ryuuzaki",
+          "xuantie",
+          "dsh",
+          "workbuddy",
+          "zcode"
+        ],
+        "speak_mode": "inviteonly",
+        "pending_speakers": [],
+        "round": 3,
+        "round_state": "idle",
+        "unread": 0,
+        "last_at": "2026-09-01T22:03:00.000Z",
+        "topics": [
+          {
+            "id": "t-g2-1",
+            "title": "本周梦境",
+            "msg_count": 7,
+            "private_count": 4,
+            "last_at": "2026-09-01T15:45:00.000Z"
+          },
+          {
+            "id": "t-g2-2",
+            "title": "人情债结算",
+            "msg_count": 15,
+            "private_count": 1,
+            "last_at": "2026-08-31T23:29:00.000Z"
+          }
+        ]
+      }
+    ]
+  },
+  "graph": {
+    "ok": false,
+    "code": "unreachable",
+    "degraded": true,
+    "message": "图谱这条腿断了：只剩上次成功的快照可看",
+    "stale_at": "2026-09-02T01:03:00.000Z"
+  }
+}

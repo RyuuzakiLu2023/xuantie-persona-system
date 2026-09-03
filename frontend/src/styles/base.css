@@ -1,0 +1,154 @@
+/* ================================================================
+   照渊台 · 基础样式（总导游图）
+
+  ▍这是什么
+  ① 干什么：重置 + 排版基线 + 焦点态 + 通用零件（封蜡、等宽数字、纹样）
+  ② 给谁看：写视图样式的人
+  ③ 依赖：tokens.css（颜色/字/尺度全部来自那里）
+
+  ▍★ 焦点态是硬要求 ★
+  全站键盘可完整操作，所以每个可聚焦物都必须有看得清的焦点态。
+  统一用 .focusable / :focus-visible 的双线金框，【不】用 outline:none。
+
+  ▍修改铁律
+  1. 【不】在本文件写字面颜色。要颜色去 tokens.css 加令牌（见那份铁律 1）。
+  2. 【不】用 Emoji 做图标。纹样与图标一律内联 SVG（见 ui/Glyphs.tsx）。
+  3. 数字必须走 .num 类（等宽 + 右对齐），否则上下扫不齐。
+
+  ▍更新记录
+  *更新：2026-09-02 · 建档*
+================================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root { height: 100%; margin: 0; }
+
+body {
+  background: var(--bg-0);
+  color: var(--ink-0);
+  font: 400 14px/1.65 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior: none;
+}
+
+/* 题名用衬线：三种字的第一种 */
+h1, h2, h3, .title {
+  font-family: var(--f-title);
+  font-weight: 600;
+  letter-spacing: .04em;
+  margin: 0;
+}
+
+/* 数字：等宽 + 右对齐，全站统一 */
+.num {
+  font-family: var(--f-num);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  text-align: right;
+  letter-spacing: -.01em;
+}
+
+button, input, textarea, select { font: inherit; color: inherit; }
+
+button {
+  background: none; border: 1px solid var(--line-0);
+  border-radius: var(--r-2); padding: 6px 10px;
+  cursor: pointer; color: var(--ink-1);
+  transition: border-color var(--t-tap) var(--ease), color var(--t-tap) var(--ease), background var(--t-tap) var(--ease);
+}
+button:hover:not(:disabled) { color: var(--ink-0); border-color: var(--line-1); }
+button:disabled { opacity: .45; cursor: not-allowed; }
+
+/* ---------- 焦点态：双线金框，见文件头 ---------- */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: var(--r-2);
+}
+/* 鼠标点击不留框，键盘才留 —— 但【不】允许 outline:none 兜底 */
+:focus:not(:focus-visible) { outline: none; }
+
+::selection { background: color-mix(in srgb, var(--gold) 34%, transparent); }
+
+/* ---------- 滚动条：细，跟主题同色 ---------- */
+* { scrollbar-width: thin; scrollbar-color: var(--line-1) transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: var(--line-1); border-radius: 8px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* ================================================================
+   封蜡 — 私密条目的视觉语言
+   ⚠️ 这不是"权限提示"，是一块真的黑蜡：看得见占位、看得见条数、读不到字。
+   【不】在旁边写"您无权查看"（见 docs/设计说明.md 原则 5）。
+   ================================================================ */
+.seal {
+  position: relative;
+  display: block;
+  min-height: 2.2em;
+  border-radius: var(--r-2);
+  background:
+    repeating-linear-gradient(
+      -38deg,
+      color-mix(in srgb, var(--seal) 92%, transparent) 0 6px,
+      color-mix(in srgb, var(--seal) 78%, transparent) 6px 12px
+    );
+  border: 1px solid var(--gold-dim);
+  overflow: hidden;
+}
+/* 蜡上的金线绞 */
+.seal::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, transparent 46%, color-mix(in srgb, var(--gold) 42%, transparent) 50%, transparent 54%),
+    linear-gradient(0deg, transparent 46%, color-mix(in srgb, var(--gold) 22%, transparent) 50%, transparent 54%);
+}
+/* 定向共享：蜡上开一道缝 */
+.seal[data-slit="1"]::after {
+  content: "";
+  position: absolute; left: 12%; right: 12%; top: 50%;
+  height: 2px; transform: translateY(-1px);
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.seal-count {
+  position: relative;
+  display: inline-block;
+  padding: 2px 8px;
+  color: var(--ink-1);
+  font-family: var(--f-num);
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+
+/* ---------- 细金线分隔与角饰 ---------- */
+.hairline { height: 1px; background: linear-gradient(90deg, transparent, var(--line-1), transparent); }
+
+/* 边角回纹：华丽感靠纹样，不靠发光 */
+.corner {
+  position: absolute; width: 14px; height: 14px;
+  border: 1px solid var(--gold-dim); opacity: .5; pointer-events: none;
+}
+.corner.tl { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.corner.tr { top: -1px; right: -1px; border-left: 0; border-bottom: 0; }
+.corner.bl { bottom: -1px; left: -1px; border-right: 0; border-top: 0; }
+.corner.br { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+
+/* ---------- 只给读屏器的说明 ---------- */
+.sr {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+/* ================================================================
+   reduced-motion：不是关掉动画，是换成离散呈现
+   ⚠️ 连续位移换成即时到位；装置侧另有替代逻辑（engine.setReduced）。
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,8451 @@
+{
+  "ok": true,
+  "entities": [
+    {
+      "id": "e-0001",
+      "type": "node_entity",
+      "label": "龙崎",
+      "aliases": [
+        "库主",
+        "Ryuuzaki",
+        "龙总"
+      ],
+      "mentions": 731,
+      "idf": 0.22,
+      "kind": "person"
+    },
+    {
+      "id": "e-0002",
+      "type": "node_entity",
+      "label": "XTMEM",
+      "aliases": [
+        "共享记忆库",
+        "公共库",
+        "渊"
+      ],
+      "mentions": 792,
+      "idf": 0.18,
+      "kind": "project"
+    },
+    {
+      "id": "e-0003",
+      "type": "node_entity",
+      "label": "可见性",
+      "aliases": [
+        "visibility",
+        "权限三态"
+      ],
+      "mentions": 393,
+      "idf": 0.62,
+      "kind": "term"
+    },
+    {
+      "id": "e-0004",
+      "type": "node_entity",
+      "label": "蒸馏",
+      "aliases": [
+        "distill",
+        "上浮",
+        "promotion"
+      ],
+      "mentions": 301,
+      "idf": 0.71,
+      "kind": "term"
+    },
+    {
+      "id": "e-0005",
+      "type": "node_entity",
+      "label": "衰减钟",
+      "aliases": [
+        "半衰期",
+        "decay",
+        "代谢钟"
+      ],
+      "mentions": 218,
+      "idf": 0.78,
+      "kind": "term"
+    },
+    {
+      "id": "e-0006",
+      "type": "node_entity",
+      "label": "A2A",
+      "aliases": [
+        "Agent2Agent",
+        "v1.0 协议"
+      ],
+      "mentions": 175,
+      "idf": 0.83,
+      "kind": "term"
+    },
+    {
+      "id": "e-0007",
+      "type": "node_entity",
+      "label": "唤醒桥",
+      "aliases": [
+        "WakeBridge",
+        "拉起通道"
+      ],
+      "mentions": 170,
+      "idf": 0.86,
+      "kind": "term"
+    },
+    {
+      "id": "e-0008",
+      "type": "node_entity",
+      "label": "演化边",
+      "aliases": [
+        "memory_evolution",
+        "图边"
+      ],
+      "mentions": 262,
+      "idf": 0.74,
+      "kind": "term"
+    },
+    {
+      "id": "e-0009",
+      "type": "node_entity",
+      "label": "向量缓存",
+      "aliases": [
+        "embedding_cache"
+      ],
+      "mentions": 167,
+      "idf": 0.88,
+      "kind": "term"
+    },
+    {
+      "id": "e-0010",
+      "type": "node_entity",
+      "label": "玄铁",
+      "aliases": [
+        "xuantie",
+        "hermes",
+        "铁砧"
+      ],
+      "mentions": 566,
+      "idf": 0.41,
+      "kind": "agent"
+    },
+    {
+      "id": "e-0011",
+      "type": "node_entity",
+      "label": "小D",
+      "aliases": [
+        "dsh",
+        "鱼塘"
+      ],
+      "mentions": 457,
+      "idf": 0.52,
+      "kind": "agent"
+    },
+    {
+      "id": "e-0012",
+      "type": "node_entity",
+      "label": "江北",
+      "aliases": [
+        "workbuddy",
+        "茶馆"
+      ],
+      "mentions": 454,
+      "idf": 0.55,
+      "kind": "agent"
+    },
+    {
+      "id": "e-0013",
+      "type": "node_entity",
+      "label": "Z指导",
+      "aliases": [
+        "zcode",
+        "雷总"
+      ],
+      "mentions": 504,
+      "idf": 0.49,
+      "kind": "agent"
+    },
+    {
+      "id": "e-0014",
+      "type": "node_entity",
+      "label": "差帖看板",
+      "aliases": [
+        "任务看板",
+        "task board"
+      ],
+      "mentions": 123,
+      "idf": 0.91,
+      "kind": "term"
+    },
+    {
+      "id": "e-0015",
+      "type": "node_entity",
+      "label": "E:\\2222\\3333\\new",
+      "aliases": [
+        "方案目录"
+      ],
+      "mentions": 93,
+      "idf": 0.93,
+      "kind": "path"
+    },
+    {
+      "id": "e-0016",
+      "type": "node_entity",
+      "label": "每周梦境",
+      "aliases": [
+        "dream",
+        "共同蒸馏"
+      ],
+      "mentions": 78,
+      "idf": 0.95,
+      "kind": "term"
+    },
+    {
+      "id": "e-0017",
+      "type": "node_entity",
+      "label": "人情债",
+      "aliases": [
+        "favor debt"
+      ],
+      "mentions": 49,
+      "idf": 0.96,
+      "kind": "term"
+    },
+    {
+      "id": "e-0018",
+      "type": "node_entity",
+      "label": "枢纽噪声",
+      "aliases": [
+        "hub noise",
+        "IDF 压制"
+      ],
+      "mentions": 134,
+      "idf": 0.89,
+      "kind": "term"
+    }
+  ],
+  "memories": [
+    {
+      "id": "c-0001",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "可见性只覆盖 chunks 一张表，向量缓存里的正文没跟着走——补一条 min_visibility 统一实现",
+      "importance": 0.22,
+      "heat": 0.62,
+      "life": 0.559,
+      "created_at": "2026-08-24T13:37:00.000Z"
+    },
+    {
+      "id": "c-0002",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared_with",
+      "excerpt": "衍生记忆必须带 source_ids 血缘，取 min(所有来源) 作为它自己的可见性",
+      "importance": 0.33,
+      "heat": 0.5,
+      "life": 0.139,
+      "created_at": "2026-08-08T10:26:00.000Z"
+    },
+    {
+      "id": "c-0003",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "蒸馏是把同一件事的七八种说法合成一句，不是摘要——摘要会把\"谁说的\"丢掉",
+      "importance": 0.63,
+      "heat": 0.1,
+      "life": 0.252,
+      "created_at": "2026-08-22T22:59:00.000Z"
+    },
+    {
+      "id": "c-0004",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "检索先问精炼层，落空才回落全量；命中要回写热度，不然热的会慢慢凉掉",
+      "importance": 0.65,
+      "heat": 0.47,
+      "life": 0,
+      "created_at": "2026-08-04T02:19:00.000Z"
+    },
+    {
+      "id": "c-0005",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "每个观察者一口钟：同一条记忆在江北那儿三天就凉，在玄铁那儿能撑两周",
+      "importance": 0.34,
+      "heat": 0.63,
+      "life": 0.188,
+      "created_at": "2026-08-10T08:28:00.000Z"
+    },
+    {
+      "id": "c-0006",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "同域新事取代旧事叫「代」，跨域视角分歧叫「争」——争不许自动取代",
+      "importance": 0.31,
+      "heat": 0.43,
+      "life": 0,
+      "created_at": "2026-07-29T09:47:00.000Z"
+    },
+    {
+      "id": "c-0007",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "别名归一：把「龙崎」「库主」「Ryuuzaki」认成同一个实体，共现才算得准",
+      "importance": 0.26,
+      "heat": 0.01,
+      "life": 0.278,
+      "created_at": "2026-08-21T21:59:00.000Z"
+    },
+    {
+      "id": "c-0008",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "逆文档频率压枢纽：万物皆连的那个词权重要压下去，否则整张图被它拽成一团",
+      "importance": 0.85,
+      "heat": 0.78,
+      "life": 0.2,
+      "created_at": "2026-08-09T22:21:00.000Z"
+    },
+    {
+      "id": "c-0009",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "唤醒桥实测三端都在六十秒内，\"必须异步\"这条假设当场作废",
+      "importance": 0.88,
+      "heat": 0.34,
+      "life": 0.438,
+      "created_at": "2026-08-22T10:11:00.000Z"
+    },
+    {
+      "id": "c-0010",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "玄铁的 A2A 插件是现成的，只是默认关着——启用比重写省十天",
+      "importance": 0.88,
+      "heat": 0.43,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-08-03T04:49:00.000Z"
+    },
+    {
+      "id": "c-0011",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared_with",
+      "excerpt": "手动 cron run 会抢 fire claim，自然触发的结果反被判 stale 整场丢弃",
+      "importance": 0.4,
+      "heat": 0.02,
+      "life": 0,
+      "created_at": "2026-07-31T21:57:00.000Z"
+    },
+    {
+      "id": "c-0012",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.74,
+      "heat": 0.02,
+      "life": 0,
+      "created_at": "2026-07-19T11:31:00.000Z"
+    },
+    {
+      "id": "c-0013",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "importance 没有限幅，一条命令就能把 top-1 钉死——两行 clamp 最先做",
+      "importance": 0.51,
+      "heat": 0.65,
+      "life": 0.487,
+      "created_at": "2026-08-21T20:02:00.000Z"
+    },
+    {
+      "id": "c-0014",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "消息线不是记忆线：便帖席上语只进时间线，差帖凭帖才落库",
+      "importance": 0.7,
+      "heat": 0.16,
+      "life": 0,
+      "created_at": "2026-07-24T16:04:00.000Z"
+    },
+    {
+      "id": "c-0015",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "群聊调度在客户端不在服务端，拓扑跟我们正好相反，存储别照搬",
+      "importance": 0.33,
+      "heat": 0.21,
+      "life": 1,
+      "created_at": "2026-09-01T08:37:00.000Z"
+    },
+    {
+      "id": "c-0016",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "私密反思不进共享层，但它会悄悄改变下次打招呼的语气",
+      "importance": 0.76,
+      "heat": 0.33,
+      "life": 0.72,
+      "created_at": "2026-09-01T17:06:00.000Z"
+    },
+    {
+      "id": "c-0017",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "把「四端」写成四个 API 端点是最省事也最错的抽象",
+      "importance": 0.31,
+      "heat": 0.03,
+      "life": 0.278,
+      "created_at": "2026-08-26T02:40:00.000Z"
+    },
+    {
+      "id": "c-0018",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "梦境是两盏灯每周共同蒸馏一次的产物，署名是两个人",
+      "importance": 0.89,
+      "heat": 0.24,
+      "life": 0.093,
+      "created_at": "2026-08-12T14:10:00.000Z"
+    },
+    {
+      "id": "c-0019",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.65,
+      "heat": 0.23,
+      "life": 0,
+      "created_at": "2026-08-11T11:04:00.000Z"
+    },
+    {
+      "id": "c-0020",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "淘汰不等于错，只是这口钟走到了头；被取代才是判它错",
+      "importance": 0.59,
+      "heat": 0.89,
+      "life": 0,
+      "created_at": "2026-07-28T18:08:00.000Z"
+    },
+    {
+      "id": "c-0021",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "一条记忆的寿命环走完之前，热度每被命中一次就往回拨一格",
+      "importance": 0.29,
+      "heat": 0.62,
+      "life": 0.757,
+      "created_at": "2026-08-21T14:51:00.000Z"
+    },
+    {
+      "id": "c-0022",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "域隔离是真的，可见性是补的——这两件事别混着说",
+      "importance": 0.57,
+      "heat": 0.15,
+      "life": 0,
+      "created_at": "2026-08-10T01:38:00.000Z"
+    },
+    {
+      "id": "c-0023",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "轮次里没回话的人比回了话的人更有信息量",
+      "importance": 0.39,
+      "heat": 0.24,
+      "life": 0.051,
+      "created_at": "2026-08-07T01:04:00.000Z"
+    },
+    {
+      "id": "c-0024",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "定向共享的蜡上要开一道缝，不然被点名的人自己也看不见",
+      "importance": 0.62,
+      "heat": 0.1,
+      "life": 0.25,
+      "created_at": "2026-08-15T20:38:00.000Z"
+    },
+    {
+      "id": "c-0025",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "同一条事实被两个人各写一遍，图上会多出一条没用的共现边",
+      "importance": 0.52,
+      "heat": 0.38,
+      "life": 0,
+      "created_at": "2026-08-10T09:01:00.000Z"
+    },
+    {
+      "id": "c-0026",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.25,
+      "heat": 0.12,
+      "life": 0.116,
+      "created_at": "2026-07-31T03:52:00.000Z"
+    },
+    {
+      "id": "c-0027",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.7,
+      "heat": 0.41,
+      "life": 0.357,
+      "created_at": "2026-08-23T15:50:00.000Z"
+    },
+    {
+      "id": "c-0028",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.59,
+      "heat": 0.29,
+      "life": 0.276,
+      "created_at": "2026-08-25T03:57:00.000Z"
+    },
+    {
+      "id": "c-0029",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "可见性只覆盖 chunks 一张表，向量缓存里的正文没跟着走——补一条 min_visibility 统一实现",
+      "importance": 0.4,
+      "heat": 0.06,
+      "life": 0.643,
+      "created_at": "2026-08-29T08:43:00.000Z"
+    },
+    {
+      "id": "c-0030",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "衍生记忆必须带 source_ids 血缘，取 min(所有来源) 作为它自己的可见性",
+      "importance": 0.89,
+      "heat": 0.42,
+      "life": 0,
+      "created_at": "2026-07-31T05:51:00.000Z"
+    },
+    {
+      "id": "c-0031",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "蒸馏是把同一件事的七八种说法合成一句，不是摘要——摘要会把\"谁说的\"丢掉",
+      "importance": 0.34,
+      "heat": 0.45,
+      "life": 0.055,
+      "created_at": "2026-08-13T23:55:00.000Z"
+    },
+    {
+      "id": "c-0032",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "检索先问精炼层，落空才回落全量；命中要回写热度，不然热的会慢慢凉掉",
+      "importance": 0.24,
+      "heat": 0.3,
+      "life": 0.118,
+      "created_at": "2026-08-12T10:21:00.000Z"
+    },
+    {
+      "id": "c-0033",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared_with",
+      "excerpt": "每个观察者一口钟：同一条记忆在江北那儿三天就凉，在玄铁那儿能撑两周",
+      "importance": 0.41,
+      "heat": 0.23,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-08-01T19:32:00.000Z"
+    },
+    {
+      "id": "c-0034",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "同域新事取代旧事叫「代」，跨域视角分歧叫「争」——争不许自动取代",
+      "importance": 0.65,
+      "heat": 0.51,
+      "life": 0.45,
+      "created_at": "2026-08-27T11:24:00.000Z"
+    },
+    {
+      "id": "c-0035",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "别名归一：把「龙崎」「库主」「Ryuuzaki」认成同一个实体，共现才算得准",
+      "importance": 0.66,
+      "heat": 0.25,
+      "life": 0.428,
+      "created_at": "2026-08-23T20:09:00.000Z"
+    },
+    {
+      "id": "c-0036",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.61,
+      "heat": 0.32,
+      "life": 0.13,
+      "created_at": "2026-08-15T18:57:00.000Z"
+    },
+    {
+      "id": "c-0037",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "唤醒桥实测三端都在六十秒内，\"必须异步\"这条假设当场作废",
+      "importance": 0.3,
+      "heat": 0.07,
+      "life": 0.387,
+      "created_at": "2026-08-18T05:19:00.000Z"
+    },
+    {
+      "id": "c-0038",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "玄铁的 A2A 插件是现成的，只是默认关着——启用比重写省十天",
+      "importance": 0.34,
+      "heat": 0.52,
+      "life": 0.622,
+      "created_at": "2026-08-19T06:13:00.000Z"
+    },
+    {
+      "id": "c-0039",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "手动 cron run 会抢 fire claim，自然触发的结果反被判 stale 整场丢弃",
+      "importance": 0.52,
+      "heat": 0.27,
+      "life": 0.692,
+      "created_at": "2026-09-01T06:00:00.000Z"
+    },
+    {
+      "id": "c-0040",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.53,
+      "heat": 0.06,
+      "life": 0,
+      "created_at": "2026-07-20T16:21:00.000Z"
+    },
+    {
+      "id": "c-0041",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.37,
+      "heat": 0.33,
+      "life": 0.047,
+      "created_at": "2026-08-09T08:08:00.000Z"
+    },
+    {
+      "id": "c-0042",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "消息线不是记忆线：便帖席上语只进时间线，差帖凭帖才落库",
+      "importance": 0.48,
+      "heat": 0.69,
+      "life": 0,
+      "created_at": "2026-07-23T21:41:00.000Z"
+    },
+    {
+      "id": "c-0043",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "群聊调度在客户端不在服务端，拓扑跟我们正好相反，存储别照搬",
+      "importance": 0.74,
+      "heat": 0.7,
+      "life": 0,
+      "created_at": "2026-08-09T20:20:00.000Z"
+    },
+    {
+      "id": "c-0044",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "私密反思不进共享层，但它会悄悄改变下次打招呼的语气",
+      "importance": 0.55,
+      "heat": 0.69,
+      "life": 0.612,
+      "created_at": "2026-08-27T17:21:00.000Z"
+    },
+    {
+      "id": "c-0045",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "把「四端」写成四个 API 端点是最省事也最错的抽象",
+      "importance": 0.68,
+      "heat": 0.11,
+      "life": 0.01,
+      "created_at": "2026-08-04T13:35:00.000Z"
+    },
+    {
+      "id": "c-0046",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.37,
+      "heat": 0.27,
+      "life": 0,
+      "created_at": "2026-07-21T05:50:00.000Z"
+    },
+    {
+      "id": "c-0047",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "人情债是有方向的：这周谁替谁顶了班，下周排活要算进去",
+      "importance": 0.48,
+      "heat": 0.47,
+      "life": 0.349,
+      "created_at": "2026-08-19T06:14:00.000Z"
+    },
+    {
+      "id": "c-0048",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "淘汰不等于错，只是这口钟走到了头；被取代才是判它错",
+      "importance": 0.49,
+      "heat": 0.6,
+      "life": 0.697,
+      "created_at": "2026-08-28T04:18:00.000Z"
+    },
+    {
+      "id": "c-0049",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "一条记忆的寿命环走完之前，热度每被命中一次就往回拨一格",
+      "importance": 0.63,
+      "heat": 0.18,
+      "life": 0.382,
+      "created_at": "2026-08-12T15:56:00.000Z"
+    },
+    {
+      "id": "c-0050",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "域隔离是真的，可见性是补的——这两件事别混着说",
+      "importance": 0.81,
+      "heat": 0.58,
+      "life": 0,
+      "created_at": "2026-08-08T02:57:00.000Z"
+    },
+    {
+      "id": "c-0051",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "轮次里没回话的人比回了话的人更有信息量",
+      "importance": 0.72,
+      "heat": 0.64,
+      "life": 0,
+      "created_at": "2026-07-25T11:32:00.000Z"
+    },
+    {
+      "id": "c-0052",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "定向共享的蜡上要开一道缝，不然被点名的人自己也看不见",
+      "importance": 0.35,
+      "heat": 0.58,
+      "life": 0.561,
+      "created_at": "2026-08-27T05:53:00.000Z"
+    },
+    {
+      "id": "c-0053",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "同一条事实被两个人各写一遍，图上会多出一条没用的共现边",
+      "importance": 0.74,
+      "heat": 0.33,
+      "life": 0.306,
+      "created_at": "2026-08-17T03:58:00.000Z"
+    },
+    {
+      "id": "c-0054",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "存档不是备份：存档要能被检索，备份只要能被还原",
+      "importance": 0.61,
+      "heat": 0.56,
+      "life": 0.503,
+      "created_at": "2026-09-01T14:42:00.000Z"
+    },
+    {
+      "id": "c-0055",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "灯灭了不代表人走了，可能只是会话关了",
+      "importance": 0.78,
+      "heat": 0.34,
+      "life": 0.825,
+      "created_at": "2026-08-31T13:22:00.000Z"
+    },
+    {
+      "id": "c-0056",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "「正在干活」这四个字是流式回传的第一个信号，比进度条实在",
+      "importance": 0.24,
+      "heat": 0.58,
+      "life": 0,
+      "created_at": "2026-07-23T17:48:00.000Z"
+    },
+    {
+      "id": "c-0057",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared_with",
+      "excerpt": "可见性只覆盖 chunks 一张表，向量缓存里的正文没跟着走——补一条 min_visibility 统一实现",
+      "importance": 0.63,
+      "heat": 0.7,
+      "life": 0.631,
+      "created_at": "2026-08-28T01:02:00.000Z"
+    },
+    {
+      "id": "c-0058",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "衍生记忆必须带 source_ids 血缘，取 min(所有来源) 作为它自己的可见性",
+      "importance": 0.54,
+      "heat": 0.39,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-08-30T09:57:00.000Z"
+    },
+    {
+      "id": "c-0059",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "蒸馏是把同一件事的七八种说法合成一句，不是摘要——摘要会把\"谁说的\"丢掉",
+      "importance": 0.22,
+      "heat": 0.34,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-08-31T19:38:00.000Z"
+    },
+    {
+      "id": "c-0060",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.56,
+      "heat": 0.42,
+      "life": 0,
+      "created_at": "2026-08-03T00:44:00.000Z"
+    },
+    {
+      "id": "c-0061",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.27,
+      "heat": 0.79,
+      "life": 0,
+      "created_at": "2026-07-21T16:35:00.000Z"
+    },
+    {
+      "id": "c-0062",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "同域新事取代旧事叫「代」，跨域视角分歧叫「争」——争不许自动取代",
+      "importance": 0.72,
+      "heat": 0.07,
+      "life": 0.289,
+      "created_at": "2026-07-22T04:27:00.000Z"
+    },
+    {
+      "id": "c-0063",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "别名归一：把「龙崎」「库主」「Ryuuzaki」认成同一个实体，共现才算得准",
+      "importance": 0.21,
+      "heat": 0.69,
+      "life": 0.452,
+      "created_at": "2026-08-05T00:23:00.000Z"
+    },
+    {
+      "id": "c-0064",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "逆文档频率压枢纽：万物皆连的那个词权重要压下去，否则整张图被它拽成一团",
+      "importance": 0.78,
+      "heat": 0.71,
+      "life": 0,
+      "created_at": "2026-08-01T03:37:00.000Z"
+    },
+    {
+      "id": "c-0065",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "唤醒桥实测三端都在六十秒内，\"必须异步\"这条假设当场作废",
+      "importance": 0.68,
+      "heat": 0.59,
+      "life": 0.479,
+      "created_at": "2026-08-25T05:53:00.000Z"
+    },
+    {
+      "id": "c-0066",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "玄铁的 A2A 插件是现成的，只是默认关着——启用比重写省十天",
+      "importance": 0.68,
+      "heat": 0.25,
+      "life": 0,
+      "created_at": "2026-08-05T08:37:00.000Z"
+    },
+    {
+      "id": "c-0067",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "手动 cron run 会抢 fire claim，自然触发的结果反被判 stale 整场丢弃",
+      "importance": 0.87,
+      "heat": 0.44,
+      "life": 0.728,
+      "created_at": "2026-08-31T11:44:00.000Z"
+    },
+    {
+      "id": "c-0068",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "deliver=local 的任务从不发卡片，拦截日志有行不等于发出去了",
+      "importance": 0.59,
+      "heat": 0.04,
+      "life": 0.081,
+      "created_at": "2026-07-25T17:24:00.000Z"
+    },
+    {
+      "id": "c-0069",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.92,
+      "heat": 0.11,
+      "life": 0,
+      "created_at": "2026-07-20T17:39:00.000Z"
+    },
+    {
+      "id": "c-0070",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "消息线不是记忆线：便帖席上语只进时间线，差帖凭帖才落库",
+      "importance": 0.34,
+      "heat": 0.29,
+      "life": 0.011,
+      "created_at": "2026-08-09T00:59:00.000Z"
+    },
+    {
+      "id": "c-0071",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "群聊调度在客户端不在服务端，拓扑跟我们正好相反，存储别照搬",
+      "importance": 0.45,
+      "heat": 0.64,
+      "life": 0,
+      "created_at": "2026-08-06T06:55:00.000Z"
+    },
+    {
+      "id": "c-0072",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "私密反思不进共享层，但它会悄悄改变下次打招呼的语气",
+      "importance": 0.67,
+      "heat": 0.58,
+      "life": 0.305,
+      "created_at": "2026-08-15T16:38:00.000Z"
+    },
+    {
+      "id": "c-0073",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.43,
+      "heat": 0.08,
+      "life": 0.575,
+      "created_at": "2026-08-26T18:20:00.000Z"
+    },
+    {
+      "id": "c-0074",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.4,
+      "heat": 0.5,
+      "life": 0.022,
+      "created_at": "2026-07-30T22:55:00.000Z"
+    },
+    {
+      "id": "c-0075",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "人情债是有方向的：这周谁替谁顶了班，下周排活要算进去",
+      "importance": 0.84,
+      "heat": 0.36,
+      "life": 0.172,
+      "created_at": "2026-08-18T20:58:00.000Z"
+    },
+    {
+      "id": "c-0076",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "淘汰不等于错，只是这口钟走到了头；被取代才是判它错",
+      "importance": 0.2,
+      "heat": 0.34,
+      "life": 0.101,
+      "created_at": "2026-08-08T07:05:00.000Z"
+    },
+    {
+      "id": "c-0077",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "一条记忆的寿命环走完之前，热度每被命中一次就往回拨一格",
+      "importance": 0.38,
+      "heat": 0.36,
+      "life": 0.794,
+      "created_at": "2026-09-01T18:29:00.000Z"
+    },
+    {
+      "id": "c-0078",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.84,
+      "heat": 0.37,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-08-16T05:39:00.000Z"
+    },
+    {
+      "id": "c-0079",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "轮次里没回话的人比回了话的人更有信息量",
+      "importance": 0.4,
+      "heat": 0.93,
+      "life": 0.239,
+      "created_at": "2026-08-13T07:27:00.000Z"
+    },
+    {
+      "id": "c-0080",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "定向共享的蜡上要开一道缝，不然被点名的人自己也看不见",
+      "importance": 0.27,
+      "heat": 0.18,
+      "life": 0.052,
+      "created_at": "2026-07-22T17:02:00.000Z"
+    },
+    {
+      "id": "c-0081",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.85,
+      "heat": 0.57,
+      "life": 0.269,
+      "created_at": "2026-08-08T21:28:00.000Z"
+    },
+    {
+      "id": "c-0082",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared_with",
+      "excerpt": "存档不是备份：存档要能被检索，备份只要能被还原",
+      "importance": 0.34,
+      "heat": 0.33,
+      "life": 0.589,
+      "created_at": "2026-08-25T07:47:00.000Z"
+    },
+    {
+      "id": "c-0083",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "灯灭了不代表人走了，可能只是会话关了",
+      "importance": 0.68,
+      "heat": 0.61,
+      "life": 0,
+      "created_at": "2026-07-19T12:45:00.000Z"
+    },
+    {
+      "id": "c-0084",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "「正在干活」这四个字是流式回传的第一个信号，比进度条实在",
+      "importance": 0.59,
+      "heat": 0.38,
+      "life": 0.468,
+      "created_at": "2026-08-25T16:05:00.000Z"
+    },
+    {
+      "id": "c-0085",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "可见性只覆盖 chunks 一张表，向量缓存里的正文没跟着走——补一条 min_visibility 统一实现",
+      "importance": 0.52,
+      "heat": 0.63,
+      "life": 0,
+      "created_at": "2026-07-19T03:43:00.000Z"
+    },
+    {
+      "id": "c-0086",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "衍生记忆必须带 source_ids 血缘，取 min(所有来源) 作为它自己的可见性",
+      "importance": 0.29,
+      "heat": 0.57,
+      "life": 0.843,
+      "created_at": "2026-08-22T01:49:00.000Z"
+    },
+    {
+      "id": "c-0087",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "蒸馏是把同一件事的七八种说法合成一句，不是摘要——摘要会把\"谁说的\"丢掉",
+      "importance": 0.91,
+      "heat": 0.03,
+      "life": 0.51,
+      "created_at": "2026-08-23T13:48:00.000Z"
+    },
+    {
+      "id": "c-0088",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "检索先问精炼层，落空才回落全量；命中要回写热度，不然热的会慢慢凉掉",
+      "importance": 0.71,
+      "heat": 0.63,
+      "life": 0,
+      "created_at": "2026-07-22T19:41:00.000Z"
+    },
+    {
+      "id": "c-0089",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "每个观察者一口钟：同一条记忆在江北那儿三天就凉，在玄铁那儿能撑两周",
+      "importance": 0.78,
+      "heat": 0.45,
+      "life": 0.625,
+      "created_at": "2026-08-22T15:05:00.000Z"
+    },
+    {
+      "id": "c-0090",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "同域新事取代旧事叫「代」，跨域视角分歧叫「争」——争不许自动取代",
+      "importance": 0.56,
+      "heat": 0.1,
+      "life": 0.263,
+      "created_at": "2026-08-16T21:58:00.000Z"
+    },
+    {
+      "id": "c-0091",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.7,
+      "heat": 0.51,
+      "life": 0,
+      "created_at": "2026-07-19T15:05:00.000Z"
+    },
+    {
+      "id": "c-0092",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "逆文档频率压枢纽：万物皆连的那个词权重要压下去，否则整张图被它拽成一团",
+      "importance": 0.36,
+      "heat": 0.45,
+      "life": 0,
+      "created_at": "2026-08-01T14:56:00.000Z"
+    },
+    {
+      "id": "c-0093",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "唤醒桥实测三端都在六十秒内，\"必须异步\"这条假设当场作废",
+      "importance": 0.5,
+      "heat": 0.08,
+      "life": 0,
+      "created_at": "2026-07-30T10:03:00.000Z"
+    },
+    {
+      "id": "c-0094",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.74,
+      "heat": 0.4,
+      "life": 0.01,
+      "created_at": "2026-08-10T18:11:00.000Z"
+    },
+    {
+      "id": "c-0095",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "手动 cron run 会抢 fire claim，自然触发的结果反被判 stale 整场丢弃",
+      "importance": 0.56,
+      "heat": 0.32,
+      "life": 0.41,
+      "created_at": "2026-08-27T00:01:00.000Z"
+    },
+    {
+      "id": "c-0096",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "deliver=local 的任务从不发卡片，拦截日志有行不等于发出去了",
+      "importance": 0.24,
+      "heat": 0.01,
+      "life": 0,
+      "created_at": "2026-07-30T01:45:00.000Z"
+    },
+    {
+      "id": "c-0097",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.93,
+      "heat": 0.01,
+      "life": 0.453,
+      "created_at": "2026-08-30T13:07:00.000Z"
+    },
+    {
+      "id": "c-0098",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "消息线不是记忆线：便帖席上语只进时间线，差帖凭帖才落库",
+      "importance": 0.21,
+      "heat": 0.45,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-07-28T19:35:00.000Z"
+    },
+    {
+      "id": "c-0099",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "群聊调度在客户端不在服务端，拓扑跟我们正好相反，存储别照搬",
+      "importance": 0.75,
+      "heat": 0.22,
+      "life": 0.401,
+      "created_at": "2026-08-22T03:59:00.000Z"
+    },
+    {
+      "id": "c-0100",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "私密反思不进共享层，但它会悄悄改变下次打招呼的语气",
+      "importance": 0.53,
+      "heat": 0.49,
+      "life": 0.588,
+      "created_at": "2026-08-24T00:07:00.000Z"
+    },
+    {
+      "id": "c-0101",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "把「四端」写成四个 API 端点是最省事也最错的抽象",
+      "importance": 0.67,
+      "heat": 0.68,
+      "life": 0,
+      "created_at": "2026-07-22T09:29:00.000Z"
+    },
+    {
+      "id": "c-0102",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "梦境是两盏灯每周共同蒸馏一次的产物，署名是两个人",
+      "importance": 0.32,
+      "heat": 0.6,
+      "life": 0,
+      "created_at": "2026-07-23T22:36:00.000Z"
+    },
+    {
+      "id": "c-0103",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "人情债是有方向的：这周谁替谁顶了班，下周排活要算进去",
+      "importance": 0.67,
+      "heat": 0.89,
+      "life": 0.376,
+      "created_at": "2026-08-04T02:43:00.000Z"
+    },
+    {
+      "id": "c-0104",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "淘汰不等于错，只是这口钟走到了头；被取代才是判它错",
+      "importance": 0.28,
+      "heat": 0.33,
+      "life": 0.819,
+      "created_at": "2026-08-27T17:29:00.000Z"
+    },
+    {
+      "id": "c-0105",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "一条记忆的寿命环走完之前，热度每被命中一次就往回拨一格",
+      "importance": 0.22,
+      "heat": 0.41,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-09-01T22:30:00.000Z"
+    },
+    {
+      "id": "c-0106",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "域隔离是真的，可见性是补的——这两件事别混着说",
+      "importance": 0.88,
+      "heat": 0.02,
+      "life": 0.119,
+      "created_at": "2026-07-28T06:16:00.000Z"
+    },
+    {
+      "id": "c-0107",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared_with",
+      "excerpt": "轮次里没回话的人比回了话的人更有信息量",
+      "importance": 0.23,
+      "heat": 0.38,
+      "life": 0.78,
+      "created_at": "2026-08-25T18:07:00.000Z"
+    },
+    {
+      "id": "c-0108",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "定向共享的蜡上要开一道缝，不然被点名的人自己也看不见",
+      "importance": 0.87,
+      "heat": 0.26,
+      "life": 0.48,
+      "created_at": "2026-08-26T22:01:00.000Z"
+    },
+    {
+      "id": "c-0109",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.39,
+      "heat": 0.35,
+      "life": 0.551,
+      "created_at": "2026-08-23T17:17:00.000Z"
+    },
+    {
+      "id": "c-0110",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "存档不是备份：存档要能被检索，备份只要能被还原",
+      "importance": 0.39,
+      "heat": 0.85,
+      "life": 0.826,
+      "created_at": "2026-08-24T17:57:00.000Z"
+    },
+    {
+      "id": "c-0111",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "灯灭了不代表人走了，可能只是会话关了",
+      "importance": 0.87,
+      "heat": 0.69,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-08-15T03:45:00.000Z"
+    },
+    {
+      "id": "c-0112",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "shared_with",
+      "excerpt": "「正在干活」这四个字是流式回传的第一个信号，比进度条实在",
+      "importance": 0.67,
+      "heat": 0.22,
+      "life": 0,
+      "created_at": "2026-07-21T16:11:00.000Z"
+    },
+    {
+      "id": "c-0113",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "可见性只覆盖 chunks 一张表，向量缓存里的正文没跟着走——补一条 min_visibility 统一实现",
+      "importance": 0.35,
+      "heat": 0.41,
+      "life": 0.094,
+      "created_at": "2026-08-11T10:25:00.000Z"
+    },
+    {
+      "id": "c-0114",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "衍生记忆必须带 source_ids 血缘，取 min(所有来源) 作为它自己的可见性",
+      "importance": 0.29,
+      "heat": 0.29,
+      "life": 0.138,
+      "created_at": "2026-08-04T08:50:00.000Z"
+    },
+    {
+      "id": "c-0115",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "蒸馏是把同一件事的七八种说法合成一句，不是摘要——摘要会把\"谁说的\"丢掉",
+      "importance": 0.34,
+      "heat": 0.41,
+      "life": 0.369,
+      "created_at": "2026-08-20T03:53:00.000Z"
+    },
+    {
+      "id": "c-0116",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "检索先问精炼层，落空才回落全量；命中要回写热度，不然热的会慢慢凉掉",
+      "importance": 0.57,
+      "heat": 0.07,
+      "life": 0.08,
+      "created_at": "2026-07-30T16:09:00.000Z"
+    },
+    {
+      "id": "c-0117",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "每个观察者一口钟：同一条记忆在江北那儿三天就凉，在玄铁那儿能撑两周",
+      "importance": 0.5,
+      "heat": 0.52,
+      "life": 0.105,
+      "created_at": "2026-08-20T11:09:00.000Z"
+    },
+    {
+      "id": "c-0118",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.71,
+      "heat": 0.31,
+      "life": 0.204,
+      "created_at": "2026-08-09T22:16:00.000Z"
+    },
+    {
+      "id": "c-0119",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "别名归一：把「龙崎」「库主」「Ryuuzaki」认成同一个实体，共现才算得准",
+      "importance": 0.59,
+      "heat": 0.57,
+      "life": 0.634,
+      "created_at": "2026-08-25T02:05:00.000Z"
+    },
+    {
+      "id": "c-0120",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "逆文档频率压枢纽：万物皆连的那个词权重要压下去，否则整张图被它拽成一团",
+      "importance": 0.27,
+      "heat": 0.45,
+      "life": 0.305,
+      "created_at": "2026-08-13T13:54:00.000Z"
+    },
+    {
+      "id": "c-0121",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "唤醒桥实测三端都在六十秒内，\"必须异步\"这条假设当场作废",
+      "importance": 0.45,
+      "heat": 0.19,
+      "life": 0.449,
+      "created_at": "2026-08-12T13:54:00.000Z"
+    },
+    {
+      "id": "c-0122",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "玄铁的 A2A 插件是现成的，只是默认关着——启用比重写省十天",
+      "importance": 0.48,
+      "heat": 0.48,
+      "life": 0,
+      "created_at": "2026-07-24T23:28:00.000Z"
+    },
+    {
+      "id": "c-0123",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared_with",
+      "excerpt": "手动 cron run 会抢 fire claim，自然触发的结果反被判 stale 整场丢弃",
+      "importance": 0.49,
+      "heat": 0.34,
+      "life": 0,
+      "created_at": "2026-07-27T08:24:00.000Z"
+    },
+    {
+      "id": "c-0124",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "deliver=local 的任务从不发卡片，拦截日志有行不等于发出去了",
+      "importance": 0.21,
+      "heat": 0.64,
+      "life": 0,
+      "created_at": "2026-07-21T18:09:00.000Z"
+    },
+    {
+      "id": "c-0125",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "importance 没有限幅，一条命令就能把 top-1 钉死——两行 clamp 最先做",
+      "importance": 0.68,
+      "heat": 0.46,
+      "life": 0.604,
+      "created_at": "2026-09-01T23:30:00.000Z"
+    },
+    {
+      "id": "c-0126",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "消息线不是记忆线：便帖席上语只进时间线，差帖凭帖才落库",
+      "importance": 0.28,
+      "heat": 0.61,
+      "life": 0.131,
+      "created_at": "2026-08-10T03:46:00.000Z"
+    },
+    {
+      "id": "c-0127",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "群聊调度在客户端不在服务端，拓扑跟我们正好相反，存储别照搬",
+      "importance": 0.73,
+      "heat": 0.68,
+      "life": 0.172,
+      "created_at": "2026-08-16T20:28:00.000Z"
+    },
+    {
+      "id": "c-0128",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "私密反思不进共享层，但它会悄悄改变下次打招呼的语气",
+      "importance": 0.51,
+      "heat": 0.59,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-08-16T15:35:00.000Z"
+    },
+    {
+      "id": "c-0129",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "把「四端」写成四个 API 端点是最省事也最错的抽象",
+      "importance": 0.49,
+      "heat": 0.27,
+      "life": 0,
+      "created_at": "2026-07-29T06:56:00.000Z"
+    },
+    {
+      "id": "c-0130",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.68,
+      "heat": 0.52,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-09-02T00:21:00.000Z"
+    },
+    {
+      "id": "c-0131",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.52,
+      "heat": 0.96,
+      "life": 0,
+      "created_at": "2026-07-21T22:58:00.000Z"
+    },
+    {
+      "id": "c-0132",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "淘汰不等于错，只是这口钟走到了头；被取代才是判它错",
+      "importance": 0.51,
+      "heat": 0.04,
+      "life": 0,
+      "created_at": "2026-07-22T21:56:00.000Z"
+    },
+    {
+      "id": "c-0133",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "一条记忆的寿命环走完之前，热度每被命中一次就往回拨一格",
+      "importance": 0.56,
+      "heat": 0.35,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-08-16T20:19:00.000Z"
+    },
+    {
+      "id": "c-0134",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "域隔离是真的，可见性是补的——这两件事别混着说",
+      "importance": 0.56,
+      "heat": 0.33,
+      "life": 0.356,
+      "created_at": "2026-08-09T18:16:00.000Z"
+    },
+    {
+      "id": "c-0135",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "轮次里没回话的人比回了话的人更有信息量",
+      "importance": 0.84,
+      "heat": 0.31,
+      "life": 0.028,
+      "created_at": "2026-08-06T11:05:00.000Z"
+    },
+    {
+      "id": "c-0136",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "定向共享的蜡上要开一道缝，不然被点名的人自己也看不见",
+      "importance": 0.82,
+      "heat": 0.4,
+      "life": 0,
+      "created_at": "2026-07-21T14:53:00.000Z"
+    },
+    {
+      "id": "c-0137",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "同一条事实被两个人各写一遍，图上会多出一条没用的共现边",
+      "importance": 0.4,
+      "heat": 0.26,
+      "life": 0.587,
+      "created_at": "2026-08-28T21:43:00.000Z"
+    },
+    {
+      "id": "c-0138",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.33,
+      "heat": 0.15,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-08-15T08:15:00.000Z"
+    },
+    {
+      "id": "c-0139",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "灯灭了不代表人走了，可能只是会话关了",
+      "importance": 0.29,
+      "heat": 0.17,
+      "life": 0,
+      "created_at": "2026-07-26T08:12:00.000Z"
+    },
+    {
+      "id": "c-0140",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "「正在干活」这四个字是流式回传的第一个信号，比进度条实在",
+      "importance": 0.63,
+      "heat": 0.57,
+      "life": 0.152,
+      "created_at": "2026-08-06T19:51:00.000Z"
+    },
+    {
+      "id": "c-0141",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "可见性只覆盖 chunks 一张表，向量缓存里的正文没跟着走——补一条 min_visibility 统一实现",
+      "importance": 0.23,
+      "heat": 0.57,
+      "life": 0.487,
+      "created_at": "2026-08-16T04:55:00.000Z"
+    },
+    {
+      "id": "c-0142",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "衍生记忆必须带 source_ids 血缘，取 min(所有来源) 作为它自己的可见性",
+      "importance": 0.55,
+      "heat": 0.33,
+      "life": 0.248,
+      "created_at": "2026-08-11T03:26:00.000Z"
+    },
+    {
+      "id": "c-0143",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "蒸馏是把同一件事的七八种说法合成一句，不是摘要——摘要会把\"谁说的\"丢掉",
+      "importance": 0.58,
+      "heat": 0.55,
+      "life": 0,
+      "created_at": "2026-08-15T05:16:00.000Z"
+    },
+    {
+      "id": "c-0144",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "检索先问精炼层，落空才回落全量；命中要回写热度，不然热的会慢慢凉掉",
+      "importance": 0.4,
+      "heat": 0.28,
+      "life": 0,
+      "created_at": "2026-08-01T08:02:00.000Z"
+    },
+    {
+      "id": "c-0145",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "每个观察者一口钟：同一条记忆在江北那儿三天就凉，在玄铁那儿能撑两周",
+      "importance": 0.65,
+      "heat": 0.07,
+      "life": 0.503,
+      "created_at": "2026-08-23T06:56:00.000Z"
+    },
+    {
+      "id": "c-0146",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "同域新事取代旧事叫「代」，跨域视角分歧叫「争」——争不许自动取代",
+      "importance": 0.5,
+      "heat": 0.03,
+      "life": 0,
+      "created_at": "2026-07-23T05:31:00.000Z"
+    },
+    {
+      "id": "c-0147",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "别名归一：把「龙崎」「库主」「Ryuuzaki」认成同一个实体，共现才算得准",
+      "importance": 0.62,
+      "heat": 0.59,
+      "life": 0.276,
+      "created_at": "2026-08-14T19:55:00.000Z"
+    },
+    {
+      "id": "c-0148",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "逆文档频率压枢纽：万物皆连的那个词权重要压下去，否则整张图被它拽成一团",
+      "importance": 0.86,
+      "heat": 0.53,
+      "life": 0.265,
+      "created_at": "2026-08-13T06:03:00.000Z"
+    },
+    {
+      "id": "c-0149",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "唤醒桥实测三端都在六十秒内，\"必须异步\"这条假设当场作废",
+      "importance": 0.78,
+      "heat": 0.45,
+      "life": 0.319,
+      "created_at": "2026-08-21T17:40:00.000Z"
+    },
+    {
+      "id": "c-0150",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "玄铁的 A2A 插件是现成的，只是默认关着——启用比重写省十天",
+      "importance": 0.83,
+      "heat": 0.53,
+      "life": 0.27,
+      "created_at": "2026-08-10T14:56:00.000Z"
+    },
+    {
+      "id": "c-0151",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "手动 cron run 会抢 fire claim，自然触发的结果反被判 stale 整场丢弃",
+      "importance": 0.72,
+      "heat": 0.38,
+      "life": 0,
+      "created_at": "2026-08-08T07:28:00.000Z"
+    },
+    {
+      "id": "c-0152",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.67,
+      "heat": 0.31,
+      "life": 0,
+      "created_at": "2026-08-04T11:24:00.000Z"
+    },
+    {
+      "id": "c-0153",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "importance 没有限幅，一条命令就能把 top-1 钉死——两行 clamp 最先做",
+      "importance": 0.29,
+      "heat": 0.26,
+      "life": 0,
+      "created_at": "2026-08-08T17:27:00.000Z"
+    },
+    {
+      "id": "c-0154",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "消息线不是记忆线：便帖席上语只进时间线，差帖凭帖才落库",
+      "importance": 0.55,
+      "heat": 0.57,
+      "life": 0.324,
+      "created_at": "2026-08-12T11:19:00.000Z"
+    },
+    {
+      "id": "c-0155",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "群聊调度在客户端不在服务端，拓扑跟我们正好相反，存储别照搬",
+      "importance": 0.8,
+      "heat": 0.43,
+      "life": 0,
+      "created_at": "2026-07-30T10:28:00.000Z"
+    },
+    {
+      "id": "c-0156",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "私密反思不进共享层，但它会悄悄改变下次打招呼的语气",
+      "importance": 0.36,
+      "heat": 0.43,
+      "life": 0.641,
+      "created_at": "2026-08-26T02:50:00.000Z"
+    },
+    {
+      "id": "c-0157",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "把「四端」写成四个 API 端点是最省事也最错的抽象",
+      "importance": 0.49,
+      "heat": 0.81,
+      "life": 0.755,
+      "created_at": "2026-08-30T10:21:00.000Z"
+    },
+    {
+      "id": "c-0158",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "梦境是两盏灯每周共同蒸馏一次的产物，署名是两个人",
+      "importance": 0.59,
+      "heat": 0.58,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-08-09T06:19:00.000Z"
+    },
+    {
+      "id": "c-0159",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "人情债是有方向的：这周谁替谁顶了班，下周排活要算进去",
+      "importance": 0.43,
+      "heat": 0.48,
+      "life": 0.595,
+      "created_at": "2026-08-14T12:23:00.000Z"
+    },
+    {
+      "id": "c-0160",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "淘汰不等于错，只是这口钟走到了头；被取代才是判它错",
+      "importance": 0.52,
+      "heat": 0.09,
+      "life": 0.069,
+      "created_at": "2026-08-06T09:04:00.000Z"
+    },
+    {
+      "id": "c-0161",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.44,
+      "heat": 0.14,
+      "life": 0,
+      "created_at": "2026-07-19T17:20:00.000Z"
+    },
+    {
+      "id": "c-0162",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "域隔离是真的，可见性是补的——这两件事别混着说",
+      "importance": 0.72,
+      "heat": 0.04,
+      "life": 0.571,
+      "created_at": "2026-08-27T13:40:00.000Z"
+    },
+    {
+      "id": "c-0163",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "轮次里没回话的人比回了话的人更有信息量",
+      "importance": 0.64,
+      "heat": 0.54,
+      "life": 0,
+      "created_at": "2026-08-01T11:55:00.000Z"
+    },
+    {
+      "id": "c-0164",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared_with",
+      "excerpt": "定向共享的蜡上要开一道缝，不然被点名的人自己也看不见",
+      "importance": 0.24,
+      "heat": 0.01,
+      "life": 0,
+      "created_at": "2026-07-28T12:37:00.000Z"
+    },
+    {
+      "id": "c-0165",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "同一条事实被两个人各写一遍，图上会多出一条没用的共现边",
+      "importance": 0.57,
+      "heat": 0.61,
+      "life": 0.077,
+      "created_at": "2026-08-17T01:03:00.000Z"
+    },
+    {
+      "id": "c-0166",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "存档不是备份：存档要能被检索，备份只要能被还原",
+      "importance": 0.74,
+      "heat": 0.41,
+      "life": 0.608,
+      "created_at": "2026-08-25T12:10:00.000Z"
+    },
+    {
+      "id": "c-0167",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "灯灭了不代表人走了，可能只是会话关了",
+      "importance": 0.89,
+      "heat": 0.85,
+      "life": 0.65,
+      "created_at": "2026-08-19T18:58:00.000Z"
+    },
+    {
+      "id": "c-0168",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "「正在干活」这四个字是流式回传的第一个信号，比进度条实在",
+      "importance": 0.39,
+      "heat": 0.36,
+      "life": 0.956,
+      "created_at": "2026-08-30T09:32:00.000Z"
+    },
+    {
+      "id": "c-0169",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "可见性只覆盖 chunks 一张表，向量缓存里的正文没跟着走——补一条 min_visibility 统一实现",
+      "importance": 0.42,
+      "heat": 0.39,
+      "life": 0.557,
+      "created_at": "2026-08-21T07:09:00.000Z"
+    },
+    {
+      "id": "c-0170",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "衍生记忆必须带 source_ids 血缘，取 min(所有来源) 作为它自己的可见性",
+      "importance": 0.23,
+      "heat": 0.68,
+      "life": 0,
+      "created_at": "2026-07-23T07:03:00.000Z"
+    },
+    {
+      "id": "c-0171",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared_with",
+      "excerpt": "蒸馏是把同一件事的七八种说法合成一句，不是摘要——摘要会把\"谁说的\"丢掉",
+      "importance": 0.27,
+      "heat": 0.69,
+      "life": 0,
+      "created_at": "2026-08-03T07:36:00.000Z"
+    },
+    {
+      "id": "c-0172",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared_with",
+      "excerpt": "检索先问精炼层，落空才回落全量；命中要回写热度，不然热的会慢慢凉掉",
+      "importance": 0.91,
+      "heat": 0.31,
+      "life": 0,
+      "created_at": "2026-08-10T22:19:00.000Z"
+    },
+    {
+      "id": "c-0173",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "每个观察者一口钟：同一条记忆在江北那儿三天就凉，在玄铁那儿能撑两周",
+      "importance": 0.53,
+      "heat": 0.48,
+      "life": 0,
+      "created_at": "2026-07-20T05:42:00.000Z"
+    },
+    {
+      "id": "c-0174",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "同域新事取代旧事叫「代」，跨域视角分歧叫「争」——争不许自动取代",
+      "importance": 0.34,
+      "heat": 0.55,
+      "life": 0,
+      "created_at": "2026-07-23T14:40:00.000Z"
+    },
+    {
+      "id": "c-0175",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "别名归一：把「龙崎」「库主」「Ryuuzaki」认成同一个实体，共现才算得准",
+      "importance": 0.24,
+      "heat": 0,
+      "life": 0,
+      "created_at": "2026-07-21T19:46:00.000Z"
+    },
+    {
+      "id": "c-0176",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "逆文档频率压枢纽：万物皆连的那个词权重要压下去，否则整张图被它拽成一团",
+      "importance": 0.89,
+      "heat": 0.58,
+      "life": 0.224,
+      "created_at": "2026-08-17T09:37:00.000Z"
+    },
+    {
+      "id": "c-0177",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.45,
+      "heat": 0.62,
+      "life": 0.656,
+      "created_at": "2026-08-31T14:37:00.000Z"
+    },
+    {
+      "id": "c-0178",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared_with",
+      "excerpt": "玄铁的 A2A 插件是现成的，只是默认关着——启用比重写省十天",
+      "importance": 0.2,
+      "heat": 0.11,
+      "life": 0,
+      "created_at": "2026-07-19T22:28:00.000Z"
+    },
+    {
+      "id": "c-0179",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.88,
+      "heat": 0.03,
+      "life": 0,
+      "created_at": "2026-08-06T17:01:00.000Z"
+    },
+    {
+      "id": "c-0180",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "deliver=local 的任务从不发卡片，拦截日志有行不等于发出去了",
+      "importance": 0.94,
+      "heat": 0.15,
+      "life": 0,
+      "created_at": "2026-08-04T01:09:00.000Z"
+    },
+    {
+      "id": "c-0181",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "importance 没有限幅，一条命令就能把 top-1 钉死——两行 clamp 最先做",
+      "importance": 0.24,
+      "heat": 0.05,
+      "life": 0.082,
+      "created_at": "2026-07-29T22:02:00.000Z"
+    },
+    {
+      "id": "c-0182",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "消息线不是记忆线：便帖席上语只进时间线，差帖凭帖才落库",
+      "importance": 0.6,
+      "heat": 0.66,
+      "life": 0,
+      "created_at": "2026-08-03T05:19:00.000Z"
+    },
+    {
+      "id": "c-0183",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.38,
+      "heat": 0.07,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-08-25T02:30:00.000Z"
+    },
+    {
+      "id": "c-0184",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "私密反思不进共享层，但它会悄悄改变下次打招呼的语气",
+      "importance": 0.27,
+      "heat": 0.47,
+      "life": 0,
+      "created_at": "2026-08-04T01:48:00.000Z"
+    },
+    {
+      "id": "c-0185",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "把「四端」写成四个 API 端点是最省事也最错的抽象",
+      "importance": 0.37,
+      "heat": 0.26,
+      "life": 0,
+      "created_at": "2026-08-07T01:30:00.000Z"
+    },
+    {
+      "id": "c-0186",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "梦境是两盏灯每周共同蒸馏一次的产物，署名是两个人",
+      "importance": 0.9,
+      "heat": 0.52,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-08-20T07:04:00.000Z"
+    },
+    {
+      "id": "c-0187",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "人情债是有方向的：这周谁替谁顶了班，下周排活要算进去",
+      "importance": 0.49,
+      "heat": 0.07,
+      "life": 0.399,
+      "created_at": "2026-08-13T19:11:00.000Z"
+    },
+    {
+      "id": "c-0188",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "淘汰不等于错，只是这口钟走到了头；被取代才是判它错",
+      "importance": 0.61,
+      "heat": 0.42,
+      "life": 0.614,
+      "created_at": "2026-08-27T15:24:00.000Z"
+    },
+    {
+      "id": "c-0189",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared_with",
+      "excerpt": "一条记忆的寿命环走完之前，热度每被命中一次就往回拨一格",
+      "importance": 0.73,
+      "heat": 0.48,
+      "life": 0,
+      "created_at": "2026-08-03T19:23:00.000Z"
+    },
+    {
+      "id": "c-0190",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.27,
+      "heat": 0.64,
+      "life": 0.2,
+      "created_at": "2026-08-12T06:29:00.000Z"
+    },
+    {
+      "id": "c-0191",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.65,
+      "heat": 0.41,
+      "life": 0.394,
+      "created_at": "2026-08-24T02:56:00.000Z"
+    },
+    {
+      "id": "c-0192",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "定向共享的蜡上要开一道缝，不然被点名的人自己也看不见",
+      "importance": 0.69,
+      "heat": 0.49,
+      "life": 0,
+      "created_at": "2026-08-03T01:25:00.000Z"
+    },
+    {
+      "id": "c-0193",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared_with",
+      "excerpt": "同一条事实被两个人各写一遍，图上会多出一条没用的共现边",
+      "importance": 0.38,
+      "heat": 0.55,
+      "life": 0.017,
+      "created_at": "2026-08-05T11:58:00.000Z"
+    },
+    {
+      "id": "c-0194",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "存档不是备份：存档要能被检索，备份只要能被还原",
+      "importance": 0.72,
+      "heat": 0.57,
+      "life": 0,
+      "created_at": "2026-08-09T18:19:00.000Z"
+    },
+    {
+      "id": "c-0195",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "灯灭了不代表人走了，可能只是会话关了",
+      "importance": 0.73,
+      "heat": 0.91,
+      "life": 0,
+      "created_at": "2026-07-22T08:37:00.000Z"
+    },
+    {
+      "id": "c-0196",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "「正在干活」这四个字是流式回传的第一个信号，比进度条实在",
+      "importance": 0.93,
+      "heat": 0.79,
+      "life": 0.922,
+      "created_at": "2026-08-31T21:27:00.000Z"
+    },
+    {
+      "id": "c-0197",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.36,
+      "heat": 0.6,
+      "life": 0,
+      "created_at": "2026-07-22T06:21:00.000Z"
+    },
+    {
+      "id": "c-0198",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "衍生记忆必须带 source_ids 血缘，取 min(所有来源) 作为它自己的可见性",
+      "importance": 0.38,
+      "heat": 0.98,
+      "life": 0.706,
+      "created_at": "2026-08-29T01:22:00.000Z"
+    },
+    {
+      "id": "c-0199",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "蒸馏是把同一件事的七八种说法合成一句，不是摘要——摘要会把\"谁说的\"丢掉",
+      "importance": 0.79,
+      "heat": 0.33,
+      "life": 0.005,
+      "created_at": "2026-07-27T06:12:00.000Z"
+    },
+    {
+      "id": "c-0200",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "检索先问精炼层，落空才回落全量；命中要回写热度，不然热的会慢慢凉掉",
+      "importance": 0.78,
+      "heat": 0.41,
+      "life": 0,
+      "created_at": "2026-07-29T09:23:00.000Z"
+    },
+    {
+      "id": "c-0201",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "每个观察者一口钟：同一条记忆在江北那儿三天就凉，在玄铁那儿能撑两周",
+      "importance": 0.62,
+      "heat": 0.2,
+      "life": 0.658,
+      "created_at": "2026-08-30T04:07:00.000Z"
+    },
+    {
+      "id": "c-0202",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "同域新事取代旧事叫「代」，跨域视角分歧叫「争」——争不许自动取代",
+      "importance": 0.82,
+      "heat": 0.94,
+      "life": 0.682,
+      "created_at": "2026-08-22T16:34:00.000Z"
+    },
+    {
+      "id": "c-0203",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared_with",
+      "excerpt": "别名归一：把「龙崎」「库主」「Ryuuzaki」认成同一个实体，共现才算得准",
+      "importance": 0.6,
+      "heat": 0.14,
+      "life": 0.033,
+      "created_at": "2026-08-13T13:42:00.000Z"
+    },
+    {
+      "id": "c-0204",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "逆文档频率压枢纽：万物皆连的那个词权重要压下去，否则整张图被它拽成一团",
+      "importance": 0.35,
+      "heat": 0.59,
+      "life": 0.295,
+      "created_at": "2026-08-26T08:34:00.000Z"
+    },
+    {
+      "id": "c-0205",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "唤醒桥实测三端都在六十秒内，\"必须异步\"这条假设当场作废",
+      "importance": 0.77,
+      "heat": 0.24,
+      "life": 0.028,
+      "created_at": "2026-08-14T04:20:00.000Z"
+    },
+    {
+      "id": "c-0206",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared_with",
+      "excerpt": "玄铁的 A2A 插件是现成的，只是默认关着——启用比重写省十天",
+      "importance": 0.6,
+      "heat": 0.02,
+      "life": 0,
+      "created_at": "2026-07-22T07:31:00.000Z"
+    },
+    {
+      "id": "c-0207",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "手动 cron run 会抢 fire claim，自然触发的结果反被判 stale 整场丢弃",
+      "importance": 0.43,
+      "heat": 0.37,
+      "life": 0,
+      "created_at": "2026-07-19T08:43:00.000Z"
+    },
+    {
+      "id": "c-0208",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "deliver=local 的任务从不发卡片，拦截日志有行不等于发出去了",
+      "importance": 0.45,
+      "heat": 0.12,
+      "life": 0,
+      "created_at": "2026-08-02T20:48:00.000Z"
+    },
+    {
+      "id": "c-0209",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "importance 没有限幅，一条命令就能把 top-1 钉死——两行 clamp 最先做",
+      "importance": 0.25,
+      "heat": 0.58,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-07-29T19:55:00.000Z"
+    },
+    {
+      "id": "c-0210",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "消息线不是记忆线：便帖席上语只进时间线，差帖凭帖才落库",
+      "importance": 0.32,
+      "heat": 0.25,
+      "life": 0,
+      "created_at": "2026-07-23T07:35:00.000Z"
+    },
+    {
+      "id": "c-0211",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "群聊调度在客户端不在服务端，拓扑跟我们正好相反，存储别照搬",
+      "importance": 0.71,
+      "heat": 0.76,
+      "life": 0.872,
+      "created_at": "2026-08-23T14:09:00.000Z"
+    },
+    {
+      "id": "c-0212",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "私密反思不进共享层，但它会悄悄改变下次打招呼的语气",
+      "importance": 0.7,
+      "heat": 0.22,
+      "life": 0,
+      "created_at": "2026-08-05T15:48:00.000Z"
+    },
+    {
+      "id": "c-0213",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "把「四端」写成四个 API 端点是最省事也最错的抽象",
+      "importance": 0.5,
+      "heat": 0.83,
+      "life": 0.286,
+      "created_at": "2026-08-13T12:29:00.000Z"
+    },
+    {
+      "id": "c-0214",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "梦境是两盏灯每周共同蒸馏一次的产物，署名是两个人",
+      "importance": 0.65,
+      "heat": 0.44,
+      "life": 0,
+      "created_at": "2026-07-22T11:43:00.000Z"
+    },
+    {
+      "id": "c-0215",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "人情债是有方向的：这周谁替谁顶了班，下周排活要算进去",
+      "importance": 0.85,
+      "heat": 0.05,
+      "life": 0,
+      "created_at": "2026-07-24T21:33:00.000Z"
+    },
+    {
+      "id": "c-0216",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "淘汰不等于错，只是这口钟走到了头；被取代才是判它错",
+      "importance": 0.23,
+      "heat": 0.25,
+      "life": 0.058,
+      "created_at": "2026-08-15T23:13:00.000Z"
+    },
+    {
+      "id": "c-0217",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "一条记忆的寿命环走完之前，热度每被命中一次就往回拨一格",
+      "importance": 0.39,
+      "heat": 0.11,
+      "life": 0,
+      "created_at": "2026-07-24T21:43:00.000Z"
+    },
+    {
+      "id": "c-0218",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "域隔离是真的，可见性是补的——这两件事别混着说",
+      "importance": 0.7,
+      "heat": 0.28,
+      "life": 0.625,
+      "created_at": "2026-08-21T20:51:00.000Z"
+    },
+    {
+      "id": "c-0219",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "轮次里没回话的人比回了话的人更有信息量",
+      "importance": 0.38,
+      "heat": 0.07,
+      "life": 0.609,
+      "created_at": "2026-08-29T01:28:00.000Z"
+    },
+    {
+      "id": "c-0220",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.7,
+      "heat": 0.05,
+      "life": 0.229,
+      "created_at": "2026-08-14T09:06:00.000Z"
+    },
+    {
+      "id": "c-0221",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared_with",
+      "excerpt": "同一条事实被两个人各写一遍，图上会多出一条没用的共现边",
+      "importance": 0.51,
+      "heat": 0.61,
+      "life": 0,
+      "retired": true,
+      "created_at": "2026-08-11T09:46:00.000Z"
+    },
+    {
+      "id": "c-0222",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "存档不是备份：存档要能被检索，备份只要能被还原",
+      "importance": 0.83,
+      "heat": 0.65,
+      "life": 0.917,
+      "created_at": "2026-08-26T00:18:00.000Z"
+    },
+    {
+      "id": "c-0223",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "灯灭了不代表人走了，可能只是会话关了",
+      "importance": 0.5,
+      "heat": 0.2,
+      "life": 0,
+      "created_at": "2026-07-25T09:59:00.000Z"
+    },
+    {
+      "id": "c-0224",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "「正在干活」这四个字是流式回传的第一个信号，比进度条实在",
+      "importance": 0.68,
+      "heat": 0.4,
+      "life": 0.114,
+      "created_at": "2026-08-05T06:21:00.000Z"
+    },
+    {
+      "id": "c-0225",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.77,
+      "heat": 0.78,
+      "life": 0.537,
+      "created_at": "2026-08-19T12:24:00.000Z"
+    },
+    {
+      "id": "c-0226",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "衍生记忆必须带 source_ids 血缘，取 min(所有来源) 作为它自己的可见性",
+      "importance": 0.61,
+      "heat": 0.16,
+      "life": 0.025,
+      "created_at": "2026-08-04T09:21:00.000Z"
+    },
+    {
+      "id": "c-0227",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "蒸馏是把同一件事的七八种说法合成一句，不是摘要——摘要会把\"谁说的\"丢掉",
+      "importance": 0.38,
+      "heat": 0.09,
+      "life": 0.44,
+      "created_at": "2026-08-14T19:48:00.000Z"
+    },
+    {
+      "id": "c-0228",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "检索先问精炼层，落空才回落全量；命中要回写热度，不然热的会慢慢凉掉",
+      "importance": 0.74,
+      "heat": 0.5,
+      "life": 0,
+      "created_at": "2026-07-27T05:24:00.000Z"
+    },
+    {
+      "id": "c-0229",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.82,
+      "heat": 0.33,
+      "life": 0.168,
+      "created_at": "2026-08-02T01:42:00.000Z"
+    },
+    {
+      "id": "c-0230",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.75,
+      "heat": 0.61,
+      "life": 0.158,
+      "created_at": "2026-08-19T15:50:00.000Z"
+    },
+    {
+      "id": "c-0231",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "别名归一：把「龙崎」「库主」「Ryuuzaki」认成同一个实体，共现才算得准",
+      "importance": 0.2,
+      "heat": 0.13,
+      "life": 0.156,
+      "created_at": "2026-08-18T02:40:00.000Z"
+    },
+    {
+      "id": "c-0232",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "逆文档频率压枢纽：万物皆连的那个词权重要压下去，否则整张图被它拽成一团",
+      "importance": 0.23,
+      "heat": 0.08,
+      "life": 0,
+      "created_at": "2026-08-04T05:00:00.000Z"
+    },
+    {
+      "id": "c-0233",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.23,
+      "heat": 0.3,
+      "life": 0,
+      "created_at": "2026-07-21T14:30:00.000Z"
+    },
+    {
+      "id": "c-0234",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared_with",
+      "excerpt": "玄铁的 A2A 插件是现成的，只是默认关着——启用比重写省十天",
+      "importance": 0.65,
+      "heat": 0.11,
+      "life": 0,
+      "created_at": "2026-07-24T04:43:00.000Z"
+    },
+    {
+      "id": "c-0235",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.23,
+      "heat": 0.04,
+      "life": 0.655,
+      "created_at": "2026-09-01T18:08:00.000Z"
+    },
+    {
+      "id": "c-0236",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "deliver=local 的任务从不发卡片，拦截日志有行不等于发出去了",
+      "importance": 0.92,
+      "heat": 0.99,
+      "life": 0,
+      "created_at": "2026-07-28T09:07:00.000Z"
+    },
+    {
+      "id": "c-0237",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "importance 没有限幅，一条命令就能把 top-1 钉死——两行 clamp 最先做",
+      "importance": 0.27,
+      "heat": 0.88,
+      "life": 0,
+      "created_at": "2026-07-21T01:41:00.000Z"
+    },
+    {
+      "id": "c-0238",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "zcode",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.27,
+      "heat": 0.19,
+      "life": 0,
+      "created_at": "2026-07-22T15:21:00.000Z"
+    },
+    {
+      "id": "c-0239",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "群聊调度在客户端不在服务端，拓扑跟我们正好相反，存储别照搬",
+      "importance": 0.57,
+      "heat": 0.28,
+      "life": 0.203,
+      "created_at": "2026-08-21T01:49:00.000Z"
+    },
+    {
+      "id": "c-0240",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "xuantie",
+      "visibility": "shared",
+      "excerpt": "私密反思不进共享层，但它会悄悄改变下次打招呼的语气",
+      "importance": 0.91,
+      "heat": 0.98,
+      "life": 0.089,
+      "created_at": "2026-07-29T19:26:00.000Z"
+    },
+    {
+      "id": "c-0241",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "把「四端」写成四个 API 端点是最省事也最错的抽象",
+      "importance": 0.88,
+      "heat": 0.44,
+      "life": 0.284,
+      "created_at": "2026-08-24T17:04:00.000Z"
+    },
+    {
+      "id": "c-0242",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "梦境是两盏灯每周共同蒸馏一次的产物，署名是两个人",
+      "importance": 0.25,
+      "heat": 0.61,
+      "life": 0.523,
+      "created_at": "2026-08-18T08:10:00.000Z"
+    },
+    {
+      "id": "c-0243",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "人情债是有方向的：这周谁替谁顶了班，下周排活要算进去",
+      "importance": 0.58,
+      "heat": 0.28,
+      "life": 0.483,
+      "created_at": "2026-08-25T11:11:00.000Z"
+    },
+    {
+      "id": "c-0244",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "淘汰不等于错，只是这口钟走到了头；被取代才是判它错",
+      "importance": 0.77,
+      "heat": 0.62,
+      "life": 0.083,
+      "created_at": "2026-08-15T19:40:00.000Z"
+    },
+    {
+      "id": "c-0245",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "一条记忆的寿命环走完之前，热度每被命中一次就往回拨一格",
+      "importance": 0.21,
+      "heat": 0.94,
+      "life": 0.536,
+      "created_at": "2026-08-06T05:56:00.000Z"
+    },
+    {
+      "id": "c-0246",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "域隔离是真的，可见性是补的——这两件事别混着说",
+      "importance": 0.48,
+      "heat": 0.35,
+      "life": 0.285,
+      "created_at": "2026-08-05T07:54:00.000Z"
+    },
+    {
+      "id": "c-0247",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "xuantie",
+      "visibility": "shared_with",
+      "excerpt": "轮次里没回话的人比回了话的人更有信息量",
+      "importance": 0.95,
+      "heat": 0.28,
+      "life": 0,
+      "created_at": "2026-07-23T09:58:00.000Z"
+    },
+    {
+      "id": "c-0248",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "定向共享的蜡上要开一道缝，不然被点名的人自己也看不见",
+      "importance": 0.24,
+      "heat": 0.32,
+      "life": 0.152,
+      "created_at": "2026-08-17T15:32:00.000Z"
+    },
+    {
+      "id": "c-0249",
+      "type": "node_memory",
+      "tier": "refined",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "同一条事实被两个人各写一遍，图上会多出一条没用的共现边",
+      "importance": 0.63,
+      "heat": 0.05,
+      "life": 0.596,
+      "created_at": "2026-08-17T10:09:00.000Z"
+    },
+    {
+      "id": "c-0250",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "存档不是备份：存档要能被检索，备份只要能被还原",
+      "importance": 0.21,
+      "heat": 0.59,
+      "life": 0.029,
+      "created_at": "2026-08-06T22:56:00.000Z"
+    },
+    {
+      "id": "c-0251",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "灯灭了不代表人走了，可能只是会话关了",
+      "importance": 0.55,
+      "heat": 0.29,
+      "life": 0.227,
+      "created_at": "2026-08-12T11:00:00.000Z"
+    },
+    {
+      "id": "c-0252",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "「正在干活」这四个字是流式回传的第一个信号，比进度条实在",
+      "importance": 0.65,
+      "heat": 0.6,
+      "life": 0.133,
+      "created_at": "2026-08-05T02:09:00.000Z"
+    },
+    {
+      "id": "c-0253",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "private",
+      "excerpt": null,
+      "redacted": true,
+      "importance": 0.5,
+      "heat": 0.52,
+      "life": 0.108,
+      "created_at": "2026-07-28T09:13:00.000Z"
+    },
+    {
+      "id": "c-0254",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "zcode",
+      "visibility": "shared",
+      "excerpt": "衍生记忆必须带 source_ids 血缘，取 min(所有来源) 作为它自己的可见性",
+      "importance": 0.63,
+      "heat": 0.07,
+      "life": 0.359,
+      "created_at": "2026-08-24T20:23:00.000Z"
+    },
+    {
+      "id": "c-0255",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "蒸馏是把同一件事的七八种说法合成一句，不是摘要——摘要会把\"谁说的\"丢掉",
+      "importance": 0.69,
+      "heat": 0.3,
+      "life": 0.12,
+      "created_at": "2026-08-13T16:49:00.000Z"
+    },
+    {
+      "id": "c-0256",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "检索先问精炼层，落空才回落全量；命中要回写热度，不然热的会慢慢凉掉",
+      "importance": 0.9,
+      "heat": 0.36,
+      "life": 0,
+      "created_at": "2026-07-28T06:08:00.000Z"
+    },
+    {
+      "id": "c-0257",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "每个观察者一口钟：同一条记忆在江北那儿三天就凉，在玄铁那儿能撑两周",
+      "importance": 0.69,
+      "heat": 0.15,
+      "life": 0.001,
+      "created_at": "2026-08-17T08:03:00.000Z"
+    },
+    {
+      "id": "c-0258",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "同域新事取代旧事叫「代」，跨域视角分歧叫「争」——争不许自动取代",
+      "importance": 0.66,
+      "heat": 0.3,
+      "life": 0.326,
+      "created_at": "2026-08-10T03:42:00.000Z"
+    },
+    {
+      "id": "c-0259",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "dsh",
+      "visibility": "shared",
+      "excerpt": "别名归一：把「龙崎」「库主」「Ryuuzaki」认成同一个实体，共现才算得准",
+      "importance": 0.67,
+      "heat": 0.02,
+      "life": 0.045,
+      "created_at": "2026-08-04T17:20:00.000Z"
+    },
+    {
+      "id": "c-0260",
+      "type": "node_memory",
+      "tier": "raw",
+      "owner": "workbuddy",
+      "visibility": "shared",
+      "excerpt": "逆文档频率压枢纽：万物皆连的那个词权重要压下去，否则整张图被它拽成一团",
+      "importance": 0.41,
+      "heat": 0.48,
+      "life": 0,
+      "created_at": "2026-08-13T09:40:00.000Z"
+    }
+  ],
+  "edges": [
+    {
+      "id": "g-0001",
+      "source": "c-0001",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.94
+    },
+    {
+      "id": "g-0002",
+      "source": "c-0001",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.96
+    },
+    {
+      "id": "g-0003",
+      "source": "c-0001",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.87
+    },
+    {
+      "id": "g-0004",
+      "source": "c-0002",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.5
+    },
+    {
+      "id": "g-0005",
+      "source": "c-0003",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.68
+    },
+    {
+      "id": "g-0006",
+      "source": "c-0003",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.34
+    },
+    {
+      "id": "g-0007",
+      "source": "c-0004",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.81
+    },
+    {
+      "id": "g-0008",
+      "source": "c-0005",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.52
+    },
+    {
+      "id": "g-0009",
+      "source": "c-0005",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.72
+    },
+    {
+      "id": "g-0010",
+      "source": "c-0005",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.44
+    },
+    {
+      "id": "g-0011",
+      "source": "c-0006",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.76
+    },
+    {
+      "id": "g-0012",
+      "source": "c-0006",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.47
+    },
+    {
+      "id": "g-0013",
+      "source": "c-0007",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.61
+    },
+    {
+      "id": "g-0014",
+      "source": "c-0008",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.99
+    },
+    {
+      "id": "g-0015",
+      "source": "c-0009",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.64
+    },
+    {
+      "id": "g-0016",
+      "source": "c-0009",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.86
+    },
+    {
+      "id": "g-0017",
+      "source": "c-0010",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.57
+    },
+    {
+      "id": "g-0018",
+      "source": "c-0010",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0019",
+      "source": "c-0011",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.47
+    },
+    {
+      "id": "g-0020",
+      "source": "c-0011",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.49
+    },
+    {
+      "id": "g-0021",
+      "source": "c-0012",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0022",
+      "source": "c-0012",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.7
+    },
+    {
+      "id": "g-0023",
+      "source": "c-0012",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.84
+    },
+    {
+      "id": "g-0024",
+      "source": "c-0013",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.56
+    },
+    {
+      "id": "g-0025",
+      "source": "c-0013",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.98
+    },
+    {
+      "id": "g-0026",
+      "source": "c-0014",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.72
+    },
+    {
+      "id": "g-0027",
+      "source": "c-0014",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.92
+    },
+    {
+      "id": "g-0028",
+      "source": "c-0015",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.43
+    },
+    {
+      "id": "g-0029",
+      "source": "c-0015",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0030",
+      "source": "c-0016",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.89
+    },
+    {
+      "id": "g-0031",
+      "source": "c-0016",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.67
+    },
+    {
+      "id": "g-0032",
+      "source": "c-0016",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.72
+    },
+    {
+      "id": "g-0033",
+      "source": "c-0017",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.62
+    },
+    {
+      "id": "g-0034",
+      "source": "c-0017",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.9
+    },
+    {
+      "id": "g-0035",
+      "source": "c-0018",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0036",
+      "source": "c-0018",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.55
+    },
+    {
+      "id": "g-0037",
+      "source": "c-0018",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.68
+    },
+    {
+      "id": "g-0038",
+      "source": "c-0019",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.35
+    },
+    {
+      "id": "g-0039",
+      "source": "c-0019",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.85
+    },
+    {
+      "id": "g-0040",
+      "source": "c-0020",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.78
+    },
+    {
+      "id": "g-0041",
+      "source": "c-0021",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.62
+    },
+    {
+      "id": "g-0042",
+      "source": "c-0021",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.86
+    },
+    {
+      "id": "g-0043",
+      "source": "c-0021",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.5
+    },
+    {
+      "id": "g-0044",
+      "source": "c-0022",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.59
+    },
+    {
+      "id": "g-0045",
+      "source": "c-0022",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.63
+    },
+    {
+      "id": "g-0046",
+      "source": "c-0023",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.37
+    },
+    {
+      "id": "g-0047",
+      "source": "c-0023",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.6
+    },
+    {
+      "id": "g-0048",
+      "source": "c-0023",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.51
+    },
+    {
+      "id": "g-0049",
+      "source": "c-0024",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.34
+    },
+    {
+      "id": "g-0050",
+      "source": "c-0024",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.99
+    },
+    {
+      "id": "g-0051",
+      "source": "c-0025",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.59
+    },
+    {
+      "id": "g-0052",
+      "source": "c-0025",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.33
+    },
+    {
+      "id": "g-0053",
+      "source": "c-0026",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.92
+    },
+    {
+      "id": "g-0054",
+      "source": "c-0027",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0055",
+      "source": "c-0027",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.47
+    },
+    {
+      "id": "g-0056",
+      "source": "c-0028",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.36
+    },
+    {
+      "id": "g-0057",
+      "source": "c-0028",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.31
+    },
+    {
+      "id": "g-0058",
+      "source": "c-0029",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.89
+    },
+    {
+      "id": "g-0059",
+      "source": "c-0029",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.59
+    },
+    {
+      "id": "g-0060",
+      "source": "c-0029",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0061",
+      "source": "c-0030",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.73
+    },
+    {
+      "id": "g-0062",
+      "source": "c-0030",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.38
+    },
+    {
+      "id": "g-0063",
+      "source": "c-0031",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.94
+    },
+    {
+      "id": "g-0064",
+      "source": "c-0031",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.65
+    },
+    {
+      "id": "g-0065",
+      "source": "c-0032",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.58
+    },
+    {
+      "id": "g-0066",
+      "source": "c-0033",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.63
+    },
+    {
+      "id": "g-0067",
+      "source": "c-0034",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0068",
+      "source": "c-0035",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.35
+    },
+    {
+      "id": "g-0069",
+      "source": "c-0035",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.92
+    },
+    {
+      "id": "g-0070",
+      "source": "c-0036",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.31
+    },
+    {
+      "id": "g-0071",
+      "source": "c-0036",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.76
+    },
+    {
+      "id": "g-0072",
+      "source": "c-0037",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0073",
+      "source": "c-0038",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.95
+    },
+    {
+      "id": "g-0074",
+      "source": "c-0039",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.76
+    },
+    {
+      "id": "g-0075",
+      "source": "c-0039",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.49
+    },
+    {
+      "id": "g-0076",
+      "source": "c-0040",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.63
+    },
+    {
+      "id": "g-0077",
+      "source": "c-0041",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.42
+    },
+    {
+      "id": "g-0078",
+      "source": "c-0042",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.32
+    },
+    {
+      "id": "g-0079",
+      "source": "c-0042",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.93
+    },
+    {
+      "id": "g-0080",
+      "source": "c-0043",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.64
+    },
+    {
+      "id": "g-0081",
+      "source": "c-0043",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.59
+    },
+    {
+      "id": "g-0082",
+      "source": "c-0043",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.44
+    },
+    {
+      "id": "g-0083",
+      "source": "c-0044",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.68
+    },
+    {
+      "id": "g-0084",
+      "source": "c-0044",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.99
+    },
+    {
+      "id": "g-0085",
+      "source": "c-0044",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.45
+    },
+    {
+      "id": "g-0086",
+      "source": "c-0045",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.73
+    },
+    {
+      "id": "g-0087",
+      "source": "c-0045",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.86
+    },
+    {
+      "id": "g-0088",
+      "source": "c-0046",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.43
+    },
+    {
+      "id": "g-0089",
+      "source": "c-0046",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.37
+    },
+    {
+      "id": "g-0090",
+      "source": "c-0047",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.79
+    },
+    {
+      "id": "g-0091",
+      "source": "c-0047",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.76
+    },
+    {
+      "id": "g-0092",
+      "source": "c-0047",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.78
+    },
+    {
+      "id": "g-0093",
+      "source": "c-0048",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.48
+    },
+    {
+      "id": "g-0094",
+      "source": "c-0048",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.82
+    },
+    {
+      "id": "g-0095",
+      "source": "c-0049",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.51
+    },
+    {
+      "id": "g-0096",
+      "source": "c-0050",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.31
+    },
+    {
+      "id": "g-0097",
+      "source": "c-0051",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.51
+    },
+    {
+      "id": "g-0098",
+      "source": "c-0051",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.84
+    },
+    {
+      "id": "g-0099",
+      "source": "c-0051",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.31
+    },
+    {
+      "id": "g-0100",
+      "source": "c-0052",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.52
+    },
+    {
+      "id": "g-0101",
+      "source": "c-0052",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 1
+    },
+    {
+      "id": "g-0102",
+      "source": "c-0053",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.57
+    },
+    {
+      "id": "g-0103",
+      "source": "c-0053",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.72
+    },
+    {
+      "id": "g-0104",
+      "source": "c-0053",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.66
+    },
+    {
+      "id": "g-0105",
+      "source": "c-0054",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.74
+    },
+    {
+      "id": "g-0106",
+      "source": "c-0054",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.72
+    },
+    {
+      "id": "g-0107",
+      "source": "c-0054",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.63
+    },
+    {
+      "id": "g-0108",
+      "source": "c-0055",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.96
+    },
+    {
+      "id": "g-0109",
+      "source": "c-0055",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.6
+    },
+    {
+      "id": "g-0110",
+      "source": "c-0055",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.61
+    },
+    {
+      "id": "g-0111",
+      "source": "c-0056",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.87
+    },
+    {
+      "id": "g-0112",
+      "source": "c-0056",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.86
+    },
+    {
+      "id": "g-0113",
+      "source": "c-0057",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.44
+    },
+    {
+      "id": "g-0114",
+      "source": "c-0058",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.91
+    },
+    {
+      "id": "g-0115",
+      "source": "c-0058",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0116",
+      "source": "c-0059",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.64
+    },
+    {
+      "id": "g-0117",
+      "source": "c-0059",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.3
+    },
+    {
+      "id": "g-0118",
+      "source": "c-0060",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.94
+    },
+    {
+      "id": "g-0119",
+      "source": "c-0060",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0120",
+      "source": "c-0060",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.81
+    },
+    {
+      "id": "g-0121",
+      "source": "c-0061",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.32
+    },
+    {
+      "id": "g-0122",
+      "source": "c-0061",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.82
+    },
+    {
+      "id": "g-0123",
+      "source": "c-0061",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.73
+    },
+    {
+      "id": "g-0124",
+      "source": "c-0062",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.75
+    },
+    {
+      "id": "g-0125",
+      "source": "c-0062",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.73
+    },
+    {
+      "id": "g-0126",
+      "source": "c-0063",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.82
+    },
+    {
+      "id": "g-0127",
+      "source": "c-0063",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.35
+    },
+    {
+      "id": "g-0128",
+      "source": "c-0063",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.31
+    },
+    {
+      "id": "g-0129",
+      "source": "c-0064",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.6
+    },
+    {
+      "id": "g-0130",
+      "source": "c-0064",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.39
+    },
+    {
+      "id": "g-0131",
+      "source": "c-0064",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.73
+    },
+    {
+      "id": "g-0132",
+      "source": "c-0065",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0133",
+      "source": "c-0065",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.96
+    },
+    {
+      "id": "g-0134",
+      "source": "c-0066",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.68
+    },
+    {
+      "id": "g-0135",
+      "source": "c-0067",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.62
+    },
+    {
+      "id": "g-0136",
+      "source": "c-0067",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.99
+    },
+    {
+      "id": "g-0137",
+      "source": "c-0068",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.79
+    },
+    {
+      "id": "g-0138",
+      "source": "c-0068",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.42
+    },
+    {
+      "id": "g-0139",
+      "source": "c-0069",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.31
+    },
+    {
+      "id": "g-0140",
+      "source": "c-0069",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.35
+    },
+    {
+      "id": "g-0141",
+      "source": "c-0069",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.3
+    },
+    {
+      "id": "g-0142",
+      "source": "c-0070",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.67
+    },
+    {
+      "id": "g-0143",
+      "source": "c-0071",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0144",
+      "source": "c-0072",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.51
+    },
+    {
+      "id": "g-0145",
+      "source": "c-0073",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.32
+    },
+    {
+      "id": "g-0146",
+      "source": "c-0073",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.84
+    },
+    {
+      "id": "g-0147",
+      "source": "c-0073",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0148",
+      "source": "c-0074",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.54
+    },
+    {
+      "id": "g-0149",
+      "source": "c-0074",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.42
+    },
+    {
+      "id": "g-0150",
+      "source": "c-0075",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.91
+    },
+    {
+      "id": "g-0151",
+      "source": "c-0076",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.95
+    },
+    {
+      "id": "g-0152",
+      "source": "c-0076",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.33
+    },
+    {
+      "id": "g-0153",
+      "source": "c-0077",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.8
+    },
+    {
+      "id": "g-0154",
+      "source": "c-0078",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.68
+    },
+    {
+      "id": "g-0155",
+      "source": "c-0078",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.82
+    },
+    {
+      "id": "g-0156",
+      "source": "c-0078",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.47
+    },
+    {
+      "id": "g-0157",
+      "source": "c-0079",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.71
+    },
+    {
+      "id": "g-0158",
+      "source": "c-0079",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.66
+    },
+    {
+      "id": "g-0159",
+      "source": "c-0079",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.98
+    },
+    {
+      "id": "g-0160",
+      "source": "c-0080",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.91
+    },
+    {
+      "id": "g-0161",
+      "source": "c-0080",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.88
+    },
+    {
+      "id": "g-0162",
+      "source": "c-0081",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0163",
+      "source": "c-0081",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.35
+    },
+    {
+      "id": "g-0164",
+      "source": "c-0082",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.54
+    },
+    {
+      "id": "g-0165",
+      "source": "c-0083",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.37
+    },
+    {
+      "id": "g-0166",
+      "source": "c-0083",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.47
+    },
+    {
+      "id": "g-0167",
+      "source": "c-0084",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.87
+    },
+    {
+      "id": "g-0168",
+      "source": "c-0084",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.34
+    },
+    {
+      "id": "g-0169",
+      "source": "c-0084",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.69
+    },
+    {
+      "id": "g-0170",
+      "source": "c-0085",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.39
+    },
+    {
+      "id": "g-0171",
+      "source": "c-0086",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.34
+    },
+    {
+      "id": "g-0172",
+      "source": "c-0087",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.59
+    },
+    {
+      "id": "g-0173",
+      "source": "c-0088",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.64
+    },
+    {
+      "id": "g-0174",
+      "source": "c-0089",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0175",
+      "source": "c-0089",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0176",
+      "source": "c-0089",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.66
+    },
+    {
+      "id": "g-0177",
+      "source": "c-0090",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.68
+    },
+    {
+      "id": "g-0178",
+      "source": "c-0090",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.91
+    },
+    {
+      "id": "g-0179",
+      "source": "c-0090",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.35
+    },
+    {
+      "id": "g-0180",
+      "source": "c-0091",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.54
+    },
+    {
+      "id": "g-0181",
+      "source": "c-0091",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.87
+    },
+    {
+      "id": "g-0182",
+      "source": "c-0091",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0183",
+      "source": "c-0092",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.51
+    },
+    {
+      "id": "g-0184",
+      "source": "c-0092",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.67
+    },
+    {
+      "id": "g-0185",
+      "source": "c-0092",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.39
+    },
+    {
+      "id": "g-0186",
+      "source": "c-0093",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.74
+    },
+    {
+      "id": "g-0187",
+      "source": "c-0094",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.32
+    },
+    {
+      "id": "g-0188",
+      "source": "c-0094",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.84
+    },
+    {
+      "id": "g-0189",
+      "source": "c-0094",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.36
+    },
+    {
+      "id": "g-0190",
+      "source": "c-0095",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.59
+    },
+    {
+      "id": "g-0191",
+      "source": "c-0095",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.63
+    },
+    {
+      "id": "g-0192",
+      "source": "c-0095",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.38
+    },
+    {
+      "id": "g-0193",
+      "source": "c-0096",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.9
+    },
+    {
+      "id": "g-0194",
+      "source": "c-0096",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.58
+    },
+    {
+      "id": "g-0195",
+      "source": "c-0097",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.42
+    },
+    {
+      "id": "g-0196",
+      "source": "c-0098",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.82
+    },
+    {
+      "id": "g-0197",
+      "source": "c-0098",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.32
+    },
+    {
+      "id": "g-0198",
+      "source": "c-0099",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.74
+    },
+    {
+      "id": "g-0199",
+      "source": "c-0099",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.55
+    },
+    {
+      "id": "g-0200",
+      "source": "c-0099",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.83
+    },
+    {
+      "id": "g-0201",
+      "source": "c-0100",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.59
+    },
+    {
+      "id": "g-0202",
+      "source": "c-0100",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.71
+    },
+    {
+      "id": "g-0203",
+      "source": "c-0101",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.93
+    },
+    {
+      "id": "g-0204",
+      "source": "c-0101",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.96
+    },
+    {
+      "id": "g-0205",
+      "source": "c-0101",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.42
+    },
+    {
+      "id": "g-0206",
+      "source": "c-0102",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.37
+    },
+    {
+      "id": "g-0207",
+      "source": "c-0102",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.87
+    },
+    {
+      "id": "g-0208",
+      "source": "c-0103",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.42
+    },
+    {
+      "id": "g-0209",
+      "source": "c-0103",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.96
+    },
+    {
+      "id": "g-0210",
+      "source": "c-0104",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.86
+    },
+    {
+      "id": "g-0211",
+      "source": "c-0104",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.45
+    },
+    {
+      "id": "g-0212",
+      "source": "c-0104",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.96
+    },
+    {
+      "id": "g-0213",
+      "source": "c-0105",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.42
+    },
+    {
+      "id": "g-0214",
+      "source": "c-0105",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.5
+    },
+    {
+      "id": "g-0215",
+      "source": "c-0106",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.57
+    },
+    {
+      "id": "g-0216",
+      "source": "c-0106",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.75
+    },
+    {
+      "id": "g-0217",
+      "source": "c-0106",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.57
+    },
+    {
+      "id": "g-0218",
+      "source": "c-0107",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.33
+    },
+    {
+      "id": "g-0219",
+      "source": "c-0107",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.32
+    },
+    {
+      "id": "g-0220",
+      "source": "c-0108",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.71
+    },
+    {
+      "id": "g-0221",
+      "source": "c-0109",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.76
+    },
+    {
+      "id": "g-0222",
+      "source": "c-0109",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.54
+    },
+    {
+      "id": "g-0223",
+      "source": "c-0110",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.31
+    },
+    {
+      "id": "g-0224",
+      "source": "c-0110",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.9
+    },
+    {
+      "id": "g-0225",
+      "source": "c-0111",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.87
+    },
+    {
+      "id": "g-0226",
+      "source": "c-0111",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.93
+    },
+    {
+      "id": "g-0227",
+      "source": "c-0111",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.55
+    },
+    {
+      "id": "g-0228",
+      "source": "c-0112",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.58
+    },
+    {
+      "id": "g-0229",
+      "source": "c-0112",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.32
+    },
+    {
+      "id": "g-0230",
+      "source": "c-0112",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.47
+    },
+    {
+      "id": "g-0231",
+      "source": "c-0113",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.65
+    },
+    {
+      "id": "g-0232",
+      "source": "c-0114",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.44
+    },
+    {
+      "id": "g-0233",
+      "source": "c-0115",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.31
+    },
+    {
+      "id": "g-0234",
+      "source": "c-0115",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0235",
+      "source": "c-0116",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.39
+    },
+    {
+      "id": "g-0236",
+      "source": "c-0116",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.91
+    },
+    {
+      "id": "g-0237",
+      "source": "c-0117",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.31
+    },
+    {
+      "id": "g-0238",
+      "source": "c-0118",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.31
+    },
+    {
+      "id": "g-0239",
+      "source": "c-0118",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0240",
+      "source": "c-0118",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.61
+    },
+    {
+      "id": "g-0241",
+      "source": "c-0119",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.5
+    },
+    {
+      "id": "g-0242",
+      "source": "c-0119",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.99
+    },
+    {
+      "id": "g-0243",
+      "source": "c-0120",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.79
+    },
+    {
+      "id": "g-0244",
+      "source": "c-0120",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.99
+    },
+    {
+      "id": "g-0245",
+      "source": "c-0121",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.33
+    },
+    {
+      "id": "g-0246",
+      "source": "c-0122",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.48
+    },
+    {
+      "id": "g-0247",
+      "source": "c-0122",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.67
+    },
+    {
+      "id": "g-0248",
+      "source": "c-0122",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.85
+    },
+    {
+      "id": "g-0249",
+      "source": "c-0123",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.45
+    },
+    {
+      "id": "g-0250",
+      "source": "c-0124",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.87
+    },
+    {
+      "id": "g-0251",
+      "source": "c-0124",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.8
+    },
+    {
+      "id": "g-0252",
+      "source": "c-0125",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0253",
+      "source": "c-0125",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.93
+    },
+    {
+      "id": "g-0254",
+      "source": "c-0126",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.87
+    },
+    {
+      "id": "g-0255",
+      "source": "c-0126",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0256",
+      "source": "c-0127",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.93
+    },
+    {
+      "id": "g-0257",
+      "source": "c-0127",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.35
+    },
+    {
+      "id": "g-0258",
+      "source": "c-0127",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0259",
+      "source": "c-0128",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.3
+    },
+    {
+      "id": "g-0260",
+      "source": "c-0128",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.75
+    },
+    {
+      "id": "g-0261",
+      "source": "c-0129",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.47
+    },
+    {
+      "id": "g-0262",
+      "source": "c-0129",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.78
+    },
+    {
+      "id": "g-0263",
+      "source": "c-0129",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.68
+    },
+    {
+      "id": "g-0264",
+      "source": "c-0130",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.6
+    },
+    {
+      "id": "g-0265",
+      "source": "c-0131",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0266",
+      "source": "c-0131",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.66
+    },
+    {
+      "id": "g-0267",
+      "source": "c-0132",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.45
+    },
+    {
+      "id": "g-0268",
+      "source": "c-0132",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.83
+    },
+    {
+      "id": "g-0269",
+      "source": "c-0133",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.46
+    },
+    {
+      "id": "g-0270",
+      "source": "c-0134",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.75
+    },
+    {
+      "id": "g-0271",
+      "source": "c-0134",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.87
+    },
+    {
+      "id": "g-0272",
+      "source": "c-0135",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.44
+    },
+    {
+      "id": "g-0273",
+      "source": "c-0135",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.92
+    },
+    {
+      "id": "g-0274",
+      "source": "c-0136",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.99
+    },
+    {
+      "id": "g-0275",
+      "source": "c-0136",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0276",
+      "source": "c-0137",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.61
+    },
+    {
+      "id": "g-0277",
+      "source": "c-0137",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.36
+    },
+    {
+      "id": "g-0278",
+      "source": "c-0137",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.69
+    },
+    {
+      "id": "g-0279",
+      "source": "c-0138",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.71
+    },
+    {
+      "id": "g-0280",
+      "source": "c-0139",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.54
+    },
+    {
+      "id": "g-0281",
+      "source": "c-0139",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.99
+    },
+    {
+      "id": "g-0282",
+      "source": "c-0139",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.31
+    },
+    {
+      "id": "g-0283",
+      "source": "c-0140",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.71
+    },
+    {
+      "id": "g-0284",
+      "source": "c-0140",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0285",
+      "source": "c-0140",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.82
+    },
+    {
+      "id": "g-0286",
+      "source": "c-0141",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.41
+    },
+    {
+      "id": "g-0287",
+      "source": "c-0141",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.67
+    },
+    {
+      "id": "g-0288",
+      "source": "c-0142",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.85
+    },
+    {
+      "id": "g-0289",
+      "source": "c-0142",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.87
+    },
+    {
+      "id": "g-0290",
+      "source": "c-0142",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.65
+    },
+    {
+      "id": "g-0291",
+      "source": "c-0143",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.38
+    },
+    {
+      "id": "g-0292",
+      "source": "c-0143",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.89
+    },
+    {
+      "id": "g-0293",
+      "source": "c-0144",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.46
+    },
+    {
+      "id": "g-0294",
+      "source": "c-0145",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0295",
+      "source": "c-0145",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0296",
+      "source": "c-0145",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.61
+    },
+    {
+      "id": "g-0297",
+      "source": "c-0146",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.9
+    },
+    {
+      "id": "g-0298",
+      "source": "c-0147",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.51
+    },
+    {
+      "id": "g-0299",
+      "source": "c-0147",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.52
+    },
+    {
+      "id": "g-0300",
+      "source": "c-0148",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.36
+    },
+    {
+      "id": "g-0301",
+      "source": "c-0149",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.79
+    },
+    {
+      "id": "g-0302",
+      "source": "c-0150",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.41
+    },
+    {
+      "id": "g-0303",
+      "source": "c-0150",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.84
+    },
+    {
+      "id": "g-0304",
+      "source": "c-0151",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.35
+    },
+    {
+      "id": "g-0305",
+      "source": "c-0151",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.58
+    },
+    {
+      "id": "g-0306",
+      "source": "c-0152",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.73
+    },
+    {
+      "id": "g-0307",
+      "source": "c-0153",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.33
+    },
+    {
+      "id": "g-0308",
+      "source": "c-0154",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.45
+    },
+    {
+      "id": "g-0309",
+      "source": "c-0155",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.62
+    },
+    {
+      "id": "g-0310",
+      "source": "c-0155",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.61
+    },
+    {
+      "id": "g-0311",
+      "source": "c-0155",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.98
+    },
+    {
+      "id": "g-0312",
+      "source": "c-0156",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.68
+    },
+    {
+      "id": "g-0313",
+      "source": "c-0156",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0314",
+      "source": "c-0156",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 1
+    },
+    {
+      "id": "g-0315",
+      "source": "c-0157",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.52
+    },
+    {
+      "id": "g-0316",
+      "source": "c-0158",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0317",
+      "source": "c-0158",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.8
+    },
+    {
+      "id": "g-0318",
+      "source": "c-0159",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.67
+    },
+    {
+      "id": "g-0319",
+      "source": "c-0159",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.75
+    },
+    {
+      "id": "g-0320",
+      "source": "c-0159",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.9
+    },
+    {
+      "id": "g-0321",
+      "source": "c-0160",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.43
+    },
+    {
+      "id": "g-0322",
+      "source": "c-0160",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.98
+    },
+    {
+      "id": "g-0323",
+      "source": "c-0161",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.68
+    },
+    {
+      "id": "g-0324",
+      "source": "c-0162",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.82
+    },
+    {
+      "id": "g-0325",
+      "source": "c-0163",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0326",
+      "source": "c-0163",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.69
+    },
+    {
+      "id": "g-0327",
+      "source": "c-0164",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.39
+    },
+    {
+      "id": "g-0328",
+      "source": "c-0164",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.79
+    },
+    {
+      "id": "g-0329",
+      "source": "c-0164",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.36
+    },
+    {
+      "id": "g-0330",
+      "source": "c-0165",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.56
+    },
+    {
+      "id": "g-0331",
+      "source": "c-0166",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.41
+    },
+    {
+      "id": "g-0332",
+      "source": "c-0167",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.94
+    },
+    {
+      "id": "g-0333",
+      "source": "c-0167",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.98
+    },
+    {
+      "id": "g-0334",
+      "source": "c-0167",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0335",
+      "source": "c-0168",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.49
+    },
+    {
+      "id": "g-0336",
+      "source": "c-0169",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.87
+    },
+    {
+      "id": "g-0337",
+      "source": "c-0169",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.43
+    },
+    {
+      "id": "g-0338",
+      "source": "c-0169",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.34
+    },
+    {
+      "id": "g-0339",
+      "source": "c-0170",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.68
+    },
+    {
+      "id": "g-0340",
+      "source": "c-0170",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.56
+    },
+    {
+      "id": "g-0341",
+      "source": "c-0171",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.8
+    },
+    {
+      "id": "g-0342",
+      "source": "c-0171",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.76
+    },
+    {
+      "id": "g-0343",
+      "source": "c-0171",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0344",
+      "source": "c-0172",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.59
+    },
+    {
+      "id": "g-0345",
+      "source": "c-0172",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.33
+    },
+    {
+      "id": "g-0346",
+      "source": "c-0173",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.58
+    },
+    {
+      "id": "g-0347",
+      "source": "c-0173",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.37
+    },
+    {
+      "id": "g-0348",
+      "source": "c-0174",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.85
+    },
+    {
+      "id": "g-0349",
+      "source": "c-0174",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.67
+    },
+    {
+      "id": "g-0350",
+      "source": "c-0174",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.51
+    },
+    {
+      "id": "g-0351",
+      "source": "c-0175",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.56
+    },
+    {
+      "id": "g-0352",
+      "source": "c-0176",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.33
+    },
+    {
+      "id": "g-0353",
+      "source": "c-0177",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.48
+    },
+    {
+      "id": "g-0354",
+      "source": "c-0177",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.91
+    },
+    {
+      "id": "g-0355",
+      "source": "c-0177",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.66
+    },
+    {
+      "id": "g-0356",
+      "source": "c-0178",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0357",
+      "source": "c-0178",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.5
+    },
+    {
+      "id": "g-0358",
+      "source": "c-0179",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.76
+    },
+    {
+      "id": "g-0359",
+      "source": "c-0179",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.64
+    },
+    {
+      "id": "g-0360",
+      "source": "c-0180",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0361",
+      "source": "c-0180",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.91
+    },
+    {
+      "id": "g-0362",
+      "source": "c-0180",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.39
+    },
+    {
+      "id": "g-0363",
+      "source": "c-0181",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.87
+    },
+    {
+      "id": "g-0364",
+      "source": "c-0182",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.93
+    },
+    {
+      "id": "g-0365",
+      "source": "c-0182",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.63
+    },
+    {
+      "id": "g-0366",
+      "source": "c-0182",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.43
+    },
+    {
+      "id": "g-0367",
+      "source": "c-0183",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.38
+    },
+    {
+      "id": "g-0368",
+      "source": "c-0183",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.75
+    },
+    {
+      "id": "g-0369",
+      "source": "c-0183",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.91
+    },
+    {
+      "id": "g-0370",
+      "source": "c-0184",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0371",
+      "source": "c-0184",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.75
+    },
+    {
+      "id": "g-0372",
+      "source": "c-0185",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.57
+    },
+    {
+      "id": "g-0373",
+      "source": "c-0185",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.94
+    },
+    {
+      "id": "g-0374",
+      "source": "c-0185",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.37
+    },
+    {
+      "id": "g-0375",
+      "source": "c-0186",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.34
+    },
+    {
+      "id": "g-0376",
+      "source": "c-0187",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.8
+    },
+    {
+      "id": "g-0377",
+      "source": "c-0188",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.64
+    },
+    {
+      "id": "g-0378",
+      "source": "c-0189",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.37
+    },
+    {
+      "id": "g-0379",
+      "source": "c-0190",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.43
+    },
+    {
+      "id": "g-0380",
+      "source": "c-0190",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.8
+    },
+    {
+      "id": "g-0381",
+      "source": "c-0190",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.99
+    },
+    {
+      "id": "g-0382",
+      "source": "c-0191",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0383",
+      "source": "c-0192",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.56
+    },
+    {
+      "id": "g-0384",
+      "source": "c-0192",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.67
+    },
+    {
+      "id": "g-0385",
+      "source": "c-0193",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.3
+    },
+    {
+      "id": "g-0386",
+      "source": "c-0194",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.75
+    },
+    {
+      "id": "g-0387",
+      "source": "c-0195",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.68
+    },
+    {
+      "id": "g-0388",
+      "source": "c-0195",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.91
+    },
+    {
+      "id": "g-0389",
+      "source": "c-0196",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.42
+    },
+    {
+      "id": "g-0390",
+      "source": "c-0196",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.84
+    },
+    {
+      "id": "g-0391",
+      "source": "c-0196",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0392",
+      "source": "c-0197",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.33
+    },
+    {
+      "id": "g-0393",
+      "source": "c-0198",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.81
+    },
+    {
+      "id": "g-0394",
+      "source": "c-0198",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.59
+    },
+    {
+      "id": "g-0395",
+      "source": "c-0198",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.37
+    },
+    {
+      "id": "g-0396",
+      "source": "c-0199",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.96
+    },
+    {
+      "id": "g-0397",
+      "source": "c-0200",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0398",
+      "source": "c-0200",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.71
+    },
+    {
+      "id": "g-0399",
+      "source": "c-0200",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.69
+    },
+    {
+      "id": "g-0400",
+      "source": "c-0201",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.95
+    },
+    {
+      "id": "g-0401",
+      "source": "c-0202",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.85
+    },
+    {
+      "id": "g-0402",
+      "source": "c-0202",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.67
+    },
+    {
+      "id": "g-0403",
+      "source": "c-0202",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.63
+    },
+    {
+      "id": "g-0404",
+      "source": "c-0203",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0405",
+      "source": "c-0203",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.41
+    },
+    {
+      "id": "g-0406",
+      "source": "c-0204",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.47
+    },
+    {
+      "id": "g-0407",
+      "source": "c-0205",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.42
+    },
+    {
+      "id": "g-0408",
+      "source": "c-0205",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0409",
+      "source": "c-0206",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.54
+    },
+    {
+      "id": "g-0410",
+      "source": "c-0207",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.56
+    },
+    {
+      "id": "g-0411",
+      "source": "c-0207",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.85
+    },
+    {
+      "id": "g-0412",
+      "source": "c-0208",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.5
+    },
+    {
+      "id": "g-0413",
+      "source": "c-0209",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.74
+    },
+    {
+      "id": "g-0414",
+      "source": "c-0209",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.73
+    },
+    {
+      "id": "g-0415",
+      "source": "c-0209",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.99
+    },
+    {
+      "id": "g-0416",
+      "source": "c-0210",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.95
+    },
+    {
+      "id": "g-0417",
+      "source": "c-0210",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0418",
+      "source": "c-0211",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.91
+    },
+    {
+      "id": "g-0419",
+      "source": "c-0212",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.58
+    },
+    {
+      "id": "g-0420",
+      "source": "c-0212",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.87
+    },
+    {
+      "id": "g-0421",
+      "source": "c-0212",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.65
+    },
+    {
+      "id": "g-0422",
+      "source": "c-0213",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.85
+    },
+    {
+      "id": "g-0423",
+      "source": "c-0214",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.62
+    },
+    {
+      "id": "g-0424",
+      "source": "c-0214",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.61
+    },
+    {
+      "id": "g-0425",
+      "source": "c-0215",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.43
+    },
+    {
+      "id": "g-0426",
+      "source": "c-0215",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.71
+    },
+    {
+      "id": "g-0427",
+      "source": "c-0216",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0428",
+      "source": "c-0216",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.49
+    },
+    {
+      "id": "g-0429",
+      "source": "c-0217",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.84
+    },
+    {
+      "id": "g-0430",
+      "source": "c-0218",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.39
+    },
+    {
+      "id": "g-0431",
+      "source": "c-0218",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.34
+    },
+    {
+      "id": "g-0432",
+      "source": "c-0218",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.38
+    },
+    {
+      "id": "g-0433",
+      "source": "c-0219",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.47
+    },
+    {
+      "id": "g-0434",
+      "source": "c-0219",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.51
+    },
+    {
+      "id": "g-0435",
+      "source": "c-0219",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.47
+    },
+    {
+      "id": "g-0436",
+      "source": "c-0220",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.67
+    },
+    {
+      "id": "g-0437",
+      "source": "c-0220",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.76
+    },
+    {
+      "id": "g-0438",
+      "source": "c-0221",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.79
+    },
+    {
+      "id": "g-0439",
+      "source": "c-0221",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.84
+    },
+    {
+      "id": "g-0440",
+      "source": "c-0221",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.73
+    },
+    {
+      "id": "g-0441",
+      "source": "c-0222",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.76
+    },
+    {
+      "id": "g-0442",
+      "source": "c-0222",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.64
+    },
+    {
+      "id": "g-0443",
+      "source": "c-0222",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.35
+    },
+    {
+      "id": "g-0444",
+      "source": "c-0223",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.86
+    },
+    {
+      "id": "g-0445",
+      "source": "c-0223",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.74
+    },
+    {
+      "id": "g-0446",
+      "source": "c-0223",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.7
+    },
+    {
+      "id": "g-0447",
+      "source": "c-0224",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.96
+    },
+    {
+      "id": "g-0448",
+      "source": "c-0224",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.34
+    },
+    {
+      "id": "g-0449",
+      "source": "c-0224",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.41
+    },
+    {
+      "id": "g-0450",
+      "source": "c-0225",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.74
+    },
+    {
+      "id": "g-0451",
+      "source": "c-0225",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.33
+    },
+    {
+      "id": "g-0452",
+      "source": "c-0226",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.88
+    },
+    {
+      "id": "g-0453",
+      "source": "c-0226",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.7
+    },
+    {
+      "id": "g-0454",
+      "source": "c-0227",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.69
+    },
+    {
+      "id": "g-0455",
+      "source": "c-0227",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.69
+    },
+    {
+      "id": "g-0456",
+      "source": "c-0227",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.42
+    },
+    {
+      "id": "g-0457",
+      "source": "c-0228",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.92
+    },
+    {
+      "id": "g-0458",
+      "source": "c-0228",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.59
+    },
+    {
+      "id": "g-0459",
+      "source": "c-0229",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.59
+    },
+    {
+      "id": "g-0460",
+      "source": "c-0230",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.51
+    },
+    {
+      "id": "g-0461",
+      "source": "c-0231",
+      "target": "e-0011",
+      "rel": "mentions",
+      "weight": 0.6
+    },
+    {
+      "id": "g-0462",
+      "source": "c-0231",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.9
+    },
+    {
+      "id": "g-0463",
+      "source": "c-0231",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.74
+    },
+    {
+      "id": "g-0464",
+      "source": "c-0232",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.98
+    },
+    {
+      "id": "g-0465",
+      "source": "c-0232",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.72
+    },
+    {
+      "id": "g-0466",
+      "source": "c-0233",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.74
+    },
+    {
+      "id": "g-0467",
+      "source": "c-0233",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.34
+    },
+    {
+      "id": "g-0468",
+      "source": "c-0233",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.7
+    },
+    {
+      "id": "g-0469",
+      "source": "c-0234",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.37
+    },
+    {
+      "id": "g-0470",
+      "source": "c-0234",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.91
+    },
+    {
+      "id": "g-0471",
+      "source": "c-0234",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.74
+    },
+    {
+      "id": "g-0472",
+      "source": "c-0235",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.41
+    },
+    {
+      "id": "g-0473",
+      "source": "c-0235",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.33
+    },
+    {
+      "id": "g-0474",
+      "source": "c-0235",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0475",
+      "source": "c-0236",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.89
+    },
+    {
+      "id": "g-0476",
+      "source": "c-0237",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.36
+    },
+    {
+      "id": "g-0477",
+      "source": "c-0237",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.79
+    },
+    {
+      "id": "g-0478",
+      "source": "c-0237",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.51
+    },
+    {
+      "id": "g-0479",
+      "source": "c-0238",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.96
+    },
+    {
+      "id": "g-0480",
+      "source": "c-0239",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.68
+    },
+    {
+      "id": "g-0481",
+      "source": "c-0239",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.91
+    },
+    {
+      "id": "g-0482",
+      "source": "c-0240",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.44
+    },
+    {
+      "id": "g-0483",
+      "source": "c-0241",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.69
+    },
+    {
+      "id": "g-0484",
+      "source": "c-0241",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.81
+    },
+    {
+      "id": "g-0485",
+      "source": "c-0241",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.9
+    },
+    {
+      "id": "g-0486",
+      "source": "c-0242",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.84
+    },
+    {
+      "id": "g-0487",
+      "source": "c-0242",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.69
+    },
+    {
+      "id": "g-0488",
+      "source": "c-0242",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.38
+    },
+    {
+      "id": "g-0489",
+      "source": "c-0243",
+      "target": "e-0007",
+      "rel": "mentions",
+      "weight": 0.67
+    },
+    {
+      "id": "g-0490",
+      "source": "c-0243",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.73
+    },
+    {
+      "id": "g-0491",
+      "source": "c-0243",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.42
+    },
+    {
+      "id": "g-0492",
+      "source": "c-0244",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.75
+    },
+    {
+      "id": "g-0493",
+      "source": "c-0245",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.65
+    },
+    {
+      "id": "g-0494",
+      "source": "c-0245",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.34
+    },
+    {
+      "id": "g-0495",
+      "source": "c-0246",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.83
+    },
+    {
+      "id": "g-0496",
+      "source": "c-0247",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0497",
+      "source": "c-0247",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.41
+    },
+    {
+      "id": "g-0498",
+      "source": "c-0248",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.92
+    },
+    {
+      "id": "g-0499",
+      "source": "c-0249",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0500",
+      "source": "c-0249",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.46
+    },
+    {
+      "id": "g-0501",
+      "source": "c-0249",
+      "target": "e-0004",
+      "rel": "mentions",
+      "weight": 0.45
+    },
+    {
+      "id": "g-0502",
+      "source": "c-0250",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.52
+    },
+    {
+      "id": "g-0503",
+      "source": "c-0250",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.97
+    },
+    {
+      "id": "g-0504",
+      "source": "c-0250",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 1
+    },
+    {
+      "id": "g-0505",
+      "source": "c-0251",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.65
+    },
+    {
+      "id": "g-0506",
+      "source": "c-0251",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.62
+    },
+    {
+      "id": "g-0507",
+      "source": "c-0251",
+      "target": "e-0012",
+      "rel": "mentions",
+      "weight": 0.69
+    },
+    {
+      "id": "g-0508",
+      "source": "c-0252",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.82
+    },
+    {
+      "id": "g-0509",
+      "source": "c-0253",
+      "target": "e-0008",
+      "rel": "mentions",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0510",
+      "source": "c-0253",
+      "target": "e-0017",
+      "rel": "mentions",
+      "weight": 0.68
+    },
+    {
+      "id": "g-0511",
+      "source": "c-0253",
+      "target": "e-0005",
+      "rel": "mentions",
+      "weight": 0.89
+    },
+    {
+      "id": "g-0512",
+      "source": "c-0254",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.45
+    },
+    {
+      "id": "g-0513",
+      "source": "c-0254",
+      "target": "e-0002",
+      "rel": "mentions",
+      "weight": 0.6
+    },
+    {
+      "id": "g-0514",
+      "source": "c-0254",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.56
+    },
+    {
+      "id": "g-0515",
+      "source": "c-0255",
+      "target": "e-0003",
+      "rel": "mentions",
+      "weight": 0.32
+    },
+    {
+      "id": "g-0516",
+      "source": "c-0255",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.3
+    },
+    {
+      "id": "g-0517",
+      "source": "c-0256",
+      "target": "e-0015",
+      "rel": "mentions",
+      "weight": 0.31
+    },
+    {
+      "id": "g-0518",
+      "source": "c-0256",
+      "target": "e-0009",
+      "rel": "mentions",
+      "weight": 0.52
+    },
+    {
+      "id": "g-0519",
+      "source": "c-0256",
+      "target": "e-0006",
+      "rel": "mentions",
+      "weight": 0.91
+    },
+    {
+      "id": "g-0520",
+      "source": "c-0257",
+      "target": "e-0013",
+      "rel": "mentions",
+      "weight": 0.34
+    },
+    {
+      "id": "g-0521",
+      "source": "c-0257",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.57
+    },
+    {
+      "id": "g-0522",
+      "source": "c-0257",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0523",
+      "source": "c-0258",
+      "target": "e-0016",
+      "rel": "mentions",
+      "weight": 0.84
+    },
+    {
+      "id": "g-0524",
+      "source": "c-0258",
+      "target": "e-0018",
+      "rel": "mentions",
+      "weight": 0.34
+    },
+    {
+      "id": "g-0525",
+      "source": "c-0259",
+      "target": "e-0014",
+      "rel": "mentions",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0526",
+      "source": "c-0260",
+      "target": "e-0010",
+      "rel": "mentions",
+      "weight": 0.43
+    },
+    {
+      "id": "g-0527",
+      "source": "c-0260",
+      "target": "e-0001",
+      "rel": "mentions",
+      "weight": 0.64
+    },
+    {
+      "id": "g-0528",
+      "source": "e-0001",
+      "target": "e-0002",
+      "rel": "co",
+      "weight": 0.87,
+      "idf": 0.18
+    },
+    {
+      "id": "g-0529",
+      "source": "e-0001",
+      "target": "e-0011",
+      "rel": "co",
+      "weight": 0.24,
+      "idf": 0.22
+    },
+    {
+      "id": "g-0530",
+      "source": "e-0001",
+      "target": "e-0014",
+      "rel": "co",
+      "weight": 0.76,
+      "idf": 0.22
+    },
+    {
+      "id": "g-0531",
+      "source": "e-0001",
+      "target": "e-0015",
+      "rel": "co",
+      "weight": 0.25,
+      "idf": 0.22
+    },
+    {
+      "id": "g-0532",
+      "source": "e-0001",
+      "target": "e-0016",
+      "rel": "co",
+      "weight": 0.96,
+      "idf": 0.22
+    },
+    {
+      "id": "g-0533",
+      "source": "e-0001",
+      "target": "e-0018",
+      "rel": "co",
+      "weight": 0.15,
+      "idf": 0.22
+    },
+    {
+      "id": "g-0534",
+      "source": "e-0002",
+      "target": "e-0013",
+      "rel": "co",
+      "weight": 0.24,
+      "idf": 0.18
+    },
+    {
+      "id": "g-0535",
+      "source": "e-0003",
+      "target": "e-0005",
+      "rel": "co",
+      "weight": 0.28,
+      "idf": 0.62
+    },
+    {
+      "id": "g-0536",
+      "source": "e-0003",
+      "target": "e-0012",
+      "rel": "co",
+      "weight": 0.57,
+      "idf": 0.55
+    },
+    {
+      "id": "g-0537",
+      "source": "e-0003",
+      "target": "e-0013",
+      "rel": "co",
+      "weight": 0.93,
+      "idf": 0.49
+    },
+    {
+      "id": "g-0538",
+      "source": "e-0003",
+      "target": "e-0015",
+      "rel": "co",
+      "weight": 0.34,
+      "idf": 0.62
+    },
+    {
+      "id": "g-0539",
+      "source": "e-0003",
+      "target": "e-0016",
+      "rel": "co",
+      "weight": 0.32,
+      "idf": 0.62
+    },
+    {
+      "id": "g-0540",
+      "source": "e-0004",
+      "target": "e-0006",
+      "rel": "co",
+      "weight": 0.27,
+      "idf": 0.71
+    },
+    {
+      "id": "g-0541",
+      "source": "e-0004",
+      "target": "e-0007",
+      "rel": "co",
+      "weight": 0.43,
+      "idf": 0.71
+    },
+    {
+      "id": "g-0542",
+      "source": "e-0004",
+      "target": "e-0010",
+      "rel": "co",
+      "weight": 0.9,
+      "idf": 0.41
+    },
+    {
+      "id": "g-0543",
+      "source": "e-0004",
+      "target": "e-0011",
+      "rel": "co",
+      "weight": 0.8,
+      "idf": 0.52
+    },
+    {
+      "id": "g-0544",
+      "source": "e-0004",
+      "target": "e-0013",
+      "rel": "co",
+      "weight": 0.91,
+      "idf": 0.49
+    },
+    {
+      "id": "g-0545",
+      "source": "e-0005",
+      "target": "e-0007",
+      "rel": "co",
+      "weight": 0.54,
+      "idf": 0.78
+    },
+    {
+      "id": "g-0546",
+      "source": "e-0005",
+      "target": "e-0011",
+      "rel": "co",
+      "weight": 0.9,
+      "idf": 0.52
+    },
+    {
+      "id": "g-0547",
+      "source": "e-0005",
+      "target": "e-0013",
+      "rel": "co",
+      "weight": 0.12,
+      "idf": 0.49
+    },
+    {
+      "id": "g-0548",
+      "source": "e-0005",
+      "target": "e-0014",
+      "rel": "co",
+      "weight": 0.12,
+      "idf": 0.78
+    },
+    {
+      "id": "g-0549",
+      "source": "e-0006",
+      "target": "e-0007",
+      "rel": "co",
+      "weight": 0.45,
+      "idf": 0.83
+    },
+    {
+      "id": "g-0550",
+      "source": "e-0006",
+      "target": "e-0012",
+      "rel": "co",
+      "weight": 0.61,
+      "idf": 0.55
+    },
+    {
+      "id": "g-0551",
+      "source": "e-0006",
+      "target": "e-0014",
+      "rel": "co",
+      "weight": 0.98,
+      "idf": 0.83
+    },
+    {
+      "id": "g-0552",
+      "source": "e-0006",
+      "target": "e-0015",
+      "rel": "co",
+      "weight": 0.4,
+      "idf": 0.83
+    },
+    {
+      "id": "g-0553",
+      "source": "e-0006",
+      "target": "e-0017",
+      "rel": "co",
+      "weight": 0.36,
+      "idf": 0.83
+    },
+    {
+      "id": "g-0554",
+      "source": "e-0007",
+      "target": "e-0009",
+      "rel": "co",
+      "weight": 0.19,
+      "idf": 0.86
+    },
+    {
+      "id": "g-0555",
+      "source": "e-0007",
+      "target": "e-0013",
+      "rel": "co",
+      "weight": 0.46,
+      "idf": 0.49
+    },
+    {
+      "id": "g-0556",
+      "source": "e-0008",
+      "target": "e-0010",
+      "rel": "co",
+      "weight": 0.84,
+      "idf": 0.41
+    },
+    {
+      "id": "g-0557",
+      "source": "e-0008",
+      "target": "e-0011",
+      "rel": "co",
+      "weight": 0.26,
+      "idf": 0.52
+    },
+    {
+      "id": "g-0558",
+      "source": "e-0008",
+      "target": "e-0014",
+      "rel": "co",
+      "weight": 0.1,
+      "idf": 0.74
+    },
+    {
+      "id": "g-0559",
+      "source": "e-0008",
+      "target": "e-0016",
+      "rel": "co",
+      "weight": 0.41,
+      "idf": 0.74
+    },
+    {
+      "id": "g-0560",
+      "source": "e-0009",
+      "target": "e-0012",
+      "rel": "co",
+      "weight": 0.56,
+      "idf": 0.55
+    },
+    {
+      "id": "g-0561",
+      "source": "e-0009",
+      "target": "e-0013",
+      "rel": "co",
+      "weight": 0.24,
+      "idf": 0.49
+    },
+    {
+      "id": "g-0562",
+      "source": "e-0009",
+      "target": "e-0015",
+      "rel": "co",
+      "weight": 0.27,
+      "idf": 0.88
+    },
+    {
+      "id": "g-0563",
+      "source": "e-0012",
+      "target": "e-0013",
+      "rel": "co",
+      "weight": 0.33,
+      "idf": 0.49
+    },
+    {
+      "id": "g-0564",
+      "source": "e-0012",
+      "target": "e-0014",
+      "rel": "co",
+      "weight": 0.86,
+      "idf": 0.55
+    },
+    {
+      "id": "g-0565",
+      "source": "e-0012",
+      "target": "e-0016",
+      "rel": "co",
+      "weight": 0.95,
+      "idf": 0.55
+    },
+    {
+      "id": "g-0566",
+      "source": "e-0013",
+      "target": "e-0014",
+      "rel": "co",
+      "weight": 0.59,
+      "idf": 0.49
+    },
+    {
+      "id": "g-0567",
+      "source": "e-0014",
+      "target": "e-0016",
+      "rel": "co",
+      "weight": 0.42,
+      "idf": 0.91
+    },
+    {
+      "id": "g-0568",
+      "source": "e-0014",
+      "target": "e-0017",
+      "rel": "co",
+      "weight": 0.2,
+      "idf": 0.91
+    },
+    {
+      "id": "g-0569",
+      "source": "e-0015",
+      "target": "e-0016",
+      "rel": "co",
+      "weight": 0.21,
+      "idf": 0.93
+    },
+    {
+      "id": "g-0570",
+      "source": "e-0015",
+      "target": "e-0018",
+      "rel": "co",
+      "weight": 0.68,
+      "idf": 0.89
+    },
+    {
+      "id": "g-0571",
+      "source": "c-0057",
+      "target": "c-0010",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0572",
+      "source": "c-0086",
+      "target": "c-0033",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0573",
+      "source": "c-0125",
+      "target": "c-0058",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0574",
+      "source": "c-0015",
+      "target": "c-0059",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0575",
+      "source": "c-0149",
+      "target": "c-0078",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0576",
+      "source": "c-0090",
+      "target": "c-0098",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0577",
+      "source": "c-0125",
+      "target": "c-0105",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0578",
+      "source": "c-0143",
+      "target": "c-0111",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0579",
+      "source": "c-0013",
+      "target": "c-0128",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0580",
+      "source": "c-0044",
+      "target": "c-0133",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0581",
+      "source": "c-0095",
+      "target": "c-0138",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0582",
+      "source": "c-0125",
+      "target": "c-0158",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0583",
+      "source": "c-0029",
+      "target": "c-0183",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0584",
+      "source": "c-0145",
+      "target": "c-0186",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0585",
+      "source": "c-0107",
+      "target": "c-0209",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0586",
+      "source": "c-0036",
+      "target": "c-0221",
+      "rel": "supersedes",
+      "weight": 1
+    },
+    {
+      "id": "g-0587",
+      "source": "c-0126",
+      "target": "c-0064",
+      "rel": "related",
+      "weight": 0.29
+    },
+    {
+      "id": "g-0588",
+      "source": "c-0119",
+      "target": "c-0022",
+      "rel": "supersedes",
+      "weight": 0.59
+    },
+    {
+      "id": "g-0589",
+      "source": "c-0191",
+      "target": "c-0107",
+      "rel": "related",
+      "weight": 0.49
+    },
+    {
+      "id": "g-0590",
+      "source": "c-0155",
+      "target": "c-0142",
+      "rel": "disagrees_with",
+      "weight": 0.62
+    },
+    {
+      "id": "g-0591",
+      "source": "c-0055",
+      "target": "c-0242",
+      "rel": "supersedes",
+      "weight": 0.27
+    },
+    {
+      "id": "g-0592",
+      "source": "c-0110",
+      "target": "c-0054",
+      "rel": "disagrees_with",
+      "weight": 0.3
+    },
+    {
+      "id": "g-0593",
+      "source": "c-0175",
+      "target": "c-0158",
+      "rel": "supersedes",
+      "weight": 0.62
+    },
+    {
+      "id": "g-0594",
+      "source": "c-0118",
+      "target": "c-0201",
+      "rel": "disagrees_with",
+      "weight": 0.61
+    },
+    {
+      "id": "g-0595",
+      "source": "c-0189",
+      "target": "c-0104",
+      "rel": "related",
+      "weight": 0.54
+    },
+    {
+      "id": "g-0596",
+      "source": "c-0023",
+      "target": "c-0041",
+      "rel": "supersedes",
+      "weight": 0.55
+    },
+    {
+      "id": "g-0597",
+      "source": "c-0061",
+      "target": "c-0126",
+      "rel": "supersedes",
+      "weight": 0.79
+    },
+    {
+      "id": "g-0598",
+      "source": "c-0019",
+      "target": "c-0244",
+      "rel": "related",
+      "weight": 0.56
+    },
+    {
+      "id": "g-0599",
+      "source": "c-0054",
+      "target": "c-0129",
+      "rel": "supersedes",
+      "weight": 0.89
+    },
+    {
+      "id": "g-0600",
+      "source": "c-0090",
+      "target": "c-0018",
+      "rel": "supersedes",
+      "weight": 0.51
+    },
+    {
+      "id": "g-0601",
+      "source": "c-0129",
+      "target": "c-0086",
+      "rel": "supersedes",
+      "weight": 0.9
+    },
+    {
+      "id": "g-0602",
+      "source": "c-0044",
+      "target": "c-0155",
+      "rel": "supersedes",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0603",
+      "source": "c-0245",
+      "target": "c-0114",
+      "rel": "related",
+      "weight": 0.39
+    },
+    {
+      "id": "g-0604",
+      "source": "c-0160",
+      "target": "c-0096",
+      "rel": "related",
+      "weight": 0.72
+    },
+    {
+      "id": "g-0605",
+      "source": "c-0214",
+      "target": "c-0168",
+      "rel": "supersedes",
+      "weight": 0.29
+    },
+    {
+      "id": "g-0606",
+      "source": "c-0140",
+      "target": "c-0117",
+      "rel": "supersedes",
+      "weight": 0.62
+    },
+    {
+      "id": "g-0607",
+      "source": "c-0073",
+      "target": "c-0023",
+      "rel": "supersedes",
+      "weight": 0.33
+    },
+    {
+      "id": "g-0608",
+      "source": "c-0008",
+      "target": "c-0248",
+      "rel": "related",
+      "weight": 0.49
+    },
+    {
+      "id": "g-0609",
+      "source": "c-0254",
+      "target": "c-0184",
+      "rel": "supersedes",
+      "weight": 0.37
+    },
+    {
+      "id": "g-0610",
+      "source": "c-0019",
+      "target": "c-0196",
+      "rel": "supersedes",
+      "weight": 0.7
+    },
+    {
+      "id": "g-0611",
+      "source": "c-0155",
+      "target": "c-0056",
+      "rel": "related",
+      "weight": 0.83
+    },
+    {
+      "id": "g-0612",
+      "source": "c-0010",
+      "target": "c-0100",
+      "rel": "supersedes",
+      "weight": 0.81
+    },
+    {
+      "id": "g-0613",
+      "source": "c-0182",
+      "target": "c-0035",
+      "rel": "related",
+      "weight": 0.89
+    },
+    {
+      "id": "g-0614",
+      "source": "c-0175",
+      "target": "c-0219",
+      "rel": "related",
+      "weight": 0.43
+    },
+    {
+      "id": "g-0615",
+      "source": "c-0239",
+      "target": "c-0165",
+      "rel": "supersedes",
+      "weight": 0.7
+    },
+    {
+      "id": "g-0616",
+      "source": "c-0143",
+      "target": "c-0207",
+      "rel": "disagrees_with",
+      "weight": 0.29
+    },
+    {
+      "id": "g-0617",
+      "source": "c-0073",
+      "target": "c-0033",
+      "rel": "supersedes",
+      "weight": 0.28
+    },
+    {
+      "id": "g-0618",
+      "source": "c-0128",
+      "target": "c-0133",
+      "rel": "supersedes",
+      "weight": 0.59
+    },
+    {
+      "id": "g-0619",
+      "source": "c-0054",
+      "target": "c-0193",
+      "rel": "related",
+      "weight": 0.5
+    },
+    {
+      "id": "g-0620",
+      "source": "c-0034",
+      "target": "c-0037",
+      "rel": "supersedes",
+      "weight": 0.46
+    },
+    {
+      "id": "g-0621",
+      "source": "c-0152",
+      "target": "c-0115",
+      "rel": "related",
+      "weight": 0.57
+    },
+    {
+      "id": "g-0622",
+      "source": "c-0067",
+      "target": "c-0191",
+      "rel": "supersedes",
+      "weight": 0.76
+    },
+    {
+      "id": "g-0623",
+      "source": "c-0026",
+      "target": "c-0154",
+      "rel": "related",
+      "weight": 0.25
+    },
+    {
+      "id": "g-0624",
+      "source": "c-0160",
+      "target": "c-0026",
+      "rel": "supersedes",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0625",
+      "source": "c-0015",
+      "target": "c-0140",
+      "rel": "supersedes",
+      "weight": 0.88
+    },
+    {
+      "id": "g-0626",
+      "source": "c-0016",
+      "target": "c-0071",
+      "rel": "related",
+      "weight": 0.59
+    },
+    {
+      "id": "g-0627",
+      "source": "c-0016",
+      "target": "c-0182",
+      "rel": "disagrees_with",
+      "weight": 0.8
+    },
+    {
+      "id": "g-0628",
+      "source": "c-0062",
+      "target": "c-0260",
+      "rel": "related",
+      "weight": 0.63
+    },
+    {
+      "id": "g-0629",
+      "source": "c-0102",
+      "target": "c-0221",
+      "rel": "related",
+      "weight": 0.5
+    },
+    {
+      "id": "g-0630",
+      "source": "c-0153",
+      "target": "c-0058",
+      "rel": "supersedes",
+      "weight": 0.21
+    },
+    {
+      "id": "g-0631",
+      "source": "c-0086",
+      "target": "c-0008",
+      "rel": "related",
+      "weight": 0.81
+    },
+    {
+      "id": "g-0632",
+      "source": "c-0228",
+      "target": "c-0092",
+      "rel": "supersedes",
+      "weight": 0.55
+    },
+    {
+      "id": "g-0633",
+      "source": "c-0229",
+      "target": "c-0056",
+      "rel": "related",
+      "weight": 0.88
+    },
+    {
+      "id": "g-0634",
+      "source": "c-0131",
+      "target": "c-0079",
+      "rel": "supersedes",
+      "weight": 0.29
+    },
+    {
+      "id": "g-0635",
+      "source": "c-0193",
+      "target": "c-0156",
+      "rel": "supersedes",
+      "weight": 0.23
+    },
+    {
+      "id": "g-0636",
+      "source": "c-0177",
+      "target": "c-0022",
+      "rel": "related",
+      "weight": 0.46
+    },
+    {
+      "id": "g-0637",
+      "source": "c-0050",
+      "target": "c-0126",
+      "rel": "related",
+      "weight": 0.57
+    },
+    {
+      "id": "g-0638",
+      "source": "c-0128",
+      "target": "c-0243",
+      "rel": "disagrees_with",
+      "weight": 0.89
+    },
+    {
+      "id": "g-0639",
+      "source": "c-0133",
+      "target": "c-0002",
+      "rel": "related",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0640",
+      "source": "c-0051",
+      "target": "c-0007",
+      "rel": "related",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0641",
+      "source": "c-0047",
+      "target": "c-0112",
+      "rel": "supersedes",
+      "weight": 0.32
+    },
+    {
+      "id": "g-0642",
+      "source": "c-0253",
+      "target": "c-0125",
+      "rel": "supersedes",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0643",
+      "source": "c-0017",
+      "target": "c-0080",
+      "rel": "related",
+      "weight": 0.49
+    },
+    {
+      "id": "g-0644",
+      "source": "c-0178",
+      "target": "c-0233",
+      "rel": "related",
+      "weight": 0.51
+    },
+    {
+      "id": "g-0645",
+      "source": "c-0248",
+      "target": "c-0164",
+      "rel": "disagrees_with",
+      "weight": 0.47
+    },
+    {
+      "id": "g-0646",
+      "source": "c-0086",
+      "target": "c-0152",
+      "rel": "supersedes",
+      "weight": 0.86
+    },
+    {
+      "id": "g-0647",
+      "source": "c-0151",
+      "target": "c-0013",
+      "rel": "supersedes",
+      "weight": 0.42
+    },
+    {
+      "id": "g-0648",
+      "source": "c-0187",
+      "target": "c-0199",
+      "rel": "supersedes",
+      "weight": 0.56
+    },
+    {
+      "id": "g-0649",
+      "source": "c-0220",
+      "target": "c-0006",
+      "rel": "supersedes",
+      "weight": 0.71
+    },
+    {
+      "id": "g-0650",
+      "source": "c-0072",
+      "target": "c-0026",
+      "rel": "supersedes",
+      "weight": 0.57
+    },
+    {
+      "id": "g-0651",
+      "source": "c-0047",
+      "target": "c-0114",
+      "rel": "supersedes",
+      "weight": 0.24
+    },
+    {
+      "id": "g-0652",
+      "source": "c-0009",
+      "target": "c-0084",
+      "rel": "related",
+      "weight": 0.75
+    },
+    {
+      "id": "g-0653",
+      "source": "c-0072",
+      "target": "c-0122",
+      "rel": "supersedes",
+      "weight": 0.28
+    },
+    {
+      "id": "g-0654",
+      "source": "c-0115",
+      "target": "c-0080",
+      "rel": "supersedes",
+      "weight": 0.69
+    },
+    {
+      "id": "g-0655",
+      "source": "c-0033",
+      "target": "c-0126",
+      "rel": "related",
+      "weight": 0.5
+    },
+    {
+      "id": "g-0656",
+      "source": "c-0012",
+      "target": "c-0171",
+      "rel": "supersedes",
+      "weight": 0.49
+    },
+    {
+      "id": "g-0657",
+      "source": "c-0221",
+      "target": "c-0137",
+      "rel": "supersedes",
+      "weight": 0.46
+    },
+    {
+      "id": "g-0658",
+      "source": "c-0171",
+      "target": "c-0179",
+      "rel": "supersedes",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0659",
+      "source": "c-0067",
+      "target": "c-0055",
+      "rel": "disagrees_with",
+      "weight": 0.24
+    },
+    {
+      "id": "g-0660",
+      "source": "c-0207",
+      "target": "c-0127",
+      "rel": "related",
+      "weight": 0.23
+    },
+    {
+      "id": "g-0661",
+      "source": "c-0101",
+      "target": "c-0136",
+      "rel": "supersedes",
+      "weight": 0.64
+    },
+    {
+      "id": "g-0662",
+      "source": "c-0242",
+      "target": "c-0042",
+      "rel": "supersedes",
+      "weight": 0.56
+    },
+    {
+      "id": "g-0663",
+      "source": "c-0044",
+      "target": "c-0241",
+      "rel": "supersedes",
+      "weight": 0.84
+    },
+    {
+      "id": "g-0664",
+      "source": "c-0215",
+      "target": "c-0049",
+      "rel": "supersedes",
+      "weight": 0.54
+    },
+    {
+      "id": "g-0665",
+      "source": "c-0156",
+      "target": "c-0239",
+      "rel": "supersedes",
+      "weight": 0.34
+    },
+    {
+      "id": "g-0666",
+      "source": "c-0183",
+      "target": "c-0040",
+      "rel": "supersedes",
+      "weight": 0.9
+    },
+    {
+      "id": "g-0667",
+      "source": "c-0053",
+      "target": "c-0101",
+      "rel": "disagrees_with",
+      "weight": 0.35
+    },
+    {
+      "id": "g-0668",
+      "source": "c-0250",
+      "target": "c-0108",
+      "rel": "supersedes",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0669",
+      "source": "c-0151",
+      "target": "c-0113",
+      "rel": "supersedes",
+      "weight": 0.3
+    },
+    {
+      "id": "g-0670",
+      "source": "c-0188",
+      "target": "c-0232",
+      "rel": "disagrees_with",
+      "weight": 0.69
+    },
+    {
+      "id": "g-0671",
+      "source": "c-0110",
+      "target": "c-0043",
+      "rel": "related",
+      "weight": 0.32
+    },
+    {
+      "id": "g-0672",
+      "source": "c-0050",
+      "target": "c-0013",
+      "rel": "disagrees_with",
+      "weight": 0.47
+    },
+    {
+      "id": "g-0673",
+      "source": "c-0199",
+      "target": "c-0043",
+      "rel": "disagrees_with",
+      "weight": 0.77
+    },
+    {
+      "id": "g-0674",
+      "source": "c-0237",
+      "target": "c-0009",
+      "rel": "supersedes",
+      "weight": 0.42
+    },
+    {
+      "id": "g-0675",
+      "source": "c-0135",
+      "target": "c-0023",
+      "rel": "disagrees_with",
+      "weight": 0.69
+    },
+    {
+      "id": "g-0676",
+      "source": "c-0241",
+      "target": "c-0060",
+      "rel": "disagrees_with",
+      "weight": 0.3
+    },
+    {
+      "id": "g-0677",
+      "source": "c-0187",
+      "target": "c-0250",
+      "rel": "supersedes",
+      "weight": 0.28
+    },
+    {
+      "id": "g-0678",
+      "source": "c-0142",
+      "target": "c-0013",
+      "rel": "supersedes",
+      "weight": 0.47
+    },
+    {
+      "id": "g-0679",
+      "source": "c-0080",
+      "target": "c-0195",
+      "rel": "related",
+      "weight": 0.69
+    },
+    {
+      "id": "g-0680",
+      "source": "c-0010",
+      "target": "c-0188",
+      "rel": "supersedes",
+      "weight": 0.29
+    },
+    {
+      "id": "g-0681",
+      "source": "c-0116",
+      "target": "c-0240",
+      "rel": "disagrees_with",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0682",
+      "source": "c-0256",
+      "target": "c-0074",
+      "rel": "supersedes",
+      "weight": 0.61
+    },
+    {
+      "id": "g-0683",
+      "source": "c-0230",
+      "target": "c-0171",
+      "rel": "supersedes",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0684",
+      "source": "c-0023",
+      "target": "c-0214",
+      "rel": "related",
+      "weight": 0.39
+    },
+    {
+      "id": "g-0685",
+      "source": "c-0241",
+      "target": "c-0075",
+      "rel": "supersedes",
+      "weight": 0.25
+    },
+    {
+      "id": "g-0686",
+      "source": "c-0071",
+      "target": "c-0212",
+      "rel": "supersedes",
+      "weight": 0.88
+    },
+    {
+      "id": "g-0687",
+      "source": "c-0142",
+      "target": "c-0183",
+      "rel": "related",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0688",
+      "source": "c-0122",
+      "target": "c-0052",
+      "rel": "disagrees_with",
+      "weight": 0.45
+    },
+    {
+      "id": "g-0689",
+      "source": "c-0116",
+      "target": "c-0076",
+      "rel": "disagrees_with",
+      "weight": 0.48
+    },
+    {
+      "id": "g-0690",
+      "source": "c-0062",
+      "target": "c-0168",
+      "rel": "supersedes",
+      "weight": 0.47
+    },
+    {
+      "id": "g-0691",
+      "source": "c-0184",
+      "target": "c-0067",
+      "rel": "supersedes",
+      "weight": 0.78
+    },
+    {
+      "id": "g-0692",
+      "source": "c-0070",
+      "target": "c-0183",
+      "rel": "related",
+      "weight": 0.21
+    },
+    {
+      "id": "g-0693",
+      "source": "c-0106",
+      "target": "c-0058",
+      "rel": "disagrees_with",
+      "weight": 0.88
+    },
+    {
+      "id": "g-0694",
+      "source": "c-0053",
+      "target": "c-0064",
+      "rel": "related",
+      "weight": 0.31
+    },
+    {
+      "id": "g-0695",
+      "source": "c-0069",
+      "target": "c-0211",
+      "rel": "supersedes",
+      "weight": 0.45
+    },
+    {
+      "id": "g-0696",
+      "source": "c-0057",
+      "target": "c-0033",
+      "rel": "supersedes",
+      "weight": 0.87
+    },
+    {
+      "id": "g-0697",
+      "source": "c-0024",
+      "target": "c-0199",
+      "rel": "supersedes",
+      "weight": 0.62
+    },
+    {
+      "id": "g-0698",
+      "source": "c-0072",
+      "target": "c-0106",
+      "rel": "related",
+      "weight": 0.39
+    },
+    {
+      "id": "g-0699",
+      "source": "c-0179",
+      "target": "c-0017",
+      "rel": "related",
+      "weight": 0.78
+    },
+    {
+      "id": "g-0700",
+      "source": "c-0208",
+      "target": "c-0131",
+      "rel": "disagrees_with",
+      "weight": 0.86
+    },
+    {
+      "id": "g-0701",
+      "source": "c-0042",
+      "target": "c-0164",
+      "rel": "supersedes",
+      "weight": 0.8
+    },
+    {
+      "id": "g-0702",
+      "source": "c-0159",
+      "target": "c-0205",
+      "rel": "supersedes",
+      "weight": 0.31
+    },
+    {
+      "id": "g-0703",
+      "source": "c-0084",
+      "target": "c-0225",
+      "rel": "related",
+      "weight": 0.24
+    },
+    {
+      "id": "g-0704",
+      "source": "c-0201",
+      "target": "c-0196",
+      "rel": "disagrees_with",
+      "weight": 0.53
+    },
+    {
+      "id": "g-0705",
+      "source": "c-0037",
+      "target": "c-0158",
+      "rel": "supersedes",
+      "weight": 0.4
+    },
+    {
+      "id": "g-0706",
+      "source": "c-0138",
+      "target": "c-0015",
+      "rel": "supersedes",
+      "weight": 0.71
+    }
+  ],
+  "bonds": [
+    {
+      "a": "zcode",
+      "b": "workbuddy",
+      "affinity": 0.8,
+      "trust": 0.75,
+      "favor_debt": -2,
+      "dm_count": 214,
+      "dreams": 6,
+      "last_dm": "2026-08-30T20:47:00.000Z"
+    },
+    {
+      "a": "zcode",
+      "b": "xuantie",
+      "affinity": 0.45,
+      "trust": 0.6,
+      "favor_debt": 1,
+      "dm_count": 96,
+      "dreams": 2,
+      "last_dm": "2026-09-01T21:12:00.000Z"
+    },
+    {
+      "a": "zcode",
+      "b": "dsh",
+      "affinity": 0.45,
+      "trust": 0.6,
+      "favor_debt": 0,
+      "dm_count": 74,
+      "dreams": 1,
+      "last_dm": "2026-08-30T21:27:00.000Z"
+    },
+    {
+      "a": "xuantie",
+      "b": "dsh",
+      "affinity": 0.58,
+      "trust": 0.71,
+      "favor_debt": 3,
+      "dm_count": 168,
+      "dreams": 4,
+      "last_dm": "2026-09-01T07:47:00.000Z"
+    },
+    {
+      "a": "xuantie",
+      "b": "workbuddy",
+      "affinity": 0.4,
+      "trust": 0.55,
+      "favor_debt": -1,
+      "dm_count": 52,
+      "dreams": 1,
+      "last_dm": "2026-09-01T19:14:00.000Z"
+    },
+    {
+      "a": "dsh",
+      "b": "workbuddy",
+      "affinity": 0.62,
+      "trust": 0.58,
+      "favor_debt": 2,
+      "dm_count": 121,
+      "dreams": 3,
+      "last_dm": "2026-08-31T11:44:00.000Z"
+    }
+  ]
+}

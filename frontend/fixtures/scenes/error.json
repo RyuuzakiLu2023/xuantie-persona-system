@@ -1,0 +1,20 @@
+{
+  "cockpit-state": {
+    "ok": false,
+    "code": "server_error",
+    "message": "渊面读不出来：vector_store.db 被另一个进程独占（WAL 锁）",
+    "stale_at": "2026-09-02T01:36:00.000Z"
+  },
+  "rooms": {
+    "ok": false,
+    "code": "server_error",
+    "message": "rooms 表查询超时（>5s）",
+    "stale_at": "2026-09-02T01:36:00.000Z"
+  },
+  "graph": {
+    "ok": false,
+    "code": "server_error",
+    "message": "图谱构建中断于 memory_evolution 扫描",
+    "stale_at": "2026-09-02T01:29:00.000Z"
+  }
+}
