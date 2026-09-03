@@ -80,7 +80,7 @@ tests/ 全套（pytest，conftest + axis_predicates + 六类守卫），83 passe
 
 ## 已知边界（如实）
 
-- 驾驶舱前端（照渊台）已并入 frontend/（契约 + mock + UI 验收脚本）；后端 8 路由形状见 src/hermes-plugin/memory/api_server.py。
+- 驾驶舱前端（照渊台）将在完成后随下一批推送（frontend/ 当前暂不纳入本批）；后端 8 路由形状见 src/hermes-plugin/memory/api_server.py。
 - 二期-C（系统自演化 P3.2-3.4）挂起等数据；Lint 巡检 / 折叠 / hanlp 未排期。
 - messages/rooms 表初始为 0 行：驾驶舱房间需部署者自行播种（xtmem rooms create）。
 
