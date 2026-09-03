@@ -52,7 +52,7 @@ tests/ 全套（pytest，conftest + axis_predicates + 六类守卫），83 passe
 
 | 占位符 | 含义 | 部署时 |
 |---|---|---|
-| <XT_ROOT> | 项目根（原本机 E:\2222\3333） | 设环境变量或替换为你自己的根 |
+| <XT_ROOT> | 项目根 | 设环境变量或替换为你自己的根 |
 | <USER_HOME> / <USER_DOCS> | 用户目录 | 替换为你的实际目录 |
 | <PYTHON_EXE> / <HERMES_EXE> | python / hermes 可执行文件 | 设 XTMEM_PYTHON 等或替换 |
 | <CANONICAL_DB> | 测试基准库 | 测试用 env XTMEM_CANONICAL_DB 指定 |
