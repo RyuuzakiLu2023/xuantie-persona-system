@@ -7,3 +7,4 @@ __pycache__/
 .backup/
 .env
 *.db
+.env.local
