@@ -1,3 +1,20 @@
+
+# ================================================================
+# wal_engine.py · 总导游图（改代码前必读，读完再动手）
+#
+# 这是什么：WAL（Write-Ahead Logging）记忆引擎——所有记忆操作先写日志，保证持久性；
+#           重启/崩溃前未落盘的条目可重放补写。
+#
+# 结构：MemoryEntry dataclass（含 namespace/project/host_origin/visibility/tier）→
+#       append/store + 跨进程锁 _locked_wal（Windows msvcrt 1 字节区间锁）→
+#       read_uncompacted/mark_compressed/cleanup_expired/purge。
+#
+# 修改铁律：
+# 1. 整文件重写（mark_compressed/cleanup_expired/purge）必须走 _locked_wal(required=True) 强锁，
+#    拿不到就抛 RuntimeError，绝不无锁重写（并发重写丢刚写的日志）。
+# 2. MemoryEntry to_json/from_json 用 asdict/**data——加字段自动序列化；旧 JSON 行缺字段走默认（向后兼容）。
+# 3. append 只追加；读方持有旧句柄时 os.replace 仍原子生效（CRT 共享删除模式）。
+# ================================================================
 # hermes/memory/wal_engine.py
 # WAL (Write-Ahead Logging) 记忆引擎
 # 所有记忆操作先写日志，保证持久性
@@ -8,6 +25,7 @@ import time
 import uuid
 import logging
 import platform
+from contextlib import contextmanager
 from dataclasses import dataclass, field, asdict
 from typing import List, Optional, Literal
 from pathlib import Path
@@ -31,6 +49,14 @@ class MemoryEntry:
     session_id: str = "default"
     compressed: bool = False         # 是否已被压缩
     compressed_into: Optional[str] = None  # 压缩后摘要的 ID
+    # R2.2（2026-08-31）：WAL 条目带四标签，重放可恢复 namespace/project/host_origin/visibility；
+    # 旧 JSON 行缺这些字段走默认 None（向后兼容）。
+    namespace: Optional[str] = None
+    project: Optional[str] = None
+    host_origin: Optional[str] = None
+    visibility: Optional[str] = None
+    # P4.8 T3（2026-09-01）：分层库 tier——WAL 重放后仍保真（缺省 None→raw）
+    tier: Optional[str] = None
 
     def to_json(self) -> str:
         return json.dumps(asdict(self), ensure_ascii=False)
@@ -44,6 +70,52 @@ class MemoryEntry:
         if self.ttl is None:
             return False
         return (time.time() - self.timestamp) > self.ttl
+
+
+# P1-9（2026-08-31）：跨进程锁。所有 WAL 写操作（append / 整文件重写）共用
+# <wal_dir>/.lock 锁文件上的 1 字节区间锁（msvcrt），防止：
+#   - append 与 mark_compressed/cleanup_expired 整文件重写同时发生时互相踩踏
+#   - Windows 上 os.replace 与未锁写入的竞态导致刚写的日志丢失
+# 读操作不加锁：读方持有旧句柄时 replace 仍原子生效（CRT 共享删除模式）。
+WAL_LOCK_ACQUIRE_TIMEOUT = 5.0      # 拿锁超时上限（秒）
+WAL_LOCK_REWRITE_REQUIRED = True    # 重写操作强锁：拿不到就抛错，绝不无锁重写
+
+
+@contextmanager
+def _locked_wal(wal_dir: str, *, required: bool = False, timeout: float = WAL_LOCK_ACQUIRE_TIMEOUT):
+    """跨进程互斥上下文。required=True 时拿不到锁会抛 RuntimeError（重写操作用）。"""
+    lock_path = Path(wal_dir) / ".lock"
+    with open(lock_path, "a+") as f:
+        if os.fstat(f.fileno()).st_size == 0:
+            f.write("\0")
+            f.flush()
+        locked = False
+        if platform.system() == "Windows":
+            import msvcrt
+            f.seek(0)
+            deadline = time.time() + timeout
+            while True:
+                try:
+                    msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+                    locked = True
+                    break
+                except OSError:
+                    if time.time() >= deadline:
+                        break
+                    time.sleep(0.02)
+        if not locked and required:
+            raise RuntimeError(
+                f"WAL lock not acquired within {timeout:.1f}s: {lock_path}"
+            )
+        try:
+            yield locked
+        finally:
+            if locked:
+                f.seek(0)
+                try:
+                    msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
+                except OSError:
+                    pass
 
 
 class WALEngine:
@@ -72,27 +144,15 @@ class WALEngine:
         """
         line = entry.to_json() + "\n"
 
-        with open(self.wal_file, "a", encoding="utf-8") as f:
-            is_windows = platform.system() == "Windows"
-            if is_windows:
-                import msvcrt
-                f.seek(0)
-                try:
-                    msvcrt.locking(f.fileno(), msvcrt.LK_LOCK, 1)
-                except OSError:
-                    pass  # 建议性锁，获取失败时退化为无锁写入
-            try:
+        # P1-9：追加也走统一跨进程锁（失败可降级无锁，但重写操作是强锁、会等我们）
+        with _locked_wal(self.wal_dir, required=False) as locked:
+            if not locked:
+                logger.warning("WAL append: lock not acquired, writing lock-free (%s)", entry.id)
+            with open(self.wal_file, "a", encoding="utf-8") as f:
                 f.seek(0, os.SEEK_END)  # 追加模式下写入始终落在文件末尾
                 f.write(line)
                 f.flush()
                 os.fsync(f.fileno())
-            finally:
-                if is_windows:
-                    f.seek(0)
-                    try:
-                        msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
-                    except OSError:
-                        pass
 
         logger.debug("WAL append: %s (type=%s, importance=%.2f)", entry.id, entry.type, entry.importance)
 
@@ -145,41 +205,43 @@ class WALEngine:
         return entries
 
     def mark_compressed(self, entry_ids: List[str], summary_id: str) -> None:
-        """标记一批条目已被压缩进某个摘要"""
-        all_entries = self.read_all()
-        updated_lines = []
+        """标记一批条目已被压缩进某个摘要（P1-9：强锁重写，防并发吞日志）"""
+        with _locked_wal(self.wal_dir, required=WAL_LOCK_REWRITE_REQUIRED):
+            all_entries = self.read_all()
+            updated_lines = []
 
-        for entry in all_entries:
-            if entry.id in entry_ids:
-                entry.compressed = True
-                entry.compressed_into = summary_id
-            updated_lines.append(entry.to_json() + "\n")
+            for entry in all_entries:
+                if entry.id in entry_ids:
+                    entry.compressed = True
+                    entry.compressed_into = summary_id
+                updated_lines.append(entry.to_json() + "\n")
 
-        # 原子重写 WAL
-        tmp_file = self.wal_file.with_suffix(".wal.tmp")
-        with open(tmp_file, "w") as f:
-            f.writelines(updated_lines)
-            f.flush()
-            os.fsync(f.fileno())
-        os.replace(tmp_file, self.wal_file)
+            # 原子重写 WAL
+            tmp_file = self.wal_file.with_suffix(".wal.tmp")
+            with open(tmp_file, "w") as f:
+                f.writelines(updated_lines)
+                f.flush()
+                os.fsync(f.fileno())
+            os.replace(tmp_file, self.wal_file)
 
         logger.info("Marked %d entries as compressed into %s", len(entry_ids), summary_id)
 
     def cleanup_expired(self) -> int:
-        """清理过期条目，返回清理数量"""
-        all_entries = self.read_all()
-        alive = [e for e in all_entries if not e.is_expired()]
-        removed = len(all_entries) - len(alive)
+        """清理过期条目，返回清理数量（P1-9：强锁重写，防并发吞日志）"""
+        with _locked_wal(self.wal_dir, required=WAL_LOCK_REWRITE_REQUIRED):
+            all_entries = self.read_all()
+            alive = [e for e in all_entries if not e.is_expired()]
+            removed = len(all_entries) - len(alive)
 
-        if removed > 0:
-            lines = [e.to_json() + "\n" for e in alive]
-            tmp_file = self.wal_file.with_suffix(".wal.tmp")
-            with open(tmp_file, "w") as f:
-                f.writelines(lines)
-                f.flush()
-                os.fsync(f.fileno())
-            os.replace(tmp_file, self.wal_file)
-            logger.info("Cleaned up %d expired WAL entries", removed)
+            if removed > 0:
+                lines = [e.to_json() + "\n" for e in alive]
+                tmp_file = self.wal_file.with_suffix(".wal.tmp")
+                with open(tmp_file, "w") as f:
+                    f.writelines(lines)
+                    f.flush()
+                    os.fsync(f.fileno())
+                os.replace(tmp_file, self.wal_file)
+                logger.info("Cleaned up %d expired WAL entries", removed)
 
         return removed
 

@@ -67,7 +67,7 @@ def main() -> int:
             CHECK["dedupe"] = bool(r2.get("ok") and r2.get("skipped"))
             r = run("lookup", "--query", "桃子汽水", "--top", "3", "--cross")
             CHECK["lookup"] = bool(r.get("ok") and r.get("count", 0) >= 1)
-            r = run("forget", "--id", str(store_id))
+            r = run("forget", "--id", str(store_id), "--as", "dsh")
             CHECK["forget"] = bool(r.get("ok") and r.get("removed", 0) >= 1)
             # 文件轨：先 export（含已存行），再造新文件 import
             r = run("export")
@@ -77,9 +77,9 @@ def main() -> int:
                 "---\nid: mem-zc-fresh\nnamespace: zcode\nproject: demo\n"
                 "importance: 0.5\ntimestamp: 1787100000\ntags: fresh\ntrack: default\n---\n\n"
                 "文件轨导入回归：Z老师记住 [[部署偏好]] 托管在 E 盘。\n", encoding="utf-8")
-            r = run("import")
+            r = run("import", "--as", "zcode")
             CHECK["import"] = bool(r.get("ok") and r.get("added", 0) >= 1)
-            r2 = run("import")
+            r2 = run("import", "--as", "zcode")
             CHECK["dedupe"] = CHECK["dedupe"] and bool(r2.get("duplicates", 0) >= 1)
             r = run("agents")
             CHECK["agents"] = bool(r.get("ok"))
@@ -92,7 +92,7 @@ def main() -> int:
             except Exception:
                 CHECK["reembed"] = "warn"
             # ── 玩法增强框架（E1/E2/E3/E6）冒烟 ──
-            r = run("whisper", "--agent", "zhanglaoshi", "--namespace", "zcode",
+            r = run("whisper", "--agent", "zcode", "--namespace", "zcode",
                     "--text", "框架冒烟：Z老师的秘密只有自己可见")
             CHECK["whisper"] = bool(r.get("ok") and r.get("visibility") == "private")
             wid = r.get("id")
@@ -103,7 +103,7 @@ def main() -> int:
             r = run("relations", "set", "--agent-a", "xuantie_lark", "--agent-b", "zhanglaoshi",
                     "--sentiment", "-0.4", "--trust", "0.3", "--note", "框架冒烟：骗过一次")
             CHECK["relations"] = bool(r.get("ok"))
-            r = run("relations", "summary", "--agent", "xuantie_lark")
+            r = run("relations", "summary", "--as", "xuantie_lark")
             CHECK["relations"] = CHECK["relations"] and bool(r.get("count", 0) >= 1)
             r = run("msg", "send", "--to", "xuantie_lark", "--from", "zhanglaoshi",
                     "--text", "框架冒烟：你的代码又出bug了")
@@ -114,7 +114,7 @@ def main() -> int:
             CHECK["reflect"] = bool(r.get("ok") and r.get("visibility") == "private")
             CHECK["reveal"] = False
             if wid:
-                r = run("reveal", "--id", str(wid), "--to", "xuantie_lark")
+                r = run("reveal", "--id", str(wid), "--to", "xuantie_lark", "--as", "zcode")
                 CHECK["reveal"] = bool(r.get("ok") and r.get("visibility") == "shared-with:xuantie_lark")
         finally:
             _os.environ.clear()

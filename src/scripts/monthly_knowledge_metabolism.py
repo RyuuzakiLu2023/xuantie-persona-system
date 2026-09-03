@@ -19,9 +19,9 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-DEFAULT_MEMORIES = os.environ.get("XTMEM_MEMORIES", "memories")
+DEFAULT_MEMORIES = r"<XT_ROOT>\mimox-data\memories"
 REPORT_DIR = os.environ.get("XTMEM_REPORT_DIR", DEFAULT_MEMORIES)
-DB = os.environ.get("XTMEM_DB_PATH", "xtmem.db")
+DB = os.environ.get("XTMEM_DB_PATH", r"<XT_ROOT>\mimox-data\.hermes\memory\vector_store.db")
 
 
 def _dir_stats(d: Path) -> dict:

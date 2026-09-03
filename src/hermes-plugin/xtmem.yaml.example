@@ -2,9 +2,9 @@
 # 实际文件：$HERMES_HOME/xtmem.yaml（每个 profile 一份；不存在则全部用默认值）
 # 默认值见 provider.py：DEFAULT_SHARED_DB / DEFAULT_NAMESPACE / DEFAULT_PROJECT
 
-# 共享物理库（默认：xtmem.db —— 可用环境变量 XTMEM_SHARED_DB 覆盖）
+# 共享物理库（默认：<XT_ROOT>\mimox-data\.hermes\memory\vector_store.db —— 龙崎拍板基准）
 # 测试期可用 XTMEM_DB_PATH 环境变量覆盖，优先级高于本文件。
-db_path: "xtmem.db"
+db_path: "E:\\2222\\3333\\mimox-data\\.hermes\\memory\\vector_store.db"
 
 # namespace 自动分域：优先用 initialize 的 agent_identity，此处仅作显式覆盖
 # namespace: "xuantie_lark"
@@ -29,3 +29,8 @@ db_path: "xtmem.db"
 #     trigger_ratio: 0.9
 #   prefetch_only: false
 #   rest_api: false
+
+# S2 活性钩子（默认关）：开 record_events 才写 xtmem_events；record_utility 才在召回时累加 chunk_utility
+# stats:
+#   record_events: false
+#   record_utility: false

@@ -10,41 +10,53 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import time
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
-XTMEM_PY = HERE.parent / "xtmem" / "xtmem.py"
+# BF-4（2026-09-01）：脚本可能被硬链到 profile 侧调用，`__file__.resolve().parent` 取调用路径、
+# 不追溯主树；`HERE.parent/xtmem/xtmem.py` 会推导出 profile 侧不存在的路径。改用 env 显式覆盖 + 生产绝对路径兜底。
+XTMEM_PY = Path(os.environ.get("XTMEM_CLI", r"<XT_ROOT>/mimox-data/xtmem/xtmem.py"))
 PYTHON = sys.executable
 
 
-def _run(argv):
+def _run(argv, env_extra=None):
+    """BF-5（2026-09-01）：返回 (returncode, parsed)。
+
+    按 returncode 判成败（带码可信）；空输出但 rc=0 = 正常 no-op（无待导入/无变化），
+    空输出但 rc!=0 = 子进程真没跑起来（如路径错），绝不能当 no-op 吞掉（旧版 `error=="empty"` 判定危险）。
+    """
+    import os as _os
+    env = {**_os.environ, **(env_extra or {})}
     try:
         proc = subprocess.run(
             [PYTHON, str(XTMEM_PY), *argv], capture_output=True, text=True,
-            encoding="utf-8", timeout=120, check=False,
+            encoding="utf-8", timeout=120, check=False, env=env,
         )
         out = (proc.stdout or "").strip()
         try:
-            return json.loads(out) if out else {"ok": False, "error": "empty"}
+            parsed = json.loads(out) if out else {}
         except Exception:
-            return {"ok": False, "error": out[:200]}
+            parsed = {}
+        return proc.returncode, parsed
     except Exception as exc:
-        return {"ok": False, "error": str(exc)}
+        return 1, {"ok": False, "error": str(exc)}
 
 
 def main() -> int:
     result = {"ok": True, "synced_at": time.time(), "import": None, "sync": None}
-    imp = _run(["import"])
-    if not imp.get("ok"):
-        return print(json.dumps({"ok": False, "error": "import failed: " + str(imp)}, ensure_ascii=False)), 1
-    result["import"] = imp
-    sync = _run(["sync", "--side", "hermes"])
-    if not sync.get("ok"):
-        return print(json.dumps({"ok": False, "error": "sync failed: " + str(sync)}, ensure_ascii=False)), 1
-    result["sync"] = sync
+    # R2.7（2026-08-31）：import 身份收口——sync 裸 import 需注入 XTMEM_ACTOR=zcode
+    # BF-5（2026-09-01）：按 returncode 判成败 + 空输出当 no-op（import/sync 都适用）。
+    rc, imp = _run(["import"], {"XTMEM_ACTOR": "zcode"})
+    if rc != 0:
+        return print(json.dumps({"ok": False, "error": "import failed (rc=%s): %s" % (rc, imp)}, ensure_ascii=False)), 1
+    result["import"] = imp or {"ok": True, "skipped": "empty-input"}
+    rc2, sync = _run(["sync", "--side", "hermes"])
+    if rc2 != 0:
+        return print(json.dumps({"ok": False, "error": "sync failed (rc=%s): %s" % (rc2, sync)}, ensure_ascii=False)), 1
+    result["sync"] = sync or {"ok": True, "skipped": "no-change"}
     print(json.dumps(result, ensure_ascii=False))
     return 0
 

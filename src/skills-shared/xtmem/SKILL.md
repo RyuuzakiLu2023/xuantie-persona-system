@@ -5,13 +5,13 @@ agent_created: true
 version: 1.0.0
 tags: [memory, xtmem, cross-agent, shared-memory]
 triggers: [查共享记忆, 跨端记忆, 写记忆, 共享库, xtmem, 记忆同步]
-source: E:\2222\3333\mimox-data\xtmem\xtmem.py
+source: <XT_ROOT>\mimox-data\xtmem\xtmem.py
 ---
 
 # XTMEM 共享记忆使用指引
 
 > 多角色共享记忆库（SQLite + bge-m3 embedding via Ollama 11434），ZCode/玄铁/DSH/WorkBuddy 四端共用。
-> 库文件：`E:\2222\3333\mimox-data\.hermes\memory\vector_store.db`；引擎 CLI：`E:\2222\3333\mimox-data\xtmem\xtmem.py`。
+> 库文件：`<XT_ROOT>\mimox-data\.hermes\memory\vector_store.db`；引擎 CLI：`<XT_ROOT>\mimox-data\xtmem\xtmem.py`。
 
 ## 这是什么
 
@@ -42,6 +42,6 @@ source: E:\2222\3333\mimox-data\xtmem\xtmem.py
 
 ## 常见坑
 
-- Git Bash 的 `python` 是微软商店 stub（静默失败/退出码 41/49）：一律用 `C:\Users\Ryuuzaki\AppData\Local\Programs\Python\Python311\python.exe` 或 `py`
-- 引擎路径：`E:\2222\3333\mimox-data\xtmem\xtmem.py`（插件里相对推导的路径会落空——已在 MCP 侧加绝对路径候选修复）
+- Git Bash 的 `python` 是微软商店 stub（静默失败/退出码 41/49）：一律用 `<PYTHON_EXE>` 或 `py`
+- 引擎路径：`<XT_ROOT>\mimox-data\xtmem\xtmem.py`（插件里相对推导的路径会落空——已在 MCP 侧加绝对路径候选修复）
 - 库里混有历史 absorb 的整段旧对话（`host_origin: absorb:hermes-webui`）——语义检索可能命中噪音，对结果做可信度判断

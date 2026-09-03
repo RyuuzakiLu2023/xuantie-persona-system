@@ -15,6 +15,15 @@ def compute_content_hash(content: str) -> str:
     return hashlib.md5(content.strip().encode()).hexdigest()
 
 
+def compute_embedding_cache_key(text: str) -> str:
+    """embedding 缓存键统一入口（P2-12，2026-08-31）。
+
+    全文 sha256——VectorStore / hydrate / reembed 一律走这里，
+    禁止再出现"前 2000 字 hash"与"全文 hash"分叉导致的长文重复计算。
+    """
+    return hashlib.sha256(text.encode()).hexdigest()
+
+
 def estimate_tokens(text: str) -> int:
     """估算文本的 token 数。
 

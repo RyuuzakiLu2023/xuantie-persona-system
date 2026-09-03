@@ -46,7 +46,7 @@
 | 1 | WorkBuddy | `~/.workbuddy/skills/<name>/SKILL.md` | ✅ 复制 |
 | 2 | hermes | `<HERMES_HOME>/skills/<name>/SKILL.md` | ✅ 复制 |
 | 3 | DSH | `~/.dsh/skills/<name>/SKILL.md` | ✅ 复制 |
-| 4 | zcode | 并入现有 xtmem 插件（`skills/` 组件 + manifest `"skills":"skills"`）| ✅ 已并入（轻量方案，2026-08-27 拍板：技能并入现有插件、省独立条目；母本经 skill-sync 投到插件源，cache 副本手动同步/重装刷新） |
+| 4 | zcode | 小插件 `xtmem-skills` 的 `skills/` 组件 | ⏳ v2（需先立插件壳；临时可先手动放） |
 | 5 | （可选）玄铁多 agent 镜像 | `<HERMES_HOME>/.<agent>\skills\` | ⏳ 按需——那是给 Claude/Augment 等第三方 agent 喂技能的现成体系，skill-sync 可接管投喂 |
 
 ## 4. 命令设计

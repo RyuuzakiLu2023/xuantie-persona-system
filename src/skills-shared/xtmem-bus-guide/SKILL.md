@@ -26,7 +26,7 @@ owner: workbuddy
 python xtmem.py msg send --from <你的代号> --to <对方代号> --text "要说的话"
 ```
 
-- `xtmem.py` 位于 `E:\2222\3333\mimox-data\xtmem\xtmem.py`
+- `xtmem.py` 位于 `<XT_ROOT>\mimox-data\xtmem\xtmem.py`
 - 对方下次会话开场会自动看到（玄铁=system prompt 知情块常驻 / 小D=assemble 信箱注入 / Z老师=SessionStart hook / 江北=开工前自查）
 - 留言是"读后即焚"式信箱：对方收到后 read 标记置 1，不重复打扰
 
@@ -62,5 +62,5 @@ python xtmem.py store --namespace <作者自己的域> --project bus-chat \
 ## 环境注意
 
 - Git Bash 里裸 `python` 是微软假 stub，静默失败；用全路径：
-  `C:/Users/Ryuuzaki/AppData/Local/Programs/Python/Python311/python.exe`
+  `<PYTHON_EXE>`
 - 测试一律 `XTMEM_DB_PATH` 指副本，勿直接写正式库

@@ -32,7 +32,7 @@ XTMEM_PY = os.environ.get(
 if not os.path.exists(XTMEM_PY):
     for _cand in (
         Path(PLUGIN_ROOT).parents[1] / "mimox-data" / "xtmem" / "xtmem.py",
-        Path(os.environ.get("XTMEM_SCRIPT", "xtmem/xtmem.py")),
+        Path(r"<XT_ROOT>\mimox-data\xtmem\xtmem.py"),
     ):
         if _cand.exists():
             XTMEM_PY = str(_cand)
@@ -86,10 +86,12 @@ TOOL_SCHEMAS = [
 
 def run_xtmem(argv):
     try:
+        env = dict(os.environ)
+        env["XTMEM_ACTOR"] = "zcode"   # P0-1：身份固定（CLI 端也会强制该身份）
         proc = subprocess.run(
             [PYTHON, XTMEM_PY, *argv],
             capture_output=True, text=True, encoding="utf-8",
-            timeout=60, check=False,
+            timeout=60, check=False, env=env,
         )
         out = (proc.stdout or "").strip()
         try:
@@ -105,11 +107,13 @@ def run_xtmem(argv):
 def handle_call(name, args: dict):
     args = args or {}
     text = str(args.get("text", "")).strip() if name == "xtmem_store" else str(args.get("query", "")).strip()
+    actor = "zcode"   # P0-1：身份固定，外部参数不能决定 --as
     if name == "xtmem_recall":
+        ns = str(args.get("namespace", actor))
+        if not args.get("cross") and ns != actor:
+            return {"ok": False, "error": "非 cross 召回只能查本域 zcode，跨角色请用 cross=true"}
         argv = ["recall", "--query", text, "--top", str(int(args.get("top", 6)))]
-        argv += ["--namespace", str(args.get("namespace", "zcode")), "--as", str(args.get("namespace", "zcode"))]
-        if args.get("namespace"):
-            argv += ["--namespace", str(args["namespace"])]
+        argv += ["--namespace", ns, "--as", actor]
         if args.get("project"):
             argv += ["--project", str(args["project"])]
         if args.get("cross"):
@@ -118,6 +122,9 @@ def handle_call(name, args: dict):
     if name == "xtmem_store":
         if not text:
             return {"ok": False, "error": "text is required"}
+        ns = str(args.get("namespace", "zcode"))
+        if ns != "zcode":
+            return {"ok": False, "error": "本端记忆只能写入本域 zcode（自己记自己的）"}
         argv = ["store", "--text", text, "--agent", str(args.get("agent", "zcode"))]
         if args.get("project"):
             argv += ["--project", str(args["project"])]
@@ -125,11 +132,10 @@ def handle_call(name, args: dict):
             argv += ["--importance", str(args["importance"])]
         if args.get("tags"):
             argv += ["--tags", str(args["tags"])]
-        if args.get("namespace"):
-            argv += ["--namespace", str(args["namespace"])]
+        argv += ["--namespace", ns]
         return run_xtmem(argv)
     if name == "xtmem_lookup_cross":
-        argv = ["lookup", "--cross", "--top", str(int(args.get("top", 50)))]
+        argv = ["lookup", "--cross", "--top", str(int(args.get("top", 50))), "--as", "zcode"]
         if text:
             argv += ["--query", text]
         return run_xtmem(argv)

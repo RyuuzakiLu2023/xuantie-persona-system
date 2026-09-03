@@ -17,7 +17,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON = sys.executable
-CANONICAL = os.environ.get("XTMEM_CANONICAL_DB", "xtmem.db")
+CANONICAL = os.environ.get("XTMEM_CANONICAL_DB", r"<XT_ROOT>\mimox-data\.hermes\memory\vector_store.db")
 CHECKS = {"mcp_init": False, "mcp_tools": False, "mcp_call": False,
           "hook_inject": False, "hook_stop": False}
 
@@ -59,7 +59,7 @@ def main() -> int:
         call = (rs[2].get("result", {}) if len(rs) > 2 else {})
         CHECKS["mcp_call"] = bool(call.get("content")) and call.get("isError") is False
         # 先存一条可命中记忆（走 CLI 引擎管线）
-        subprocess.run([PYTHON, os.environ.get("XTMEM_SCRIPT", "xtmem/xtmem.py"), "store",
+        subprocess.run([PYTHON, "<XT_ROOT>/mimox-data/xtmem/xtmem.py", "store",
                         "--text", "zcode冒烟：玄铁部署偏好=Ollama 11434 本地 bge-m3", "--agent",
                         "zcode", "--importance", "0.8", "--namespace", "zcode"],
                        capture_output=True, text=True, encoding="utf-8", timeout=180, env=env)

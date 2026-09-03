@@ -1,3 +1,14 @@
+
+# ================================================================
+# cost_compressor.py · 总导游图（改代码前必读）
+#
+# 这是什么：成本压缩器——把超长 WAL 条目摘要成短记忆。可达但休眠：
+#           context_builder.py:26/132/154/373/488/535 引用，生产 chunk_count 未达 _should_compress 阈值未触发。
+#
+# 结构：CostCompressor(_summarize_rules) 纯规则摘要；trigger 在 context_builder.compress()。
+#
+# 修改铁律：别当死代码删——是「可达但未触发」，P4.3-d 长 chunk 治理会用上。
+# ================================================================
 import logging
 from typing import List, Optional, Callable, Any
 from .utils import estimate_tokens

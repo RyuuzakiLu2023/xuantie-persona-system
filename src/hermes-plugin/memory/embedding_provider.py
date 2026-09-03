@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import time
 from abc import ABC, abstractmethod
 from typing import List, Optional
 
@@ -93,6 +94,9 @@ class OllamaEmbedding(EmbeddingProvider):
         self._base_url = base_url.rstrip("/")
         self._timeout = timeout
         self._dim: Optional[int] = None
+        # 2026-08-31（N-收尾）：Ollama 故障黑名单冷却——服务 502/挂起时
+        # 快速降级 SimpleEmbedder，不再每个请求干等满超时（实测 30s×2 次尝试）。
+        self._blackout_until: float = 0.0
 
     # ------------------------------------------------------------------
     # Public API
@@ -112,9 +116,19 @@ class OllamaEmbedding(EmbeddingProvider):
 
         import httpx
 
+        # 冷却期内直接快速失败，交 HybridRetriever 降级 SimpleEmbedder
+        if time.time() < self._blackout_until:
+            raise RuntimeError(
+                "Ollama embedding blackout (recent failure, cooldown active)"
+            )
+
         results: List[List[float]] = []
         url = f"{self._base_url}/api/embed"
         batch_size = 32  # Ollama handles batch input natively
+        # 连接/写入 2s 快速失败；读取仍按业务超时（服务挂起时等待期有限）
+        fast_timeout = httpx.Timeout(
+            self._timeout, connect=2.0, write=2.0, pool=2.0
+        )
 
         for start in range(0, len(texts), batch_size):
             batch = [
@@ -125,7 +139,8 @@ class OllamaEmbedding(EmbeddingProvider):
                 resp = httpx.post(
                     url,
                     json={"model": self._model, "input": batch},
-                    timeout=self._timeout,
+                    timeout=fast_timeout,
+                    trust_env=False,  # 2026-08-31 修复：本地 Ollama 不走系统代理（系统代理 127.0.0.1:7890 会吞 loopback 请求回 502）
                 )
                 resp.raise_for_status()
                 data = resp.json()
@@ -143,15 +158,19 @@ class OllamaEmbedding(EmbeddingProvider):
                         probe = httpx.post(
                             url,
                             json={"model": self._model, "input": ["dimension probe"]},
-                            timeout=self._timeout,
+                            timeout=fast_timeout,
+                            trust_env=False,  # 同上：本地请求绕开系统代理
                         )
                         probe.raise_for_status()
                         vecs = probe.json().get("embeddings", [])
                         if vecs:
                             self._dim = len(vecs[0])
                     except Exception:
-                        logger.exception(
-                            "Ollama embedding unreachable (model=%s) — global fallback",
+                        # 进入 60s 冷却：期间不再叩 Ollama，快速降级
+                        self._blackout_until = time.time() + 60.0
+                        logger.error(
+                            "Ollama embedding unreachable (model=%s) — "
+                            "global fallback + 60s blackout",
                             self._model,
                         )
                         raise

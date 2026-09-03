@@ -43,7 +43,8 @@ CORRECTION_PATTERNS = re.compile(
 
 
 def _has_task_intent(text: str) -> bool:
-    return bool(_TASK_INTENT_PATTERNS.match(text))
+    # Y-1（2026-08-31）：单字「改」「请」不再触发任务意图
+    return len(text) >= 2 and bool(_TASK_INTENT_PATTERNS.match(text))
 
 
 DEFAULT_ALWAYS_RECALL: List[str] = [
@@ -85,6 +86,7 @@ class RecallPolicy:
         # Phase 1: 短追问继承状态
         self._last_recall_ts: float = 0.0
         self._last_recall_result: bool = False
+        self._inherit_count: int = 0  # R2.5（Y-2）：短追问继承计次，>=3 后强制重判
 
     def should_recall(
         self,
@@ -114,6 +116,7 @@ class RecallPolicy:
         # 用户说"不对/记错了" → 强制检索，绕过所有规则
         if CORRECTION_PATTERNS.search(msg):
             logger.info("recall_policy: triggered — correction signal detected in '%s'", msg[:30])
+            self._inherit_count = 0
             self._last_recall_ts = now
             self._last_recall_result = True
             return True
@@ -124,19 +127,22 @@ class RecallPolicy:
             self._last_recall_result
             and len(msg) < _SHORT_FOLLOWUP_MAX_LEN
             and (now - self._last_recall_ts) < _SHORT_FOLLOWUP_WINDOW
+            and self._inherit_count < 3
         ):
             logger.info(
                 "recall_policy: inherited — short follow-up (%d chars) within %.0fs window",
                 len(msg),
                 _SHORT_FOLLOWUP_WINDOW,
             )
-            self._last_recall_ts = now
-            # 不更新 _last_recall_result，保持继承链
+            # R2.5（Y-2）：不再刷新 _last_recall_ts（此前注释自称不更新但时间戳照刷）；
+            # 连续 >=3 次继承后强制走完整判定（下方规则逻辑）。
+            self._inherit_count += 1
             return self._last_recall_result
 
         # 规则1: 上下文刚压缩过 → 必须检索，恢复丢失的记忆
         if context_is_compressed:
             logger.info("recall_policy: triggered — context was compressed")
+            self._inherit_count = 0
             self._last_recall_ts = now
             self._last_recall_result = True
             return True
@@ -145,6 +151,7 @@ class RecallPolicy:
         for kw in self.always_kw:
             if kw in lower:
                 logger.info("recall_policy: triggered — keyword '%s'", kw)
+                self._inherit_count = 0
                 self._last_recall_ts = now
                 self._last_recall_result = True
                 return True
@@ -154,6 +161,7 @@ class RecallPolicy:
             for kw in self.never_kw:
                 if kw == lower:
                     logger.info("recall_policy: skipped — short confirm '%s'", kw)
+                    self._inherit_count = 0
                     self._last_recall_ts = now
                     self._last_recall_result = False
                     return False
@@ -161,6 +169,7 @@ class RecallPolicy:
         # 规则4: 简单确认/闲聊 → 跳过
         if lower in self.never_kw:
             logger.info("recall_policy: skipped — simple confirmation")
+            self._inherit_count = 0
             self._last_recall_ts = now
             self._last_recall_result = False
             return False
@@ -168,6 +177,7 @@ class RecallPolicy:
         # 规则5: 短消息但包含任务指示词 → 仍然是任务请求
         if _has_task_intent(lower):
             logger.info("recall_policy: triggered — task intent detected")
+            self._inherit_count = 0
             self._last_recall_ts = now
             self._last_recall_result = True
             return True
@@ -175,11 +185,13 @@ class RecallPolicy:
         # 规则6: 消息足够长且有实质内容 → 触发
         if len(msg) >= self.min_length:
             logger.info("recall_policy: triggered — substantive message (%d chars)", len(msg))
+            self._inherit_count = 0
             self._last_recall_ts = now
             self._last_recall_result = True
             return True
 
         # 默认不检索
+        self._inherit_count = 0
         self._last_recall_ts = now
         self._last_recall_result = False
         return False
