@@ -16,7 +16,17 @@ import random
 import time
 from typing import Any, Callable, Dict, List, Optional
 
-DEFAULT_INVITE_PROMPT = "现在轮到你{{agent}}发言了。系统已为房间添加发言标记，正常聊天即可。"
+# 议事厅点名模板（2026-09-08 重写）。旧版照抄 VCP 的「系统已为房间添加发言标记」——
+# 那是 VCP 的文本标记法，我方按修订2 走角色层（正文零标记），那句话既误导又无用；
+# 且没要求「以本人身份直接发言」，导致对端把点名当汇报、复述指令。
+# 占位符：{{agent}}=被点名端，{{room}}=房间名。
+DEFAULT_INVITE_PROMPT = (
+    "【议事厅点名 · {{room}}】现在轮到你（{{agent}}）发言。"
+    "请以你自己的身份，直接对房间里当前的话题说一句你的话——"
+    "你的回复会原样贴进房间给库主看。"
+    "不要复述本条点名指令，不要转述别人说了什么，不要汇报系统状态；"
+    "没话可说就回一句「本轮无话」。"
+)
 
 # 按端默认超时（秒）；可由 xtmem_tuning.json 的 cockpit_timeouts 覆盖
 DEFAULT_TIMEOUTS = {"xuantie_lark": 90, "dsh": 60, "workbuddy": 120, "zcode": 0}
@@ -137,7 +147,8 @@ CHAT_MODES: Dict[str, BaseChatMode] = {
 def resolve_invite_prompt(room, agent):
     """invitePrompt 模板替换：rooms.invite_prompt 可覆盖；默认用 DEFAULT_INVITE_PROMPT。"""
     template = (room or {}).get("invite_prompt") or DEFAULT_INVITE_PROMPT
-    return template.replace("{{agent}}", agent)
+    room_name = str((room or {}).get("name") or (room or {}).get("id") or "")
+    return template.replace("{{agent}}", agent).replace("{{room}}", room_name)
 
 
 def run_round(
@@ -162,14 +173,22 @@ def run_round(
     results = []
     for agent in speakers:
         invite = resolve_invite_prompt(room, agent)
+        # 邀请先落库拿 id，并用它当 context_id（2026-09-08 修）：
+        # 原先传 "" → a2a_client 自造 ctx-xxx，对端异步回帖的 reply_to 指向不存在的帖，
+        # cmd_msg 的「--reply-to 自动归房」失效，群聊回帖会掉进无房孤儿帖。
+        invite_mid = _write_invite_message(conn, room_id, agent, invite)
         try:
-            reply, ctx, state = a2a_call(agent, invite, "")
+            reply, ctx, state = a2a_call(agent, invite, invite_mid or "")
             if write_event:
                 write_event("msg_invite", agent, meta={"room": room_id, "state": state, "ok": True})
+            # 群聊回帖落库（2026-09-08 修）：此前 reply 只进返回值、从不入库，
+            # 导致议事厅跑完一轮房间时间线是空的。kind=chat → persist=0 / inject=1（二维闸）。
+            # 对端只回确认文本（[pending]/ack 形）时不落，避免噪声帖。
+            if reply and not _looks_like_ack(reply):
+                _write_chat_message(conn, room_id, agent, reply)
             results.append({"agent": agent, "ok": True, "reply": reply, "ctx": ctx, "state": state})
         except Exception as e:
-            # 超时/不可达 → 留言兜底 + 事件；该成员出队不阻塞本轮
-            _write_invite_message(conn, room_id, agent, invite)
+            # 超时/不可达 → 事件 + 降级标注；邀请帖已在 try 前落库，不重复写
             if write_event:
                 write_event("msg_timeout", agent, meta={"room": room_id, "reason": str(e)})
             results.append({"agent": agent, "ok": False, "error": str(e)})
@@ -206,6 +225,39 @@ def _get_room(conn, room_id):
         return {}
 
 
+# 对端「只确认没真答」的文本特征（2026-09-08 收紧：短真回复不是噪声，不能按长度吞）
+_ACK_PREFIXES = ("[pending]",)
+_ACK_EXACT = {"收到", "已收到", "好的", "行", "嗯", "ok", "okay", "ack", "已注入", "已唤醒", "收到！"}
+_ACK_HINTS = ("a2a 入站已注入", "真回复异步产生中", "task_state_submitted", "task_state_working")
+
+
+def _looks_like_ack(text):
+    t = str(text or "").strip()
+    if not t:
+        return True
+    low = t.lower().rstrip("。！!～~. ")
+    if any(low.startswith(p) for p in _ACK_PREFIXES):
+        return True
+    if low in _ACK_EXACT:
+        return True
+    return any(h in low for h in _ACK_HINTS) and len(low) < 200
+
+
+def _write_chat_message(conn, room_id, agent, text):
+    """群聊发言落库：from=该端 → to=ryuuzaki，kind=chat（persist=0 / inject=1）。"""
+    try:
+        mid = "msg-" + str(int(time.time() * 1000)) + "-" + str(len(text) % 1000)
+        conn.execute(
+            "INSERT OR REPLACE INTO messages (id, from_agent, to_agent, content, ts, read, room_id, kind, persist, inject)"
+            " VALUES (?,?,?,?,?,0,?,'chat',0,1)",
+            (mid, agent, "ryuuzaki", str(text)[:4000], time.time(), room_id),
+        )
+        conn.commit()
+        return mid
+    except Exception:
+        return ""
+
+
 def _write_invite_message(conn, room_id, agent, text):
     try:
         mid = "msg-" + str(int(time.time() * 1000)) + "-" + str(len(text) % 1000)
@@ -215,8 +267,9 @@ def _write_invite_message(conn, room_id, agent, text):
             (mid, "scheduler", agent, text, time.time(), room_id),
         )
         conn.commit()
+        return mid
     except Exception:
-        pass
+        return ""
 
 
 def _advance_round(conn, room_id):

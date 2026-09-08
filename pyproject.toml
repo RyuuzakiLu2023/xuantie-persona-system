@@ -46,6 +46,7 @@ dev = [
     "pytest>=7.4.0",
     "pytest-asyncio>=0.21.0",
     "flake8>=6.0.0",
+    "build>=1.0.0",
 ]
 host = [
     "hermes-agent",
@@ -62,15 +63,14 @@ Issues = "https://github.com/RyuuzakiLu2023/xuantie-persona-system/issues"
 
 [tool.setuptools]
 py-modules = ["xtmem"]
+packages = ["memory"]
 
 [tool.setuptools.package-dir]
 "" = "src/cli"
 "memory" = "src/hermes-plugin/memory"
 
-[tool.setuptools.packages.find]
-where = ["src/hermes-plugin/memory"]
-include = ["memory*"]
-namespaces = false
+[tool.setuptools.package-data]
+"memory" = ["*.html", "static/**/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

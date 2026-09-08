@@ -22,15 +22,25 @@ jobs:
         python-version: ${{ matrix.python-version }}
         cache: 'pip'
 
-    - name: Install dependencies
+    - name: Install build tools & dependencies
       run: |
-        python -m pip install --upgrade pip
+        python -m pip install --upgrade pip setuptools wheel pytest
         pip install -e ".[dev]"
 
     - name: Sanitization & Path Scan
       run: |
         python scripts/scan_drive_letters.py
 
-    - name: Run Smoke Tests
+    - name: Run Test Suite
+      env:
+        PYTHONUTF8: "1"
       run: |
         python -m pytest tests/test_smoke.py -v
+        python -m pytest -q
+
+    - name: Build & Verify Wheel Artifact
+      run: |
+        python setup.py bdist_wheel
+        python -m pip install --force-reinstall dist/*.whl
+        python -c "import memory; print('Memory engine imported successfully from wheel!')"
+        xtmem --help

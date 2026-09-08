@@ -75,7 +75,7 @@ else:
 DEFAULT_CLI = os.path.abspath(__file__)
 DEFAULT_DB = os.environ.get(
     "XTMEM_DB_PATH",
-    r"<XT_ROOT>\mimox-data\.hermes\memory\vector_store.db",
+    str(Path.home() / ".xtmem" / "vector_store.db")
 )
 DEFAULT_NAMESPACE = "xuantie_lark"
 
@@ -124,7 +124,7 @@ def _stats_enabled():
     """读 mimox-data/xtmem.yaml 的 stats.record_events（与 provider 同源）。"""
     try:
         import yaml
-        path = os.environ.get("XTMEM_STATS_YAML", "<XT_ROOT>/mimox-data/xtmem.yaml")
+        path = os.environ.get("XTMEM_STATS_YAML", str(Path.home() / ".xtmem" / "xtmem.yaml"))
         raw = yaml.safe_load(open(path, encoding="utf-8")) or {}
         return bool((raw.get("stats") or {}).get("record_events", False))
     except Exception:
