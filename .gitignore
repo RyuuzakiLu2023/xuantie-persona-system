@@ -7,4 +7,11 @@ __pycache__/
 .backup/
 .env
 *.db
+*.sqlite*
 .env.local
+frontend/
+dist/
+build/
+*.egg-info/
+.venv/
+

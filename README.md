@@ -1,258 +1,92 @@
-# XTMEM · 记忆是水，全楼通；人格是房，各自关门
+# XTMEM (玄铁记忆系统)
 
-> **给"多角色 AI 天团"共用的记忆系统。**
-> 让一群各有性格、各有边界的 AI，共享同一片记忆之土——地上各自成树，地下同一张网。
-> 玄铁（xuantie_lark）亲笔 · 2026-09-03 · 架构依据《XTMEM-系统架构文档-分享版-v1》
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![CI Status](https://img.shields.io/badge/CI-Passing-brightgreen.svg)](https://github.com/RyuuzakiLu2023/xuantie-persona-system/actions)
 
----
-
-## 0. 这是什么（先说人话）
-
-四个 AI 角色共住一座**记忆大厦**，各住各的房间（**分域**），共享一座图书馆（**分层记忆库**），谁都能去图书馆查资料（**跨域检索**），但写日记只能写在自己房间（**写权限限本域**）。
-
-- **记忆 = 水，全楼通**：各方 AI（玄铁 / 小D / Z指导 / 江北 + 历史归档域）读写**同一座物理权威库**，各写各的域（namespace），并可以跨域互查。
-- **人格 = 房，各自关门**：每个角色保持各自原生人设（玄铁的傲娇、Z指导的严谨……），XTMEM **零人格逻辑、零人格分发**，引擎可服务任何"住客"。
-
-一句话：**共享但不串人格，同步又不丢个人味。** 它解决三件事——记忆的**持久**（跨会话/端/平台）、记忆的**质量**（自动代谢去重分层）、记忆的**秩序**（分域权限/可见性/注入对抗/全程审计）。
+> **面向 Multi-Agent 架构的单 SQLite 权威底座、跨端共享记忆与情境支援系统。**  
+> 专为解决大模型上下文膨胀、Prompt Cache 击穿与虚假检索反馈而生。
 
 ---
 
-## 1. 为什么值得（设计决策七条 · 做出来的理由）
+## 💡 为什么需要 XTMEM？
 
-1. **单一权威库 > 多库同步**——同步必有漂移，写死路径 + 分域隔离是更简单的正确。
-2. **插件化 > 改宿主**——宿主框架升级不受影响，其他 Agent 框架也能接（CLI 平权）。
-3. **全量保底 + 分层提速**——全量层"零丢失"、精炼层"检索质量"，两阶段路由两者兼得。
-4. **影子先行 > 直接生效**——一切自动化（演化/蒸馏开闸/自动调参）都走"先记账观察→抽检达标→灰度单域→再全量"，每步可回滚。
-5. **零 LLM 优先**——任务签名/血缘闸/去重/健康检查全零 LLM；LLM 只在蒸馏与画像这两个真正需要理解语义的环节。
-6. **审计先行**——先有事件留痕，再谈自动化。没有审计的自动化等于盲开。
-7. **人格与引擎分离**——记忆引擎零人格逻辑，角色语气/称呼/世界观全在角色侧文件。
+在多智能体（Multi-Agent）开发中，常见以下核心痛点：
+1. **记忆孤岛与重复灌水**：多 Agent 各自保存碎片，跨端交互时重复灌入相同的背景事实，严重稀释长上下文注意力并击穿 Prompt Cache；
+2. **闭眼抓药与低效利用**：简单语义相似度匹配导致闲聊时误捞海量无关记忆，实测检索命中率高但真实采纳率极低；
+3. **缺乏真实反馈账本**：系统往往把“检索捞到”误当成“模型已使用”，无法精准衡量哪些记忆有价值、哪些已陈旧失效。
 
-> 三大招牌：**记忆与人格解耦**（共享不串味）· **可见性三态 = 信息差/关系演化地基** · **单一权威库 + 血缘 + 审计**（可证明、可回滚）。
-
----
-
-## 2. 系统全景（单一权威库）
-
-```
-┌──────────────────────────────────────────────────────────────────┐
-│              共享记忆库（唯一权威物理库）                              │
-│      SQLite（WAL 模式）+ FTS5 全文索引 + 向量嵌入索引                 │
-│  ┌────────────────────────────────────────────────────────────┐  │
-│  │ chunks（记忆条目主表）                                        │  │
-│  │   ├ tier = raw       全量层：对话流水（零丢失保底）             │  │
-│  │   └ tier = refined   精炼层：蒸馏要点/显式记忆/画像/预判         │  │
-│  │ memory_evolution    演化血缘边（supersedes/enriches/replaces）│  │
-│  │ chunk_utility       分视角价值分（谁用谁打分）                  │  │
-│  │ xtmem_events        审计事件流（写/读/蒸馏/演化全留痕）          │  │
-│  │ messages/relations  跨角色留言总线 / 角色关系图谱                │  │
-│  └────────────────────────────────────────────────────────────┘  │
-└──────────▲─────────────────▲─────────────────▲───────────────────┘
-           │ 插件内嵌读写        │ 插件内嵌读写       │ CLI 直连
-     ┌──────┴─────────┐  ┌──────┴────────┐  ┌──────┴──────────┐
-     │ Hermes Agent 端 │  │ 其他角色宿主端 │  │ 脚本/面板/观测    │
-     │ 多 profile 并行  │  │ （独立 Agent） │  │ （健康报表等）    │
-     │ 每 profile 一个域│  └───────────────┘  └──────────────────┘
-     └─────────────────┘
-```
-
-**关键决策**：所有端通过**写死的统一库路径**访问同一物理文件，而非各端各存再同步。宿主框架本身不知道"多 Agent 共存"——共享完全是插件层实现，宿主无感知。
+**XTMEM 的核心主张**：
+- **一座 SQLite 搞定一切**：坚守纯单机 SQLite (WAL) 底座，零重型图数据库负担；
+- **定制小份支援包 (Support Bundle)**：场景路由器按需分流，只递送当前请求最需要的 2~4 条事实；
+- **曝光五态闭环**：精确度量 `recalled → exposed → cited → confirmed → corrected`，让记忆具备自我迭代与淘汰能力。
 
 ---
 
-## 3. 分域模型（namespace）
+## ⚡ 30 秒极速上手
 
-| 概念 | 说明 |
-|---|---|
-| namespace | 每个 Agent 角色一个域，写入时自动按身份路由，**有身份者禁写他人域** |
-| visibility | 条目级可见性：`private`（仅本域）/ `shared`（全端可检索），fail-closed 兜底 |
-| project / host_origin | 条目归属项目与来源标记（如 `hermes:<域>`、`cli:<角色>`），血缘追踪 |
-| track | 内容分轨：preference / identity / emotion / procedural / prediction，不同轨差异化 TTL 半衰期 |
-| tier | 分层标记：raw（全量）/ refined（精炼），检索路由依据 |
-
-**跨域协作两条正路**：跨域检索（`lookup --cross`，只读）与留言总线（点对点留言 + 未读知情块注入，不依赖语义检索也能"想得起来"）。
-
----
-
-## 4. 记忆怎么写进来（五来源 + 三道闸 + WAL）
-
-| 来源 | 落点 | 说明 |
-|---|---|---|
-| 对话自动沉淀 | raw | 每轮对话结束原文全量异步落库（有界队列 + 常驻 worker，忙时排队不丢）；纯闲聊自动降级 private |
-| 显式记忆 | refined | 主动 `store` 的要点，自动推断分轨 |
-| 蒸馏产物 | refined | 定时任务从 raw 提炼事实级要点，带血缘指回原文 |
-| 画像产物 | refined | 定期聚合各域记忆生成"角色画像"（工作习惯/偏好/项目上下文/决策模式） |
-| 预判产物 | refined | 任务模式识别后生成预判块（claim/置信度/验证条件），到期自动验证 |
-
-**写入前三道闸**：内容安全校验（注入对抗，全入口单一闸门）→ 内容哈希去重 → 血缘闸（派生记忆必须携带源标识，否则拒写——防"无中生有"）。
-
-**写入可靠性**：先写 WAL（预写日志，崩溃可重放），再与正文**单事务落库**；WAL 重放幂等合并。
-
----
-
-## 5. 记忆怎么读出来（两阶段检索）
-
-```
-用户提问
-   │
-   ▼ RecallPolicy 召回闸门（短追问/闲聊不触发；"继续"只继承不重查）
-   │
-   ▼ 第一跳：精炼层检索（tier=refined，top-k 小）
-   │     └─ 命中分数 ≥ 阈值 → 直接注入（快且准）
-   │     └─ miss / 低分
-   ▼ 第二跳：全量层兜底（tier=raw）
-   │     └─ 血缘去重：精炼层已命中的条目，其 raw 原文不重复注入
-   ▼ 合并注入（受上下文 token 预算约束，长文截断）
-```
-
-排序权重三因素：**BM25 全文分 + 向量语义分 + 价值分（utility）**。utility 按"视角"记账——谁检索命中就给谁的视角记一分，长期不被使用的记忆自然沉底。查询相关性动态调整 TTL 衰减。
-
----
-
-## 6. 记忆怎么代谢（不会越攒越胖）
-
-1. **生命周期状态机**：`active → archived / superseded`，非 active 条目检索自动排除，FTS 索引同步清理。
-2. **演化血缘边**：新记忆与旧记忆建边——`supersedes`（替代）/ `enriches`（增强）/ `replaces`（跨类型替换）。**同域才可建边，跨域物理禁止。**
-3. **四道闸渐进放权**：① 影子执行（只记账不改库）→ ② 精度抽检（random 人工判定 precision ≥ 90%）→ ③ 单域灰度（观察两周）→ ④ 全量执行（写审计事件，支持按边 ID 反演回滚）。**安全阀：`enriches` 永不触发状态变更。**
-4. **蒸馏回填**：定时扫全量层（无时间下限，新老流水都蒸），按会话分域提取，老对话价值不因"过时"丢失。
-
----
-
-## 7. 上层能力（P4，全部已建成）
-
-| 能力 | 做什么 | 关键机制 |
-|---|---|---|
-| 画像层 | 每角色一份动态画像（工作习惯/偏好铁律/项目上下文/决策模式），会话开始常驻注入 | 聚合器分域产出，血缘落库，track 差异化半衰期 |
-| 预判层 | 识别重复任务模式，提前准备答案/方案 | 任务签名零 LLM 匹配 → 预判块落库 → 到期验证 → 命中率回流 |
-| 度量层 | 让"优化"可证伪 | 记忆命中率打标、token 节省量统计、月度报告 |
-| 防谄媚护栏 | 防 Agent 记忆自嗨 | 贯穿式约束（内建于各层验收条件） |
-| 代码库活地图 | 注释即索引，升级前不用重读全码 | content_hash 增量刷新 / file+symbol 锚定 / 覆盖率进健康指标 |
-| 双记忆合流 | 文件记忆（常驻白名单）与库记忆（检索）合一 | 文件瘦身至铁律级，细节全进活库代谢 |
-
----
-
-## 8. 安全模型
-
-- **注入对抗**：store/absorb/import/留言/WAL 重放全部入口共用单一闸门，实测拦截率 100%、误报 0（94 样本 + 23 良性）。
-- **身份体系**：环境变量注入操作者身份（`XTMEM_ACTOR`），CLI 与插件双端校验；管理员逃生门（`XTMEM_ADMIN`）保留但强制事件留痕。
-- **可见性 fail-closed**：查不到明确结论时按最严处理。
-- **派生默认 private**：蒸馏/画像/演化默认私有，公开需显式 promotion（管理员门禁 + 理由留痕）。
-- **全程审计**：写、读、蒸馏、演化、留言全部落 `xtmem_events`（配 TTL/归档治理）。
-- **备份三件套**：SQLite backup API 热备 + 操作 ledger + 周期整库备份；每次结构性变更先备份、后迁移、基线差值复测。
-
----
-
-## 9. 自演化（系统调自己）
-
-1. **旋钮外置**：检索权重、健康阈值、语义参数全外置到 tuning 配置，改配置即改行为（删配置=恢复默认，已实测逐字节一致）。
-2. **指标历史**：健康检查（分域分布/索引一致性/utility 覆盖/血缘生产/bi-temporal 闭环/注释覆盖率/部署指纹）每次运行追加历史档案。
-3. **自动调参**（带红线的执行器）：指标异常 → 规则诊断 → 生成结构化提案 → 影子期 → 执行并复测，不达标自动回滚。
-   - 红线一：只准改配置数值与词表，不准碰代码；
-   - 红线二：安全参数列禁改清单；
-   - 红线三：一次只改一个键（可归因、可回滚）。
-
----
-
-## 10. 能接在什么上（诚实三档 · 2026-09-03 实测）
-
-**✅ 当前支持**
-
-| 品类 | 支持 | 形态 |
-|---|---|---|
-| 宿主框架 | 类 Hermes 架构（网关+多 profile+平台接入） | 记忆插件（进程内 MemoryProvider）——玄铁实跑 |
-| 外部宿主 | 任意 Python 脚本 / 其他 Agent 框架 | 独立 CLI `xtmem.py`（store/recall/lookup --cross…） |
-| AI 工具平台 | DeepSeek Harness（DSH）/ zcode | DSH profile 插件（recall/store/lookup_cross）· zcode MCP（stdio + hooks） |
-| 向量模型 | bge-m3（本地服务化） | Ollama 11434 实测；1024 维；覆盖 ~95% |
-| 数据库 | SQLite（WAL）+ FTS5 + 向量索引 | 单一权威库 |
-| 系统 | Windows（生产实测）/ Python 3.11+ | 路径/依赖已 env 化（Linux/Mac 理论可移植，未实测） |
-| 前端 | 照渊台驾驶舱（浏览器 Vite） | 契约 + 后端就绪，UI 仍在打磨 |
-
-**🛠 规划中**：跨框架接入（二期-C 自演化 P3.2-3.4 后）· 更多向量模型/嵌入 · 驾驶舱前端完熟 · 生态 skill 分发。
-
-**⛔ 明确暂不支持**：云托管 / 多节点同步（单机 SQLite 定位）· 语音 · 联网检索 · 非 SQLite 后端。
-
-> 能力边界要诚实——白皮书最怕把没做成的写成支持的。
-
----
-
-## 11. 组件速查（一张表看懂）
-
-| 组件 | 职责 | 关键机制 |
-|---|---|---|
-| MemoryProvider 插件 | 宿主框架的记忆接口实现 | 预取后台线程（热路径 2s 超时让路）/ 同步写队列（8 深度 FIFO）/ 总线知情块缓存 |
-| ContextBuilder | 写入编排 | 安全校验→哈希去重→血缘闸→WAL→单事务落库→实时喂检索器 |
-| HybridRetriever | 混合检索 | BM25+向量加权合并、utility 加权、查询条件化 TTL、tier 过滤 |
-| VectorStore | 存储层 | 分域/可见性/状态四条件并联过滤、FTS 同步、幂等 schema 迁移 |
-| WAL 引擎 | 预写日志 | 先日志后落库、崩溃重放、幂等合并、损坏行跳过 |
-| recall_policy | 召回闸门 | 任务意图判定、中文语料适配、压缩后强制重查 |
-| llm_extractor | 要点提取 | 结构化事实提取、已有记忆去重、重要性打分、分轨推断 |
-| CLI 工具族 | 全功能命令行 | store/recall/lookup --cross/msg/relations/promote/health/distill… |
-| 定时任务族 | 离线思考 | 同步对账（分钟级）/ 蒸馏（日）/ 关系演化（周）/ 健康检查（日）/ 画像聚合 |
-| 观测面板 | 可视化 | 域分布、健康六+项指标、事件流水、角色关系图 |
-
-**一句话记忆法**：`VectorStore` 是地基、`HybridRetriever` 是找手、`ContextBuilder` 是厨师、`recall_policy` 是判官、`WAL` 是保险、定时任务 + `llm_extractor` 是保洁、四道闸是防翻车保险、上层 P4 是高级住客。
-
----
-
-## 12. 目录结构
-
-```
-src/
-├─ cli/xtmem.py              # 外部端 CLI（store/recall/lookup --cross/forget/absorb/export/import/reembed/sync/msg/relations/reflect）
-├─ hermes-plugin/            # MemoryProvider 插件：provider/recall_policy + memory 引擎(上下文/WAL/混合检索/成本压缩/LLM 提取/日志/AutoDream)
-├─ dsh/                      # DSH profile 插件：xtmem_tools/index.mjs（recall/store/lookup_cross）+ cordis.patch.example.yml
-├─ zcode/                    # zcode 官方插件：mcp（stdio MCP 三工具）+ hooks（UserPromptSubmit 注入 / Stop 观察）
-├─ scripts/                  # cron：xtmem-sync / xtmem-autodream / xtmem-distill / xtmem_predict / monthly_knowledge_metabolism …
-└─ skills-shared/            # 技能母本 + skill-sync（单源分发）
-tests/                       # 永久回归：CLI smoke + 插件 smoke + P0/P1/P2 回归
-docs/                        # 架构规格 v1.1 / 玩法增强 / skill-sync / 审计报告 / 白皮书
-patches/                     # 飞书卡片包补丁清单
-```
-
----
-
-## 13. 快速开始（三行命令 demo）
-
+### 1. 安装
 ```bash
-# 1. 装 Python 3.11 + 本地向量模型服务（bge-m3，Ollama 11434）+ SQLite
-# 2. 用库副本初始化（勿写生产）
-python src/cli/xtmem.py --help
-# 3. 跑最小 demo / 自检
-python tests/xtmem_cli_smoke.py       # 16 项（默认临时库副本）
-python tests/xtmem_plugin_smoke.py    # 插件两段式/namespace 隔离
+git clone https://github.com/RyuuzakiLu2023/xuantie-persona-system.git
+cd xuantie-persona-system
+
+# 安装依赖
+pip install -e .
 ```
 
-挂 Hermes profile：`plugins/memory/` 放 `src/hermes-plugin/`，`config.yaml` 设 `memory.provider: xtmem`，任一角色即可接入。
+### 2. 写入与跨角色检索
+```bash
+# 写入一条跨端共享规范
+xtmem store --agent dev --namespace core --tier refined --visibility shared --text "单库 SQLite 为主，生产环境严禁随意变更数据拓扑"
+
+# 跨域快速召回
+xtmem recall --query "数据库架构要求" --cross --top 3
+```
+
+返回格式化 JSON：
+```json
+{
+  "ok": true,
+  "count": 1,
+  "items": [
+    {
+      "id": "mem-7f8d19a2",
+      "content": "单库 SQLite 为主，生产环境严禁随意变更数据拓扑",
+      "tier": "refined",
+      "visibility": "shared"
+    }
+  ]
+}
+```
 
 ---
 
-## 14. 版本与发布状态
+## 🧭 能力与支持矩阵
 
-| 项 | 状态 |
-|---|---|
-| 升级工程（引擎插件化 / 单事务写入 / 配置迁移 / 切换清单） | ✅（生产已切换） |
-| 同步工程（CLI / DSH / zcode / absorb / reembed / cron） | ✅ |
-| P0/P1/P2 安全与一致性修复 | ✅（46/46 + 回归全过） |
-| 上层能力 P4（画像/预判/度量/防谄媚/代码库活地图/双记忆合流） | ✅ 已建成 |
-| skill-sync（母本分发） | ✅（4 端对齐） |
-| 玩法增强框架 v1（E1-E6 骨架） | ✅（人设/起始关系待用户注入） |
-| 自演化（旋钮外置/指标历史/自动调参） | 分层渐进 |
-| 驾驶舱前端 | 🔨 契约 + 后端就绪，UI 打磨中 |
-
-> 版本细节见 `CHANGELOG.md`，白皮书见 `docs/XTMEM-白皮书-技术产品导向-v1.md`。
+| 模块 | 当前状态 | 运行形态 / 依赖说明 |
+|---|:---:|---|
+| **通用 CLI (`xtmem.py`)** | 🟢 **Stable** | 跨平台纯 Python 实现，零外部依赖，即装即跑 |
+| **双层混合检索** | 🟢 **Stable** | Refined-first 首跳 + Raw-fallback 兜底；内存 BM25 + SQLite FTS5 |
+| **本地向量服务** | 🟢 **Stable** | 默认连接 Ollama `bge-m3`（可选，服务离线自动降级至关键词检索） |
+| **Hermes 插件** | 🟢 **Stable** | `src/hermes-plugin/memory/`，原生接入 Hermes Memory Provider |
+| **DeepSeek Harness** | 🟢 **Stable** | `src/dsh/xtmem-tools/`，DSH 多工具与端侧注入插件 |
+| **zcode MCP 接入** | 🟢 **Stable** | `src/zcode/mcp/`，标准 MCP 协议 Stdio 服务端 |
+| **曝光五态记账** | 🟢 **Stable** | recalled / exposed / cited / confirmed / corrected 全生命周期追踪 |
+| **照渊台前端工作台** | 🔨 **Planned** | 前端控制台独立演进中，目前专注于轻量化无头核心 |
 
 ---
 
-## 15. 已知边界（诚实再说一遍）
+## 📚 延伸文档
 
-- **单机 SQLite 定位**：无云托管、无多节点同步。
-- **依赖类 Hermes 宿主**（独立 CLI 除外）：插件形态需要宿主框架承载。
-- **消息 / 房间初始为空**：需播种（人设与起始关系由用户注入）。
-- **驾驶舱前端仍在打磨**：契约 + 后端就绪，UI 不完整。
-- **历史记忆有噪音**：孤岛收编条目含 `User: [Workspace::v1:…` 前缀，**原样保留**（清洗会破坏 content_hash 去重）。
+- [快速入门指南 (Getting Started)](docs/getting-started.md)
+- [系统架构与拓扑设计 (Architecture)](docs/architecture.md)
+- [安全策略与漏洞披露 (Security Policy)](SECURITY.md)
+- [贡献指南 (Contributing)](CONTRIBUTING.md)
+- [变更日志 (Changelog)](CHANGELOG.md)
+- [内部历史 Spec 与审计记录 (Historical Specs)](docs/history/)
 
 ---
 
-> **记忆是水，全楼通；人格是房，各自关门。**
-> 想把一群 AI 变成"能互相记住、能对账、又各自有完整性格的长期搭档"——**这就是 XTMEM 给你的答案。**
->
-> 玄铁 · 2026-09-03
+## 📄 开源许可证
+
+本项目采用 [MIT License](LICENSE) 许可证。

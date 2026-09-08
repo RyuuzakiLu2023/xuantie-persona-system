@@ -3,12 +3,12 @@
 
 把 XTMEM 真库（chunks/messages/rooms/widgets/entities/tag_edges/relations/…）组装成
 照渊台前端契约定死的八端点形状。契约唯一出处：
-    E:\\xtmem-cockpit\\src\\api\\contract.ts + endpoints.ts（字段级）
+    <COCKPIT_ROOT>\\src\\api\\contract.ts + endpoints.ts（字段级）
 mock（src/mock/engine.ts）是行为基准；fixtures/*.json 是返回样本。
 本模块是纯函数层：入参 sqlite3.Connection（读或写）+ 探活 dict → 出参契约形状 dict，
 api_server 只做薄路由。改字段名/形状前必须对照 endpoints.ts，禁止自造形状。
 
-设计裁定（Q1-Q6 后端拍板）见 E:\\2222\\3333\\new\\XTMEM-驾驶舱-照渊台契约缝合-设计-v1.md。
+设计裁定（Q1-Q6 后端拍板）见 <XT_ROOT>\\new\\XTMEM-驾驶舱-照渊台契约缝合-设计-v1.md。
 """
 from __future__ import annotations
 

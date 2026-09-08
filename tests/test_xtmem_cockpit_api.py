@@ -2,7 +2,7 @@
 """P5.1-2b 契约缝合守卫测试（2026-09-02，小D）。
 
 TestClient 直打 api_server 八路由，断言返回形状与照渊台契约一致
-（E:\\xtmem-cockpit\\src\\api\\endpoints.ts 是字段级唯一出处；mock 是行为基准）。
+（<COCKPIT_ROOT>\\src\\api\\endpoints.ts 是字段级唯一出处；mock 是行为基准）。
 
 覆盖：state 聚合形状 / rooms+topics 聚合 / context 不过滤 kind / msg send 契约字段
 （private → content=null+redacted；system→notice 落库）/ ack 双义（差帖回执 + widget 拍板）/

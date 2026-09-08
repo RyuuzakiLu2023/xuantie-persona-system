@@ -4,7 +4,7 @@
 
 # 共享物理库（默认：<XT_ROOT>\mimox-data\.hermes\memory\vector_store.db —— 龙崎拍板基准）
 # 测试期可用 XTMEM_DB_PATH 环境变量覆盖，优先级高于本文件。
-db_path: "E:\\2222\\3333\\mimox-data\\.hermes\\memory\\vector_store.db"
+db_path: "<XT_ROOT>\\mimox-data\\.hermes\\memory\\vector_store.db"
 
 # namespace 自动分域：优先用 initialize 的 agent_identity，此处仅作显式覆盖
 # namespace: "xuantie_lark"

@@ -20,9 +20,9 @@
 |---|---|
 | OS | Windows（Git Bash），AMD RX6750GRE（仅 Vulkan） |
 | 共享记忆库 | `<XT_ROOT>\mimox-data\.hermes\memory\vector_store.db`（SQLite，450 条，WAL，FTS5+bge-m3@Ollama:11434；memory_advanced 已启用） |
-| 记忆孤岛 | `E:\hermes-webui (2)\.hermes\memory\vector_store.db`（**1503 条**，止于 2026-07-29，7 月底前历史——待 absorb 收编） |
+| 记忆孤岛 | `<ARCHIVE>\hermes-webui\.hermes\memory\vector_store.db`（**1503 条**，止于 2026-07-29，7 月底前历史——待 absorb 收编） |
 | 在用 hermes 源码 | `<XT_ROOT>\hermes-agent-main-v2\hermes-agent-main`（0.19.0 + 自建 memory/ 包 + ~2300 行官方文件改动，**无 git**） |
-| 原版 0.19 / 新源码 | `E:\git项目源码\hermes-agent-main0.19`（diff 基准）/ `E:\git项目源码\hermes-agent-mainv0.21`（**实际 0.20.5**，升级目标） |
+| 原版 0.19 / 新源码 | `<ARCHIVE>\hermes-agent-main0.19`（diff 基准）/ `<ARCHIVE>\hermes-agent-mainv0.21`（**实际 0.20.5**，升级目标） |
 | mimox 启动器 | `<XT_ROOT>\mimox\mimox.py`（设 HERMES_HOME=mimox-data；⚠️ 其内硬编码 v1 老路径待盘点） |
 | 玄铁人格母本 | `<XT_ROOT>\mimox-data\profiles\xuantie_lark\SOUL.md`（玄铁亲笔维护，自动快照 20 份） |
 | 好感度 | `mimox-data\affection\affection.yaml`（79.5 分，已两端共享）+ `quotes.yaml`（8 阶段台词）+ `memory_bridge.py`/`affection_bridge.py` |
@@ -149,8 +149,8 @@ context_compressor(494)/memory_tool(441)/system_prompt(113) 合并时：① 从 
 
 ### ⭐ 工作流总则（D12，龙崎拍板 2026-08-25：开发-测试-手动切换三段式）
 
-1. **所有改动只在 `E:\git项目源码\hermes-agent-mainv0.21`（新源码）上进行**——它是开发环境；生产目录 `<XT_ROOT>\hermes-agent-main-v2\hermes-agent-main` 在切换前**一律不动**（玄铁现链路持续在跑）。
-2. **每步改动配测试，测试文件永久留存**（`E:\git项目源码\hermes-agent-mainv0.21\tests\` 下命名 `xtmem_*.py`，参照既有 test_p1_features.py 惯例）——它们是后续升级 0.21 的回归资产。
+1. **所有改动只在 `<ARCHIVE>\hermes-agent-mainv0.21`（新源码）上进行**——它是开发环境；生产目录 `<XT_ROOT>\hermes-agent-main-v2\hermes-agent-main` 在切换前**一律不动**（玄铁现链路持续在跑）。
+2. **每步改动配测试，测试文件永久留存**（`<ARCHIVE>\hermes-agent-mainv0.21\tests\` 下命名 `xtmem_*.py`，参照既有 test_p1_features.py 惯例）——它们是后续升级 0.21 的回归资产。
 3. **全部改动验收通过后，由龙崎亲自执行源码替换**（新源码目录 → 原目录位置；AI 不擅自切换）。替换前 AI 须先出一份"切换清单"（替换步骤 + 回滚方法 + 路径硬编码改点核对），龙崎点头才算。
 4. **测试期数据保护**：涉及写库的测试一律用 `vector_store.db` 的**副本**（拷到临时路径，引擎 db_path 指副本）；纯读测试可用真库。生产库在切换完成前不接任何新写入。
 5. 测试跑新源码的方式：临时启动器（仿 mimox.py，HERMES_HOME 指向独立测试数据目录或 mimox-data 只读场景），实施时定，原则=不污染生产。
@@ -231,6 +231,7 @@ context_compressor(494)/memory_tool(441)/system_prompt(113) 合并时：① 从 
 
 > 依据：《XTMEM审计报告-问题与修复建议-20260828.md》《XTMEM-P0修复验证报告-20260831.md》。
 > 全部修改已通过回归（verify_p0 46/46、P0 回归 29 项、P1 回归 15 项、P2 回归 10 项、CLI/插件/zcode smoke）。
+> ⚠️ 以上为历史验收快照（2026-08-25）。此后测试统计以 pytest/CI 实际输出为准，禁止手写静态宣称（P1-I/R-13）。
 
 ### 10.1 P0（2026-08-28，均验收通过）
 

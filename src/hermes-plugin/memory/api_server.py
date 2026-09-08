@@ -264,7 +264,7 @@ def create_app(context_builder=None, vector_store=None, host: str = "127.0.0.1")
         return {"ok": True, "chunk_id": chunk_id, "updated": body}
 
     # ── P5.1-2 驾驶舱后端（2026-09-02，P5.1-2b 契约缝合版）────────────────
-    # 八端点按照渊台契约为准组装（形状唯一出处 E:\\xtmem-cockpit\\src\\api\\contract.ts +
+    # 八端点按照渊台契约为准组装（形状唯一出处 <COCKPIT_ROOT>\\src\\api\\contract.ts +
     # endpoints.ts；组装纯函数在 memory/cockpit_contract.py，mock 是行为基准）。
     # 写侧 msg/schedule/widget 走 CLI 单入口或本表专属直写（widgets 非消息域）；
     # 读侧 _ro_conn（mode=ro）；鉴权继承 XTMEM_REST_TOKEN + 非 loopback 无 token 拒启动。

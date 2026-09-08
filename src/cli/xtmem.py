@@ -14,7 +14,7 @@
     python xtmem.py migrate --namespace xuantie_lark
     python xtmem.py store --agent dsh --project X --text "..." --importance .8
     python xtmem.py recall --cross --query "部署偏好" --top 6
-    python xtmem.py absorb --db "E:/hermes-webui (2)/.hermes/memory/vector_store.db" --namespace hermes-webui
+    python xtmem.py absorb --db "<ARCHIVE>/hermes-webui/.hermes/memory/vector_store.db" --namespace hermes-webui
 """
 
 from __future__ import annotations
@@ -42,15 +42,36 @@ except Exception:
 # 引擎与库路径
 # ---------------------------------------------------------------------------
 HERE = Path(__file__).resolve().parent
-DEFAULT_ENGINE = os.path.join(HERE, "..", "plugins", "xtmem", "memory")
-ENGINE_ROOT = os.environ.get("XTMEM_HERMES_ROOT", DEFAULT_ENGINE)
+# P1-H / R-12：引擎解析候选——
+#   1) XTMEM_HERMES_ROOT 环境变量
+#   2) 镜像布局 <repo>/src/hermes-plugin/memory（从 src/cli/xtmem.py 出发 = ../hermes-plugin/memory）
+#   3) 运行时布局 <HERMES_HOME>/plugins/xtmem/memory（从 <HERMES_HOME>/xtmem/xtmem.py 出发 = ../plugins/xtmem/memory）
+# 全找不到 → 打印明确指引并退出（不再抛 No module named 'memory'）
+_engine_candidates = []
+_env_root = os.environ.get("XTMEM_HERMES_ROOT", "").strip()
+if _env_root:
+    _engine_candidates.append(_env_root)
+_engine_candidates.append(str(Path(HERE) / ".." / "hermes-plugin" / "memory"))
+_engine_candidates.append(str(Path(HERE) / ".." / "plugins" / "xtmem" / "memory"))
+DEFAULT_ENGINE = next((c for c in _engine_candidates if Path(c).exists()), "")
+if not DEFAULT_ENGINE:
+    _msg = (
+        "xtmem: 找不到 memory 引擎目录。已尝试:\n  "
+        + "\n  ".join(_engine_candidates)
+        + "\n请设 XTMEM_HERMES_ROOT 指向 src/hermes-plugin/memory（镜像）"
+          "或 plugins/xtmem/memory（运行时），或从仓库正确位置运行。"
+    )
+    if __name__ == "__main__":
+        print(_msg, file=sys.stderr)
+        sys.exit(2)
+    raise RuntimeError(_msg)
+ENGINE_ROOT = DEFAULT_ENGINE
 # 若指向插件内 memory/（名字=memory），父目录才是 import memory 的搜索根
 _PARENT = str(Path(ENGINE_ROOT).resolve().parent)
 if Path(ENGINE_ROOT).name == "memory":
     sys.path.insert(0, _PARENT)
 else:
     sys.path.insert(0, ENGINE_ROOT)
-
 DEFAULT_CLI = os.path.abspath(__file__)
 DEFAULT_DB = os.environ.get(
     "XTMEM_DB_PATH",
