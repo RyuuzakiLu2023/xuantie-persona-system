@@ -1,0 +1,41 @@
+name: Public installation and core regression
+
+on:
+  push:
+    branches: [master, main, 'sync/**']
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  public-package:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.10', '3.11']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Build wheel
+        run: |
+          python -m pip install --upgrade build
+          python -m build --wheel
+      - name: Install wheel into separate environment
+        shell: bash
+        run: |
+          python -m venv "$RUNNER_TEMP/xtmem-installed"
+          if [ "$RUNNER_OS" = Windows ]; then
+            PY="$RUNNER_TEMP/xtmem-installed/Scripts/python.exe"
+          else
+            PY="$RUNNER_TEMP/xtmem-installed/bin/python"
+          fi
+          "$PY" -m pip install dist/*.whl pytest pytest-asyncio
+          "$PY" -m xtmem --help
+          "$PY" -m pytest tests/test_public_install.py tests/test_public_clients.py tests/test_public_distillation.py tests/core -q --basetemp "$RUNNER_TEMP/xtmem-pytest"
+      - name: Public path scan
+        run: python scripts/scan_drive_letters.py
+
+# 历史tests仍保留；不能把依赖私人部署的失败冒称跳过。
+# 此工作流明确验证公开安装与迁移后的合成核心集，不宣称整个历史目录全绿。

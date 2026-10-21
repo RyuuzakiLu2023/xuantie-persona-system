@@ -1,0 +1,434 @@
+{
+  "version": "1.1.0.dev0",
+  "published": false,
+  "description": "Complete general-purpose source synchronization; private deployment excluded. Final verification is recorded separately.",
+  "adaptations": [
+    "portable user paths and package discovery",
+    "environment-supplied peer/model/actor configuration",
+    "no private bridge, credentials, host data or cron",
+    "host adapters share installed CLI",
+    "distillation dependencies included; experimental wiki guarded"
+  ],
+  "files": [
+    {
+      "path": "src/cli/xtmem.py",
+      "sha256": "18d0ba89ff06e285dd7eef4db24ccd9ad8c9d0dfda9113ea9f0574aadeac4881",
+      "source_relative": "xtmem\\xtmem.py",
+      "source_sha256": "9c1d5a05e0ecccc60ba31d9097e98c9997066b135a20e9ba73d7db5ac5b418d3"
+    },
+    {
+      "path": "src/hermes-plugin/__init__.py",
+      "sha256": "1cd4f6310dfe04a53082bf87c0ee510ba1ef732e89026a4ccd3f43c588fd86a2"
+    },
+    {
+      "path": "src/hermes-plugin/memory/__init__.py",
+      "sha256": "a73e19f1a829e0eb2687525082d8ce8f0da948ad95f4c40fcf816ac69b4fca32",
+      "source_relative": "plugins\\xtmem\\memory\\__init__.py",
+      "source_sha256": "0ce466e6bbc1222b175aad0a6e6f76d7eddaa003bd2ef6aad6bbc04464289ab7"
+    },
+    {
+      "path": "src/hermes-plugin/memory/a2a_client.py",
+      "sha256": "dcc712d0a6b902e7c48af199fd3a6c498bdb31e45866f1ced1f41bae6b5fc27a",
+      "source_relative": "plugins\\xtmem\\memory\\a2a_client.py",
+      "source_sha256": "387a5f04e2171d79d3be23d18a9d699fa93c20c069ae518876252585dd19cfeb"
+    },
+    {
+      "path": "src/hermes-plugin/memory/api_server.py",
+      "sha256": "71005d059756a9f176430c7743aeec33e65630d73b9b137b2698fd3456831df8",
+      "source_relative": "plugins\\xtmem\\memory\\api_server.py",
+      "source_sha256": "2b44a1ee05d49041e64e5ccd45df00996dab3ffb33a450fad566131b823f58b6"
+    },
+    {
+      "path": "src/hermes-plugin/memory/bundle_selector.py",
+      "sha256": "9b9be10ed569a5a39e82cdc930bb2274e62e2560e8c4600c9628db2ae0f609eb",
+      "source_relative": "plugins\\xtmem\\memory\\bundle_selector.py",
+      "source_sha256": "5c78a04bbf7859799a5a7ed53994b14c99f941705c34fd92d6730fa544b0d21b"
+    },
+    {
+      "path": "src/hermes-plugin/memory/chat_scheduler.py",
+      "sha256": "9b41692c7bb4a696057d0e21b211778f53fd11eb7f4d08f6f49fd257eca93f2a",
+      "source_relative": "plugins\\xtmem\\memory\\chat_scheduler.py",
+      "source_sha256": "47c9c3ed7f13c4142e3ff98b2885af050e607d21715a6605925352760d327ecd"
+    },
+    {
+      "path": "src/hermes-plugin/memory/cockpit_contract.py",
+      "sha256": "9708a3386ecb9f6fe05f897411c3c37f36c9f157b1587ae4c37e0cc3c8db89a6",
+      "source_relative": "plugins\\xtmem\\memory\\cockpit_contract.py",
+      "source_sha256": "af483e86bb520c29a82773244e770960882dc6b234d296b8220951cccca3f152"
+    },
+    {
+      "path": "src/hermes-plugin/memory/conflict.py",
+      "sha256": "9230c29edfc8fbd7a35b8fd6dccd00c62efe61b5303ebcf05f28754ccbd4fc5a",
+      "source_relative": "plugins\\xtmem\\memory\\conflict.py",
+      "source_sha256": "486dacfa666fdaa3968bea9c5eb63933866d70fab9bd4d35370dccfcf85b0d03"
+    },
+    {
+      "path": "src/hermes-plugin/memory/context_builder.py",
+      "sha256": "0851102a7743f5395aa9a172be2c52eb8ad24410da707ec88df32b120f489087",
+      "source_relative": "plugins\\xtmem\\memory\\context_builder.py",
+      "source_sha256": "e846b12ce4cda1d38afe5272764e3f4d8186e44d63ecdbf3815fd4ad9700d991"
+    },
+    {
+      "path": "src/hermes-plugin/memory/conversation_adapter_bridge.py",
+      "sha256": "a8d7bb90bd546998e3ca6204db5e8c75f4b4988afeb1326e22ac2ab3cc0a691c",
+      "source_relative": "plugins\\xtmem\\memory\\conversation_adapter_bridge.py",
+      "source_sha256": "a8d7bb90bd546998e3ca6204db5e8c75f4b4988afeb1326e22ac2ab3cc0a691c"
+    },
+    {
+      "path": "src/hermes-plugin/memory/conversation_bootstrap.py",
+      "sha256": "ca2afc0f834b08f931e680018eee123cdb62a95cc6734894cd1670687eaf4354",
+      "source_relative": "plugins\\xtmem\\memory\\conversation_bootstrap.py",
+      "source_sha256": "ca2afc0f834b08f931e680018eee123cdb62a95cc6734894cd1670687eaf4354"
+    },
+    {
+      "path": "src/hermes-plugin/memory/conversation_capture.py",
+      "sha256": "9997e8e3b9a936e6f2bbdbe237f20fbece62360c874ca3ed8a75356d12ad0bfc",
+      "source_relative": "plugins\\xtmem\\memory\\conversation_capture.py",
+      "source_sha256": "9997e8e3b9a936e6f2bbdbe237f20fbece62360c874ca3ed8a75356d12ad0bfc"
+    },
+    {
+      "path": "src/hermes-plugin/memory/conversation_schema.py",
+      "sha256": "5e446511be03006a19472e7a34db480a26766e5670658d3552840ee9d25605c0",
+      "source_relative": "plugins\\xtmem\\memory\\conversation_schema.py",
+      "source_sha256": "5e446511be03006a19472e7a34db480a26766e5670658d3552840ee9d25605c0"
+    },
+    {
+      "path": "src/hermes-plugin/memory/conversation_source.py",
+      "sha256": "5ebbd9dea5cc98e0506611d21f8169e31a10bf74e2f80683c03d8d22e3fca1c0",
+      "source_relative": "plugins\\xtmem\\memory\\conversation_source.py",
+      "source_sha256": "5ebbd9dea5cc98e0506611d21f8169e31a10bf74e2f80683c03d8d22e3fca1c0"
+    },
+    {
+      "path": "src/hermes-plugin/memory/cost_compressor.py",
+      "sha256": "916c3f3abf90956afec7421ca9c99422535d6f0cbb1253b9cce4fad50b2f6053",
+      "source_relative": "plugins\\xtmem\\memory\\cost_compressor.py",
+      "source_sha256": "f3720e72525861c944886e0c4b4e87b0f272c0f1449b40b23516c5e624f2de79"
+    },
+    {
+      "path": "src/hermes-plugin/memory/daily_log.py",
+      "sha256": "0b051579d7b59337042bfce8080e10143f396c03489e6f0fc81a4683a078fe4a",
+      "source_relative": "plugins\\xtmem\\memory\\daily_log.py",
+      "source_sha256": "0b051579d7b59337042bfce8080e10143f396c03489e6f0fc81a4683a078fe4a"
+    },
+    {
+      "path": "src/hermes-plugin/memory/daily_log_heartbeat.py",
+      "sha256": "a9d3aa8d81819c3133fd3a4a98327cab20e8f2a18e7e078098e74de418a1b342",
+      "source_relative": "plugins\\xtmem\\memory\\daily_log_heartbeat.py",
+      "source_sha256": "a9d3aa8d81819c3133fd3a4a98327cab20e8f2a18e7e078098e74de418a1b342"
+    },
+    {
+      "path": "src/hermes-plugin/memory/dashboard.html",
+      "sha256": "310a6d548710fb4584124325cb94f6d4d2b3970ae385bc485b2696b694452321"
+    },
+    {
+      "path": "src/hermes-plugin/memory/delivery_jobs.py",
+      "sha256": "dec6c5833dc36a17845b2380b7b4b4e3c392f7d8bee17626cc7218e220027ae1",
+      "source_relative": "plugins\\xtmem\\memory\\delivery_jobs.py",
+      "source_sha256": "dec6c5833dc36a17845b2380b7b4b4e3c392f7d8bee17626cc7218e220027ae1"
+    },
+    {
+      "path": "src/hermes-plugin/memory/diagnostics.py",
+      "sha256": "ab236a08d53c2c8bb7576d6964b559e8ce1a9967d5777c84e812d4b7927fb364",
+      "source_relative": "plugins\\xtmem\\memory\\diagnostics.py",
+      "source_sha256": "0f73e9612b74cf40151a5124310ab4d43a1b9f72192819b88ae58069b80f5589"
+    },
+    {
+      "path": "src/hermes-plugin/memory/doctor.py",
+      "sha256": "9d1e10ffd0a129a4dcdb0a88f4b8405ff03e09252a4bc10aef0771ce7c84bf49",
+      "source_relative": "plugins\\xtmem\\memory\\doctor.py",
+      "source_sha256": "9d1e10ffd0a129a4dcdb0a88f4b8405ff03e09252a4bc10aef0771ce7c84bf49"
+    },
+    {
+      "path": "src/hermes-plugin/memory/embedding_provider.py",
+      "sha256": "80197394d7a7e6bacf0bca741113757b58bba8de9a2f7d0f968cb6eadaf5e225",
+      "source_relative": "plugins\\xtmem\\memory\\embedding_provider.py",
+      "source_sha256": "e9ed5328da458a7c79c6980bab2983d7f09a90565ba6267065aa2eb2fd845cb8"
+    },
+    {
+      "path": "src/hermes-plugin/memory/endpoint_config.py",
+      "sha256": "fdede18b851cf904b140333cef136c693726994c958f634b113db47244ac0a3c",
+      "source_relative": "plugins\\xtmem\\memory\\endpoint_config.py",
+      "source_sha256": "60882c910581fbb97590454d0a796db75344f4f43f138be8f9f534cf6cefe797"
+    },
+    {
+      "path": "src/hermes-plugin/memory/evidence_admission.py",
+      "sha256": "5ebdda19e38e6caed950d155aa7b2ee816e2ed86317581561b446d2252f2c03e",
+      "source_relative": "plugins\\xtmem\\memory\\evidence_admission.py",
+      "source_sha256": "5ebdda19e38e6caed950d155aa7b2ee816e2ed86317581561b446d2252f2c03e"
+    },
+    {
+      "path": "src/hermes-plugin/memory/graph.py",
+      "sha256": "f8d353d3a14052045df82ce7df2651ecfeee12b3907617041c63c27a8bcfbf0c",
+      "source_relative": "plugins\\xtmem\\memory\\graph.py",
+      "source_sha256": "fcba777b022d38e4d5ab87922ae639e845f1efb064dc3024d547723ed90c66a1"
+    },
+    {
+      "path": "src/hermes-plugin/memory/hybrid_retriever.py",
+      "sha256": "adb6aa069428de1e48279bc78662f4d7476443b537e3cee4d232ce15008cd46c",
+      "source_relative": "plugins\\xtmem\\memory\\hybrid_retriever.py",
+      "source_sha256": "c56abafa6ac37503fa177afdd9770be4ef3b4dd0e0c07a4bf0ee239adda35dbd"
+    },
+    {
+      "path": "src/hermes-plugin/memory/inbox.py",
+      "sha256": "a079368609e495c6dd07f8a6cae4853ccb3fff7945b7841d10ccaa17bbbf5770",
+      "source_relative": "plugins\\xtmem\\memory\\inbox.py",
+      "source_sha256": "a079368609e495c6dd07f8a6cae4853ccb3fff7945b7841d10ccaa17bbbf5770"
+    },
+    {
+      "path": "src/hermes-plugin/memory/llm_extractor.py",
+      "sha256": "0450e5fffe35c8ec7853fd751bf39b231a0c9845a85084b15367a98f7180de9c",
+      "source_relative": "plugins\\xtmem\\memory\\llm_extractor.py",
+      "source_sha256": "0450e5fffe35c8ec7853fd751bf39b231a0c9845a85084b15367a98f7180de9c"
+    },
+    {
+      "path": "src/hermes-plugin/memory/ner_tagger.py",
+      "sha256": "90052a0b01f265727e026ac0510573895d774aa5402ff56941cd7870d55f5b63",
+      "source_relative": "plugins\\xtmem\\memory\\ner_tagger.py",
+      "source_sha256": "3b837e928e6dc8e39705b1840d4d9accab5eba1ef655c5ff982bdf9a7a8c06a7"
+    },
+    {
+      "path": "src/hermes-plugin/memory/noise_filter.py",
+      "sha256": "63b6ad7e1cf7787d26c1fc218925ef3a0c9503c97658fd760452dfc672f95495",
+      "source_relative": "plugins\\xtmem\\memory\\noise_filter.py",
+      "source_sha256": "92619ba2671bb2d4958e809f9a8a557e7b1a07a7e40cbfe2f2144bbb9c5d8acf"
+    },
+    {
+      "path": "src/hermes-plugin/memory/open_db.py",
+      "sha256": "dbae892848c6b9b4d6c3ccad560044814b0bbd69a7d02108bef74236ac95ef37",
+      "source_relative": "plugins\\xtmem\\memory\\open_db.py",
+      "source_sha256": "3ef3fb746a1990452537fd28f915d16d5f066d63f2a9414f59f20defcf97eeef"
+    },
+    {
+      "path": "src/hermes-plugin/memory/probe.py",
+      "sha256": "c86d9e04ed916d328105063c3b3e68a08a5de1f0269e0b0e0babc64aa6c827f0",
+      "source_relative": "plugins\\xtmem\\memory\\probe.py",
+      "source_sha256": "c86d9e04ed916d328105063c3b3e68a08a5de1f0269e0b0e0babc64aa6c827f0"
+    },
+    {
+      "path": "src/hermes-plugin/memory/public_runtime.py",
+      "sha256": "d66a39a81006965deef90ea42a11f87b86c1d343c089053e2b9f65a03673d40a"
+    },
+    {
+      "path": "src/hermes-plugin/memory/schema.py",
+      "sha256": "2ba3041e75b3833ce6708f308c5d799ac990277feb0bc0076d3603763e5db210",
+      "source_relative": "plugins\\xtmem\\memory\\schema.py",
+      "source_sha256": "0e8d65cb7edc88d743fd12d2c51ef8fae36267934096e6ea92e8d4e850c66540"
+    },
+    {
+      "path": "src/hermes-plugin/memory/serve_protocol.py",
+      "sha256": "2a8e581962c5d37b3e7eb51ab8e199ebb1de7c02a8eac8b951b3f9a12d5390f4",
+      "source_relative": "plugins\\xtmem\\memory\\serve_protocol.py",
+      "source_sha256": "929ac399f38cc696b8e52a7814e9d108e6ebaae69b9dae5ad9d6951859725194"
+    },
+    {
+      "path": "src/hermes-plugin/memory/source_resolver.py",
+      "sha256": "3871b0cf8f8712a2ee8fc98dd639a7bdff9d8de94a0a08649449e2245fce4140",
+      "source_relative": "plugins\\xtmem\\memory\\source_resolver.py",
+      "source_sha256": "780c63721d8277c772f09c1a11ff1659afa43d6a611649674beea5672a7732dc"
+    },
+    {
+      "path": "src/hermes-plugin/memory/static/dashboard.html",
+      "sha256": "65eb1ee6d967f5239739906c0c5347a47a1594f6c7d1a607d2432145a50a47ba"
+    },
+    {
+      "path": "src/hermes-plugin/memory/text_sanitize.py",
+      "sha256": "9e5731ab6d94abecba8a44b66548359629559cff896fd4566d16ef0c34d613a5",
+      "source_relative": "plugins\\xtmem\\memory\\text_sanitize.py",
+      "source_sha256": "6ca169ba3a03ce12a88698d3db50b4280042b3f19798c7045db72bb2521cb888"
+    },
+    {
+      "path": "src/hermes-plugin/memory/trace.py",
+      "sha256": "d91647c874d85bae54f0ec6a40d80d5ddd96a6ed0690b84eca8082ecac48f704",
+      "source_relative": "plugins\\xtmem\\memory\\trace.py",
+      "source_sha256": "215dd1a0c25d40c6f57cd588a69f443c2b63395d6be79e615edfadf355aab268"
+    },
+    {
+      "path": "src/hermes-plugin/memory/tuning.py",
+      "sha256": "680a21f1caf7d7d1fa04b8f7428d40377b918fc0be1a0ca2e1e96954da4d6fc7",
+      "source_relative": "plugins\\xtmem\\memory\\tuning.py",
+      "source_sha256": "1d5d77a10976c5cd2ef0f9128b358a90c4d67c0947277462e5ef63434be5fa55"
+    },
+    {
+      "path": "src/hermes-plugin/memory/utils.py",
+      "sha256": "739af59e0500d6ce600200cb4392d865ae377a08a1bc4e3f80edb9ce6a2cd8e1",
+      "source_relative": "plugins\\xtmem\\memory\\utils.py",
+      "source_sha256": "739af59e0500d6ce600200cb4392d865ae377a08a1bc4e3f80edb9ce6a2cd8e1"
+    },
+    {
+      "path": "src/hermes-plugin/memory/vector_store.py",
+      "sha256": "3eb2dad2a6451abfac47638f47132674f3ac197bc3b7300c7e6edb14c4d67b6e",
+      "source_relative": "plugins\\xtmem\\memory\\vector_store.py",
+      "source_sha256": "e67df1bcce9c2c64f049380a1e9af70345761ec20714a01d149907b07ba4911e"
+    },
+    {
+      "path": "src/hermes-plugin/memory/visibility.py",
+      "sha256": "7ceefaace575be5650b3ba77edc65706db1d9c06b94307fba7b375d975f20667",
+      "source_relative": "plugins\\xtmem\\memory\\visibility.py",
+      "source_sha256": "111368d4b625e86cef501fadc0476a79eea5f2f25ab100284543cf433d168dcb"
+    },
+    {
+      "path": "src/hermes-plugin/memory/wal_engine.py",
+      "sha256": "fbc18d637ad8fdfcab5cde56cb970a6aa1be389f2a0c8b1026c0256c8725fe18",
+      "source_relative": "plugins\\xtmem\\memory\\wal_engine.py",
+      "source_sha256": "fbc18d637ad8fdfcab5cde56cb970a6aa1be389f2a0c8b1026c0256c8725fe18"
+    },
+    {
+      "path": "src/hermes-plugin/plugin.yaml",
+      "sha256": "96df0511ff7b189efce08c2677f441e18b1dc3b56eebcb4034948ffdfc65eb4e"
+    },
+    {
+      "path": "src/hermes-plugin/provider.py",
+      "sha256": "1421b11743c929ccd4f84e4db70548b8e8e1ac1d0485a147863239a6d8a19a9b",
+      "source_relative": "plugins\\xtmem\\provider.py",
+      "source_sha256": "6750ff961817829a249f38dd56cff04ea1379e558eae49ae999e518cda0ba820"
+    },
+    {
+      "path": "src/hermes-plugin/recall_policy.py",
+      "sha256": "16648b7012378a9bf66f4182c10b8ee6378110cbde87bd0810908fb1bb7119f1"
+    },
+    {
+      "path": "src/hermes-plugin/recall_tools.py",
+      "sha256": "b7891c7db78cf16aff4ab7ffb086f7ce620e61e719dd00f8cbc8fc80f93c931d"
+    },
+    {
+      "path": "src/hermes-plugin/xtmem.yaml.example",
+      "sha256": "122f5e84eb24b0a0375b905fd8fe84db8d43a401e95652cd0a4175dab3e5b0aa"
+    },
+    {
+      "path": "src/scripts/__init__.py",
+      "sha256": "fa65e7f8c396d39c28f69a7b380f1eb0fa597f4071c717471527c6accd9bd8f6"
+    },
+    {
+      "path": "src/scripts/monthly_knowledge_metabolism.py",
+      "sha256": "9e5761327331fe55186dc769274fda0d23c3c5b49f6bd7230e28d516e8b997f7"
+    },
+    {
+      "path": "src/scripts/prompts/distill_v2_generic.md",
+      "sha256": "39b2681d3d39d3945b6a3007d7634a051ee71374edc9aa3b11c482dc71a59d0c"
+    },
+    {
+      "path": "src/scripts/xtmem_autodream.py",
+      "sha256": "844a6751e8b4feb0eaf9c2b6fa2beaf4e909408611b136196b6cdf6124110f8d"
+    },
+    {
+      "path": "src/scripts/xtmem_common.py",
+      "sha256": "f188ea8e6ff3c7d69405d339a55fe2ae00b61e02add55dfd0d8f0e7442a378a8"
+    },
+    {
+      "path": "src/scripts/xtmem_d1_version_flip.py",
+      "sha256": "9af3d433fda7c63a2466213d544f2767987ff0e0dc5b28d58ef8575fdd56426e"
+    },
+    {
+      "path": "src/scripts/xtmem_distill.py",
+      "sha256": "d09af9877f3913fb575a9fc6476b7bae39608bceee313622e5e37d3df686fcae"
+    },
+    {
+      "path": "src/scripts/xtmem_distill_commit.py",
+      "sha256": "fd59b1a270245f453e6142737868412aed28754ea925fd0e458af2df3c534556"
+    },
+    {
+      "path": "src/scripts/xtmem_distill_job.py",
+      "sha256": "3a2f48523217ff847af83c77a7ed998e88e531ea54a602492e04f8e9e80c38cd"
+    },
+    {
+      "path": "src/scripts/xtmem_distill_llm.py",
+      "sha256": "ffa98697ae5f1dbe83e0c1864e17332a7cb13595eb0dbd579adbbf145d174d83"
+    },
+    {
+      "path": "src/scripts/xtmem_distill_units.py",
+      "sha256": "055d03414f08f31b0db0ba613d56760b69b0d1918f93aed5c72581596c291fbc"
+    },
+    {
+      "path": "src/scripts/xtmem_events_purge.py",
+      "sha256": "095210e3bd713d719d99964ffa38c488682c1013e43188602f800fcb3003c2ba"
+    },
+    {
+      "path": "src/scripts/xtmem_health.py",
+      "sha256": "caf32cfd5a8919db8d4382ef04d8186c4fff672bf46bef312001efe4adf86bb6"
+    },
+    {
+      "path": "src/scripts/xtmem_lineage_resolve.py",
+      "sha256": "5ca4622092400d03de558489925a9f5ebf42d89b3f32d70c08565747c431bc51"
+    },
+    {
+      "path": "src/scripts/xtmem_lineage_stale_report.py",
+      "sha256": "4fe77990d43e6bad451d6eb01c283b430a9427df36bb87223916a53664aa4df9"
+    },
+    {
+      "path": "src/scripts/xtmem_migrate_d1.py",
+      "sha256": "7c5c75d9a1ad0705a3fec0aa9dd18f44560fdb95468ad11132b4cae6669f1277"
+    },
+    {
+      "path": "src/scripts/xtmem_predict.py",
+      "sha256": "4bc7ec5ad6e8c58a9435ce9a7d89f79dacf7d85a4d392122e478a2173c35e758"
+    },
+    {
+      "path": "src/scripts/xtmem_profile.py",
+      "sha256": "08106ad9c1a49e996caddbae97644bf78e7446af14ba36b7d75dbb34cf12b931"
+    },
+    {
+      "path": "src/scripts/xtmem_prune_wiki_raw_cards.py",
+      "sha256": "449a5994d4806de2ca58ec378c167894fd5fe9e83f2035318b5ed62cca5f33bc"
+    },
+    {
+      "path": "src/scripts/xtmem_reflect.py",
+      "sha256": "133910baba562e2058eb547852aba68c3253d05fb362a3cb745e7d7659cae698"
+    },
+    {
+      "path": "src/scripts/xtmem_relations_evolve.py",
+      "sha256": "a18604c821b3837df06e604f8f701c51cdee7d7a82e467955a2e6e7d86dd2dbf"
+    },
+    {
+      "path": "src/scripts/xtmem_sources.py",
+      "sha256": "69d0b4366bfed50c990ec1a888d4f454278ba3c514828bd828753df1996f9122"
+    },
+    {
+      "path": "src/scripts/xtmem_sync.py",
+      "sha256": "f32fb368dcc9b36ad85c27aeaa92a486bf6ef62f7653c84e58f5a21ec64d4d53"
+    },
+    {
+      "path": "src/scripts/xtmem_timeline.py",
+      "sha256": "0429a739d8c674ed87cede69e3621755adb70ca2ff0df235446f3feb5c6e4ad2"
+    },
+    {
+      "path": "src/scripts/xtmem_wiki.py",
+      "sha256": "5747996702bcd8823763bbcb3e725ab71e94f2b4de464ec62fadf853ffd7855c"
+    },
+    {
+      "path": "src/zcode/.mcp.json",
+      "sha256": "95eb22c477de205dfb0a1098085c259bf9ed611d48120d8edebda58f0f856c65"
+    },
+    {
+      "path": "src/zcode/.zcode-plugin/plugin.json",
+      "sha256": "41dd7aa9ac8e5ae94bda51435d309c3a972c70442e310338d62cf9c45e05da4c"
+    },
+    {
+      "path": "src/zcode/hooks/hooks.json",
+      "sha256": "5040427c200d8328fa761176c644f127942a775dc84de9b26a62454161688f82"
+    },
+    {
+      "path": "src/zcode/hooks/xtmem_hook.py",
+      "sha256": "29a65c39f9654ae225ff0e47943434937b2430ec88dd673ca2c29ecaac6e4f79"
+    },
+    {
+      "path": "src/zcode/marketplace.json",
+      "sha256": "7b2af09e0a0a6b8c3467418c487060911fc38b5d2f2d614a2a8f991e5099f0f7"
+    },
+    {
+      "path": "src/zcode/mcp/xtmem_mcp.py",
+      "sha256": "f5247c7c5f5de5cb6d0590d542204d1c079e1a393fdbef5168229119b2bd53d0"
+    },
+    {
+      "path": "src/zcode/README.md",
+      "sha256": "996f82e2090a76470601703e652a2194792e3302ab6d0db87cac4704c5b87208"
+    },
+    {
+      "path": "src/dsh/xtmem-tools/index.mjs",
+      "sha256": "9669f78620bca2dacf41fcd8654b7a4fd797085273370ed01b3d3267d00e7ec4"
+    },
+    {
+      "path": "src/dsh/xtmem-tools/memory-now.mjs",
+      "sha256": "4d077a294fba948626a6e45c059183485e10dc64bb22c9d83979274265873ee1"
+    }
+  ]
+}

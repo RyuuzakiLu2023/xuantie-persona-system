@@ -1,0 +1,55 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": ".",
+        "hooks": [
+          {
+            "type": "process",
+            "command": "python",
+            "args": [
+              "${ZCODE_PLUGIN_ROOT}/hooks/xtmem_hook.py",
+              "UserPromptSubmit"
+            ],
+            "timeoutMs": 60000,
+            "statusMessage": "XTMEM memory recall"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": ".",
+        "hooks": [
+          {
+            "type": "process",
+            "command": "python",
+            "args": [
+              "${ZCODE_PLUGIN_ROOT}/hooks/xtmem_hook.py",
+              "SessionStart"
+            ],
+            "timeoutMs": 30000,
+            "statusMessage": "XTMEM resume anchor"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": ".",
+        "hooks": [
+          {
+            "type": "process",
+            "command": "python",
+            "args": [
+              "${ZCODE_PLUGIN_ROOT}/hooks/xtmem_hook.py",
+              "Stop"
+            ],
+            "timeoutMs": 60000,
+            "statusMessage": "XTMEM observation write"
+          }
+        ]
+      }
+    ]
+  }
+}

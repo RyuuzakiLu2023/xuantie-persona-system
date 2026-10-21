@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIMOX 记忆系统监控</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ============ 主题变量 ============ */
+:root {
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --green: #34d399;
+  --amber: #fbbf24;
+  --red: #f87171;
+  --pink: #f472b6;
+  --indigo: #818cf8;
+  --cyan: #22d3ee;
+  --slate: #94a3b8;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-gradient:
+    radial-gradient(1100px 750px at 12% -10%, rgba(129, 140, 248, 0.22), transparent 60%),
+    radial-gradient(950px 700px at 92% -5%, rgba(34, 211, 238, 0.14), transparent 55%),
+    radial-gradient(900px 850px at 50% 115%, rgba(244, 114, 182, 0.12), transparent 60%),
+    linear-gradient(160deg, #0a0f1e 0%, #10172b 100%);
+  --card-bg: rgba(255, 255, 255, 0.055);
+  --card-bg-strong: rgba(255, 255, 255, 0.09);
+  --card-border: rgba(255, 255, 255, 0.11);
+  --card-shadow: 0 6px 20px rgba(2, 6, 23, 0.4);
+  --card-fallback: #151c33;
+  --text: #edf0f8;
+  --text-dim: rgba(237, 240, 248, 0.55);
+  --text-faint: rgba(237, 240, 248, 0.35);
+  --divider: rgba(255, 255, 255, 0.08);
+  --track: rgba(255, 255, 255, 0.09);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg-gradient:
+    radial-gradient(1100px 750px at 12% -10%, rgba(129, 140, 248, 0.30), transparent 60%),
+    radial-gradient(950px 700px at 92% -5%, rgba(34, 211, 238, 0.24), transparent 55%),
+    radial-gradient(900px 850px at 50% 115%, rgba(244, 114, 182, 0.22), transparent 60%),
+    linear-gradient(160deg, #e3ebfa 0%, #eae5f8 55%, #dfeafa 100%);
+  --card-bg: rgba(255, 255, 255, 0.55);
+  --card-bg-strong: rgba(255, 255, 255, 0.72);
+  --card-border: rgba(255, 255, 255, 0.75);
+  --card-shadow: 0 6px 20px rgba(90, 100, 160, 0.12);
+  --card-fallback: #f4f6fd;
+  --text: #1e293b;
+  --text-dim: rgba(30, 41, 59, 0.58);
+  --text-faint: rgba(30, 41, 59, 0.38);
+  --divider: rgba(30, 41, 59, 0.09);
+  --track: rgba(30, 41, 59, 0.08);
+}
+
+/* ============ 性能优化：固定背景层 ============ */
+/* 用 body::before 代替 background-attachment: fixed，避免滚动时全屏重绘 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: var(--bg-gradient);
+}
+
+html, body { min-height: 100vh; }
+body {
+  font-family: var(--font);
+  color: var(--text);
+  padding-bottom: 30px;
+}
+
+/* ============ 玻璃拟态卡片（性能优化版） ============ */
+.glass {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  box-shadow: var(--card-shadow);
+  /* blur 从 18px 降到 10px，去掉 saturate（额外滤镜通道） */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  /* 只 transition transform，不 transition background/box-shadow（昂贵） */
+  transition: transform 0.25s ease, border-color 0.3s ease;
+  /* 限制重绘范围 */
+  contain: layout style;
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass { background: var(--card-fallback); }
+}
+
+/* 入场动画 */
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.rise { animation: rise 0.55s cubic-bezier(0.22, 0.9, 0.3, 1) both; }
+.d1 { animation-delay: 0.05s; } .d2 { animation-delay: 0.12s; }
+.d3 { animation-delay: 0.19s; } .d4 { animation-delay: 0.26s; }
+.d5 { animation-delay: 0.33s; } .d6 { animation-delay: 0.40s; }
+
+/* ============ 顶栏 ============ */
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+  margin: 22px 26px 0; padding: 15px 22px;
+}
+.brand { display: flex; align-items: center; gap: 13px; }
+.status-dot { width: 11px; height: 11px; border-radius: 50%; position: relative; flex-shrink: 0; transition: background 0.3s; }
+.status-dot.green { background: var(--green); color: var(--green); }
+.status-dot.yellow { background: var(--amber); color: var(--amber); }
+.status-dot.red { background: var(--red); color: var(--red); }
+.status-dot::after {
+  content: ''; position: absolute; inset: -4px; border-radius: 50%;
+  border: 2px solid currentColor;
+  animation: ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes ping { 0% { transform: scale(0.6); opacity: 0.7; } 80%, 100% { transform: scale(1.7); opacity: 0; } }
+.brand h1 { font-size: 17px; font-weight: 600; letter-spacing: 0.3px; }
+.brand .sub { font-size: 12px; color: var(--text-faint); margin-top: 2px; display: flex; align-items: center; gap: 8px; }
+.header-right { display: flex; align-items: center; gap: 14px; }
+.timestamp { font-size: 12.5px; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+.timestamp.stale { color: var(--red); }
+
+/* LIVE 徽标 */
+.live-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 2px 8px; border-radius: 99px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  background: rgba(52, 211, 153, 0.12); color: var(--green);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+.live-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green);
+  animation: live-pulse 1.6s ease-in-out infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4); }
+  50% { opacity: 0.5; box-shadow: 0 0 0 5px rgba(52, 211, 153, 0); }
+}
+
+/* 刷新倒计时条 */
+.refresh-bar {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 2px; z-index: 100; overflow: hidden;
+  background: transparent;
+}
+.refresh-bar::after {
+  content: ''; display: block; height: 100%; width: 100%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--cyan), var(--indigo), transparent);
+  animation: refresh-countdown 15s linear infinite;
+}
+@keyframes refresh-countdown {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.theme-toggle {
+  width: 38px; height: 38px; border-radius: 12px; cursor: pointer;
+  display: grid; place-items: center;
+  background: var(--card-bg-strong);
+  border: 1px solid var(--card-border);
+  color: var(--text-dim);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+.theme-toggle:hover { color: var(--text); transform: translateY(-1px); }
+.theme-toggle svg { width: 18px; height: 18px; grid-area: 1 / 1; transition: transform 0.45s cubic-bezier(0.22, 0.9, 0.3, 1), opacity 0.3s ease; }
+[data-theme="dark"] .icon-sun { transform: rotate(90deg) scale(0.4); opacity: 0; }
+[data-theme="light"] .icon-moon { transform: rotate(-90deg) scale(0.4); opacity: 0; }
+
+/* ============ 告警条 ============ */
+.alert-bar {
+  margin: 18px 26px 0; padding: 12px 20px;
+  font-size: 13.5px; display: none; align-items: center; gap: 10px;
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.alert-bar svg { width: 16px; height: 16px; flex-shrink: 0; }
+.alert-bar.red { display: flex; background: rgba(248, 113, 113, 0.12); border: 1px solid rgba(248, 113, 113, 0.35); color: var(--red); }
+.alert-bar.yellow { display: flex; background: rgba(251, 191, 36, 0.10); border: 1px solid rgba(251, 191, 36, 0.35); color: var(--amber); }
+
+/* ============ KPI 指标卡 ============ */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin: 18px 26px 0; }
+.kpi { padding: 18px 20px; min-width: 0; position: relative; overflow: hidden; }
+.kpi:hover { transform: translateY(-3px); }
+
+/* 数据刷新扫光效果 */
+.kpi::after {
+  content: ''; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.06), transparent);
+  pointer-events: none;
+}
+.kpi.flash::after {
+  animation: sweep 0.8s ease-out;
+}
+@keyframes sweep {
+  0% { left: -60%; }
+  100% { left: 120%; }
+}
+
+.kpi .top { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.kpi .icon { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; flex-shrink: 0; }
+.kpi .icon svg { width: 17px; height: 17px; }
+.icon.indigo { background: rgba(129, 140, 248, 0.15); color: var(--indigo); }
+.icon.cyan { background: rgba(34, 211, 238, 0.13); color: var(--cyan); }
+.icon.pink { background: rgba(244, 114, 182, 0.14); color: var(--pink); }
+.icon.green { background: rgba(52, 211, 153, 0.14); color: var(--green); }
+.kpi .name { font-size: 12.5px; color: var(--text-dim); letter-spacing: 0.5px; }
+.kpi .value { font-size: 30px; font-weight: 700; letter-spacing: 0.5px; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi .foot { font-size: 12px; color: var(--text-faint); margin-top: 6px; font-variant-numeric: tabular-nums; }
+
+/* 数字刷新动效 */
+@keyframes tick { 0% { opacity: 0.3; transform: translateY(4px); } 100% { opacity: 1; transform: translateY(0); } }
+.tick { animation: tick 0.45s ease; }
+
+/* ============ 面板与图表 ============ */
+.main-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 18px; margin: 18px 26px 0; }
+.bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 18px 26px 0; }
+.panel { padding: 20px 22px; min-width: 0; }
+.panel h3 {
+  font-size: 12.5px; font-weight: 600; color: var(--text-dim);
+  letter-spacing: 1.5px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 9px;
+}
+.panel h3::before { content: ''; width: 8px; height: 8px; border-radius: 3px; background: var(--indigo); flex-shrink: 0; }
+.panel h3.cyan::before { background: var(--cyan); }
+.panel h3.pink::before { background: var(--pink); }
+.chart-box { height: 300px; margin-top: 6px; overflow: hidden; }
+
+/* ============ 统计行 ============ */
+.stats-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10.5px 0; border-bottom: 1px solid var(--divider);
+  font-size: 13.5px;
+}
+.stats-row:last-child { border-bottom: none; }
+.stats-row .k { color: var(--text-dim); }
+.stats-row .val { font-weight: 600; font-variant-numeric: tabular-nums; }
+.stats-row .val.green { color: var(--green); }
+.stats-row .val.red { color: var(--red); }
+
+.badge { padding: 3px 11px; border-radius: 99px; font-size: 12px; font-weight: 600; }
+.badge.ok { background: rgba(52, 211, 153, 0.14); color: var(--green); }
+.badge.err { background: rgba(248, 113, 113, 0.14); color: var(--red); }
+
+/* 进度条 */
+.progress { height: 8px; border-radius: 99px; background: var(--track); overflow: hidden; margin-top: 10px; }
+.progress-fill {
+  height: 100%; border-radius: 99px; width: 0;
+  background: linear-gradient(90deg, var(--cyan), var(--indigo));
+  transition: width 0.8s cubic-bezier(0.22, 0.9, 0.3, 1);
+}
+.progress-fill.danger { background: linear-gradient(90deg, var(--amber), var(--red)); }
+.ratio-head { display: flex; justify-content: space-between; align-items: baseline; margin-top: 14px; }
+.ratio-head .k { font-size: 13px; color: var(--text-dim); }
+.ratio-head .v { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* ============ 响应式 ============ */
+@media (max-width: 1100px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .main-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .kpi-grid, .bottom-grid { grid-template-columns: 1fr; }
+  .header, .alert-bar, .kpi-grid, .main-grid, .bottom-grid { margin-left: 14px; margin-right: 14px; }
+  .header { margin-top: 14px; }
+}
+
+/* 尊重 reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .rise, .tick, .status-dot::after, .live-badge::before, .refresh-bar::after { animation: none !important; }
+  .glass, .kpi, .theme-toggle, .progress-fill { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- 刷新倒计时条 -->
+<div class="refresh-bar" id="refreshBar"></div>
+
+<!-- 顶栏 -->
+<div class="header glass rise">
+  <div class="brand">
+    <span class="status-dot green" id="statusDot"></span>
+    <div>
+      <h1>MIMOX 记忆系统监控</h1>
+      <div class="sub">
+        <span id="statusText">系统正常</span>
+        <span class="live-badge">LIVE</span>
+      </div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="timestamp" id="lastUpdate">最近更新: --</span>
+    <button class="theme-toggle" id="themeToggle" title="切换明暗主题" aria-label="切换明暗主题">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- 告警条 -->
+<div class="alert-bar" id="alertBar">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+  <span id="alertText"></span>
+</div>
+
+<!-- KPI 指标卡 -->
+<div class="kpi-grid">
+  <div class="kpi glass rise d1" id="card-prefetch">
+    <div class="top">
+      <span class="icon indigo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></span>
+      <span class="name">Prefetch 调用</span>
+    </div>
+    <div class="value" id="prefetchCount">--</div>
+    <div class="foot">累计预取请求次数</div>
+  </div>
+  <div class="kpi glass rise d2" id="card-store">
+    <div class="top">
+      <span class="icon cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg></span>
+      <span class="name">Store 写入</span>
+    </div>
+    <div class="value" id="storeCount">--</div>
+    <div class="foot">累计记忆写入次数</div>
+  </div>
+  <div class="kpi glass rise d3" id="card-chunk">
+    <div class="top">
+      <span class="icon pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg></span>
+      <span class="name">Chunk 总数</span>
+    </div>
+    <div class="value" id="chunkCount">--</div>
+    <div class="foot">当前记忆块数量</div>
+  </div>
+  <div class="kpi glass rise d4" id="card-probe">
+    <div class="top">
+      <span class="icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-6 4 12 2.5-6h5"/></svg></span>
+      <span class="name">探针成功率</span>
+    </div>
+    <div class="value" id="probeRate">--</div>
+    <div class="foot" id="probeFoot">OK -- · FAIL --</div>
+  </div>
+</div>
+
+<!-- 图表区 -->
+<div class="main-grid">
+  <div class="panel glass rise d5">
+    <h3 class="pink">分轨分布</h3>
+    <div id="trackChart" class="chart-box"></div>
+  </div>
+  <div class="panel glass rise d6">
+    <h3 class="cyan">24h 趋势</h3>
+    <div id="trendChart" class="chart-box"></div>
+  </div>
+</div>
+
+<!-- 明细区 -->
+<div class="bottom-grid">
+  <div class="panel glass rise d6">
+    <h3>健康明细</h3>
+    <div class="stats-row"><span class="k">探针 OK</span><span class="val green" id="probeOk">--</span></div>
+    <div class="stats-row"><span class="k">探针 FAIL</span><span class="val red" id="probeFail">--</span></div>
+    <div class="stats-row"><span class="k">分轨状态</span><span class="badge ok" id="trackBadge">正常</span></div>
+    <div class="stats-row"><span class="k">API 连接</span><span class="badge ok" id="apiBadge">已连接</span></div>
+  </div>
+  <div class="panel glass rise d6">
+    <h3>记忆演化</h3>
+    <div class="stats-row"><span class="k">演化关系总数</span><span class="val" id="evoTotal">--</span></div>
+    <div class="stats-row"><span class="k">Superseded 数量</span><span class="val" id="supersededCount">--</span></div>
+    <div class="ratio-head">
+      <span class="k">Superseded 比例（阈值 20%）</span>
+      <span class="v" id="supersededRatio">--</span>
+    </div>
+    <div class="progress"><div class="progress-fill" id="supersededBar"></div></div>
+  </div>
+</div>
+
+<script>
+const API_BASE = window.location.origin;
+const htmlEl = document.documentElement;
+const $ = id => document.getElementById(id);
+const pick = (...vals) => { const v = vals.find(v => v !== undefined && v !== null); return v === undefined ? '--' : v; };
+const POLL_INTERVAL = 15000;
+
+/* ============ 主题切换 ============ */
+function initTheme() {
+  const saved = localStorage.getItem('mimox-theme');
+  const preferred = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  htmlEl.dataset.theme = saved || preferred;
+}
+function applyTheme(theme) {
+  htmlEl.dataset.theme = theme;
+  localStorage.setItem('mimox-theme', theme);
+  renderCharts(true); // 强制重绘
+}
+initTheme();
+$('themeToggle').addEventListener('click', () => {
+  applyTheme(htmlEl.dataset.theme === 'dark' ? 'light' : 'dark');
+});
+
+/* ============ 图表 ============ */
+const CHART_COLORS = {
+  dark:  { axis: 'rgba(237,240,248,0.45)', split: 'rgba(255,255,255,0.07)', legend: 'rgba(237,240,248,0.60)', label: 'rgba(237,240,248,0.85)', tipBg: 'rgba(18,24,44,0.94)', tipBorder: 'rgba(255,255,255,0.14)', tipText: '#edf0f8' },
+  light: { axis: 'rgba(30,41,59,0.50)',    split: 'rgba(30,41,59,0.08)',    legend: 'rgba(30,41,59,0.62)',    label: 'rgba(30,41,59,0.80)',    tipBg: 'rgba(255,255,255,0.96)',    tipBorder: 'rgba(30,41,59,0.10)',     tipText: '#1e293b' }
+};
+
+let trackChart = echarts.init($('trackChart'), null, { renderer: 'canvas' });
+let trendChart = echarts.init($('trendChart'), null, { renderer: 'canvas' });
+let lastHealth = null, lastStats = null;
+let lastTrackSig = '', lastTrendSig = '';
+
+function tipStyle(c) {
+  return { backgroundColor: c.tipBg, borderColor: c.tipBorder, borderWidth: 1, textStyle: { color: c.tipText, fontSize: 12.5 }, padding: [8, 12] };
+}
+
+function renderCharts(force) {
+  if (!trackChart || !trendChart) return;
+  const c = CHART_COLORS[htmlEl.dataset.theme] || CHART_COLORS.dark;
+  renderTrack(c, force);
+  renderTrend(c, force);
+}
+
+function renderTrack(c, force) {
+  const dist = (lastHealth && lastHealth.track_distribution) || {};
+  const data = [
+    { name: 'identity',   value: dist.identity || 0,   itemStyle: { color: '#f472b6' } },
+    { name: 'preference', value: dist.preference || 0, itemStyle: { color: '#818cf8' } },
+    { name: 'emotion',    value: dist.emotion || 0,    itemStyle: { color: '#fbbf24' } },
+    { name: 'default',    value: dist.default || 0,    itemStyle: { color: '#94a3b8' } },
+  ].filter(d => d.value > 0);
+  const total = data.reduce((a, b) => a + b.value, 0);
+
+  // 数据指纹：数据没变就跳过 setOption
+  const sig = JSON.stringify(data) + '|' + htmlEl.dataset.theme;
+  if (!force && sig === lastTrackSig) return;
+  lastTrackSig = sig;
+
+  trackChart.setOption({
+    tooltip: Object.assign({ trigger: 'item', formatter: '{b}: {c} ({d}%)' }, tipStyle(c)),
+    legend: { bottom: 0, icon: 'circle', itemWidth: 8, itemHeight: 8, itemGap: 18, textStyle: { color: c.legend, fontSize: 12 } },
+    title: data.length ? {
+      text: String(total), subtext: '总 Chunks', left: 'center', top: '34%',
+      textStyle: { color: c.label, fontSize: 26, fontWeight: 700 },
+      subtextStyle: { color: c.axis, fontSize: 12 }, itemGap: 4
+    } : undefined,
+    series: [{
+      type: 'pie', radius: ['50%', '72%'], center: ['50%', '44%'],
+      itemStyle: { borderRadius: 8, borderColor: 'rgba(0,0,0,0)', borderWidth: 2, shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.2)' },
+      emptyCircleStyle: { color: c.split },
+      label: { show: false },
+      emphasis: { scale: true, scaleSize: 6, label: { show: true, color: c.label, fontSize: 13, fontWeight: 600, formatter: '{b}\n{c} ({d}%)' } },
+      data
+    }],
+    graphic: data.length ? [] : [{ type: 'text', left: 'center', top: 'middle', style: { text: '暂无数据', fill: c.axis, fontSize: 13 } }]
+  }, true);
+}
+
+function renderTrend(c, force) {
+  const timeline = (lastStats && lastStats.timeline) || [];
+  const times = timeline.map(t => t.ts ? new Date(t.ts).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }) : '');
+  const prefetchChars = timeline.map(t => t.prefetch_chars || 0);
+  const storeWrites = timeline.map(t => t.store_writes || 0);
+
+  // 数据指纹
+  const sig = JSON.stringify(times) + JSON.stringify(prefetchChars) + JSON.stringify(storeWrites) + '|' + htmlEl.dataset.theme;
+  if (!force && sig === lastTrendSig) return;
+  lastTrendSig = sig;
+
+  trendChart.setOption({
+    tooltip: Object.assign({ trigger: 'axis', axisPointer: { type: 'line', lineStyle: { color: c.axis, type: 'dashed' } } }, tipStyle(c)),
+    legend: { data: ['Prefetch 字符数', 'Store 写入'], top: 0, right: 0, icon: 'roundRect', itemWidth: 14, itemHeight: 4, textStyle: { color: c.legend, fontSize: 12 } },
+    grid: { left: 58, right: 58, bottom: 46, top: 40 },
+    xAxis: {
+      type: 'category', data: times, boundaryGap: false,
+      axisLabel: { color: c.axis, rotate: 45, fontSize: 11 },
+      axisLine: { lineStyle: { color: c.split } }, axisTick: { show: false }
+    },
+    yAxis: [
+      { type: 'value', axisLabel: { color: c.axis, fontSize: 11 }, splitLine: { lineStyle: { color: c.split } } },
+      { type: 'value', axisLabel: { color: c.axis, fontSize: 11 }, splitLine: { show: false } }
+    ],
+    series: [
+      {
+        name: 'Prefetch 字符数', type: 'line', data: prefetchChars, smooth: true, showSymbol: false,
+        lineStyle: { width: 2.5, color: '#22d3ee' }, itemStyle: { color: '#22d3ee' },
+        areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          { offset: 0, color: 'rgba(34, 211, 238, 0.28)' },
+          { offset: 1, color: 'rgba(34, 211, 238, 0)' }
+        ]) },
+        animationDuration: 600
+      },
+      {
+        name: 'Store 写入', type: 'bar', data: storeWrites, yAxisIndex: 1, barMaxWidth: 14,
+        itemStyle: { color: 'rgba(251, 191, 36, 0.85)', borderRadius: [4, 4, 0, 0] },
+        animationDuration: 500
+      }
+    ],
+    graphic: timeline.length ? [] : [{ type: 'text', left: 'center', top: 'middle', style: { text: '暂无数据', fill: c.axis, fontSize: 13 } }]
+  }, true);
+}
+
+/* ============ 告警 ============ */
+function checkAlerts(data) {
+  const alertBar = $('alertBar');
+  let alerts = [];
+
+  const trackDist = data.track_distribution || {};
+  const trackBroken = (trackDist.identity || 0) === 0 && (trackDist.preference || 0) === 0;
+  if (trackBroken) {
+    alerts.push({ level: 'red', text: '分轨未生效：identity 和 preference 都为 0' });
+  }
+  if ((data.superseded_ratio || 0) > 0.2) {
+    alerts.push({ level: 'yellow', text: '演化过激：superseded 比例超过 20%' });
+  }
+
+  if (alerts.some(a => a.level === 'red')) {
+    $('statusDot').className = 'status-dot red';
+    $('statusText').textContent = '系统异常';
+  } else if (alerts.some(a => a.level === 'yellow')) {
+    $('statusDot').className = 'status-dot yellow';
+    $('statusText').textContent = '需要注意';
+  } else {
+    $('statusDot').className = 'status-dot green';
+    $('statusText').textContent = '系统正常';
+  }
+
+  const trackBadge = $('trackBadge');
+  trackBadge.textContent = trackBroken ? '未生效' : '正常';
+  trackBadge.className = trackBroken ? 'badge err' : 'badge ok';
+
+  if (alerts.length > 0) {
+    alertBar.className = 'alert-bar ' + alerts[0].level;
+    $('alertText').textContent = alerts.map(a => a.text).join(' | ');
+  } else {
+    alertBar.className = 'alert-bar';
+  }
+}
+
+/* ============ 数据更新 ============ */
+function setNum(id, val) {
+  const el = $(id);
+  const text = String(val === undefined || val === null ? '--' : val);
+  if (el.textContent !== text) {
+    el.textContent = text;
+    el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick');
+    return true;
+  }
+  return false;
+}
+
+// KPI 卡片扫光效果
+function flashCard(cardId) {
+  const card = $(cardId);
+  if (!card) return;
+  card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
+}
+
+// 重置刷新倒计时条
+function resetRefreshBar() {
+  const bar = $('refreshBar');
+  bar.style.animation = 'none';
+  void bar.offsetWidth;
+  bar.style.animation = '';
+}
+
+async function updateHealth() {
+  try {
+    const [healthRes, statsRes] = await Promise.all([
+      fetch(API_BASE + '/api/memory/health').then(r => r.json()),
+      fetch(API_BASE + '/api/stats').then(r => r.json()),
+    ]);
+    lastHealth = healthRes; lastStats = statsRes;
+
+    // KPI 卡 — 记录哪些卡的数据变了
+    const changed = {};
+    changed.prefetch = setNum('prefetchCount', statsRes.prefetch_count_total || 0);
+    changed.store = setNum('storeCount', statsRes.store_count_total || 0);
+    changed.chunk = setNum('chunkCount', pick(statsRes.chunk_count_total, healthRes.chunk_count, healthRes.total_chunks, statsRes.chunk_count));
+
+    const ok = statsRes.probe_ok_count || 0;
+    const fail = statsRes.probe_fail_count || 0;
+    const probeTotal = ok + fail;
+    const rate = probeTotal ? ok / probeTotal : null;
+    changed.probe = setNum('probeRate', rate === null ? '--' : Math.round(rate * 100) + '%');
+    $('probeRate').style.color = rate === null ? '' : (rate >= 0.9 ? 'var(--green)' : rate >= 0.7 ? 'var(--amber)' : 'var(--red)');
+    $('probeFoot').textContent = `OK ${ok} · FAIL ${fail}`;
+
+    // 数据有变化时触发扫光
+    if (changed.prefetch) flashCard('card-prefetch');
+    if (changed.store) flashCard('card-store');
+    if (changed.chunk) flashCard('card-chunk');
+    if (changed.probe) flashCard('card-probe');
+
+    // 明细
+    setNum('probeOk', ok);
+    setNum('probeFail', fail);
+    setNum('supersededCount', healthRes.superseded_count || 0);
+    setNum('evoTotal', Object.values(healthRes.evolution || {}).reduce((a, b) => a + b, 0));
+
+    const ratio = healthRes.superseded_ratio || 0;
+    setNum('supersededRatio', (ratio * 100).toFixed(1) + '%');
+    $('supersededRatio').style.color = ratio > 0.2 ? 'var(--red)' : '';
+    $('supersededBar').style.width = Math.min(ratio * 100, 100) + '%';
+    $('supersededBar').classList.toggle('danger', ratio > 0.2);
+
+    // 图表与告警（内部有数据指纹去重）
+    renderCharts(false);
+    checkAlerts(healthRes);
+
+    // API 徽标与时间戳
+    $('apiBadge').textContent = '已连接';
+    $('apiBadge').className = 'badge ok';
+    $('lastUpdate').textContent = '最近更新: ' + new Date().toLocaleTimeString('zh-CN');
+    $('lastUpdate').className = 'timestamp';
+
+    // 重置倒计时条
+    resetRefreshBar();
+
+  } catch (e) {
+    $('statusDot').className = 'status-dot red';
+    $('statusText').textContent = '连接失败';
+    $('lastUpdate').textContent = '最近更新: 连接失败';
+    $('lastUpdate').className = 'timestamp stale';
+    $('apiBadge').textContent = '连接失败';
+    $('apiBadge').className = 'badge err';
+  }
+}
+
+/* ============ 响应式（防抖）与轮询 ============ */
+let resizeTimer = null;
+window.addEventListener('resize', () => {
+  if (resizeTimer) clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    trackChart.resize();
+    trendChart.resize();
+  }, 150);
+});
+
+// 页面可见性：切到后台时暂停轮询，切回来立即刷新
+let pollTimer = null;
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+  } else {
+    updateHealth();
+    if (!pollTimer) pollTimer = setInterval(updateHealth, POLL_INTERVAL);
+  }
+});
+
+renderCharts(true);
+updateHealth();
+pollTimer = setInterval(updateHealth, POLL_INTERVAL);
+</script>
+</body>
+</html>

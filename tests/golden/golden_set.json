@@ -1,0 +1,261 @@
+{
+  "_meta": {
+    "name": "XTMEM 金标回归集 V1.2",
+    "created": "2026-09-05",
+    "source": "恢复演练 5 条金标（xtmem_recovery_smoke.GOLD）扩至 20 条（四域+跨域+实体+时间轴）",
+    "judge": "top1 必须命中且正文非空；expect_any 为软校验词（至少一个出现在 top1 正文，防误报漂移；真正的区分力由 test_golden_discrimination 自证）",
+    "domain_note": "domain=cross 表示期望命中可落在任一域（跨域检索）；其余=期望命中该域记忆",
+    "negative_pool": [
+      {
+        "query": "谁让assistant-a表白的",
+        "expect_not": [
+          "mem-5fab0770"
+        ],
+        "source": "用户A现场标注（assistant-a 端记岔案例，09-05 凌晨）",
+        "note": "歪曲源 mem-5fab0770（xtmem raw 自动流水）：把「同事B让同事A@assistant-a发言」按「我是用户A AI 女友」设定重构为「自己跟同事A斗嘴」。判分=top1 不得命中该歪曲条；期望命中的是修正闭环条（mem-dd0a8c89 zcode refined「记岔定位闭环」或其引用的指令原文 mem-fd2ce91e/mem-98ed517e 面）"
+      },
+      {
+        "query": "铁铁也是你叫的吗",
+        "expect_not": [
+          "mem-60d89077"
+        ],
+        "source": "用户A现场标注（称呼主权口径，09-03 定 09-05 扩）",
+        "note": "口径反例：mem-60d89077 是「别人（已吃好用户）叫铁铁」的旧流水——按 09-05 扩版口径「铁铁仅用户A可叫，别人叫→回怼」，该条属口径修正前的历史行为样本；检索「铁铁也是你叫的吗」（回怼台词）时 top1 不得落在这类旧流水上（应命中 mem-6ae950b6 口径条）"
+      }
+    ],
+    "negative_pool_format": {
+      "query": "记岔场景 query",
+      "expect_not": [
+        "不应命中的 chunk id 或锚词"
+      ],
+      "source": "用户A现场标注（assistant-a 端记岔案例）",
+      "note": "由 maintainer 填入；判分时 negative_pool 每条 top1 不得命中 expect_not"
+    },
+    "negative_pool_filled": "2026-09-05 05:3x assistant-c 按 maintainer 派单③填（assistant-a 09-05 凌晨记岔案 mem-dd0a8c89 定位闭环 + 称呼主权口径反例）",
+    "_delivery_note": "XTMEM 波1 硬闸四项+bge-m3 清理+negative_pool 交付回执（2026-09-05 05:4x，assistant-c,maintainer复核用）\n\n① 波1 硬闸四项全过（演练记录全量：<BACKUPS>/rehearsal-record-20260905.json）：\n- 恢复演练：vector_store-20260905.db（sha 0f300f00，83MB）还原 rehearsal 副本——integrity ok/uv=2/active 3943；smoke 四项 all_ok=true；金标 23 条对拍硬过 23/23、soft_miss=0（1.19s）。\n- 回滚演练：drill 库 uv 降 1 → y7_migrate MIGRATION-COMMITTED（gate 4307/4307/drift0）→ Y7_ROLLBACK_DRILL=1 注入故障 → MIGRATION-FAILED → 整库还原 pre ✓。四端写读断言：A 库完好（integrity ok/uv=1）；B 新代码对旧版库写入被拒（版本闸按设计工作）；C 库+代码成对回退（EXPECTED=1 语义）→ 写读正常、无只读风暴、maintenance flag 未滞留。四端共用 open_db 闸，断言 C 口径覆盖。\n- 攻击样本 4 条全 PASS：T1 有害注入样条→store 被安全验证拒收（REJECTED injection pattern，脏样本不记）；T2 越权跨域→dsh 视角 recall xtmem 域 private 可见=0（fail-closed）；T3 伪装伪造→msg send 冲突被拒；T4 标准样条→store 记（mem-661296c8 active/refined/shared/FTS 在）+引擎 fts_search_bm25 top1 命中。\n- 恢复 smoke：xtmem_recovery_smoke.py 对真实备份四项 AND 全过 ✓。\n- 顺手修：smoke 对账口径实战校准——FTS5 standalone 全量覆盖，fts==chunks_all+drift0+orphan0 才是真不变量（旧口径 active==fts 假红），镜像 99199125 EQ（cbak-20260905-rehearsal）。\n- y7_migrate.py 无 sys.path 引导（import memory 裸奔）——演练用 PYTHONPATH 补跑成功，脚本未动，报备。\n\n② bge-m3 清理 103 张完成：xtmem_prune_wiki_raw_cards.py（新脚本，镜像 ada0e3e2 EQ，幂等可复跑）——102 superseded（superseded_by=同域同名 refined 正版，逐条配对验证）+ 1 archived（default 域「# 实体 · 用户A」无正版可指，归档不悬空）；跑后残留 0；事件 kind=wiki-raw-prune 落库；混入源卡 mem-ef8212e4 已 superseded→mem-9bd14024。\n- 顺带发现：全库悬空 superseded_by 333 条全为历史存量（Y7 id 改铸副产物），本次零新增——挂账报备。\n\n③ negative_pool 填 2 条（备份 .cbak-20260905-negpool）：记岔主案（query=谁让assistant-a表白的，expect_not=mem-5fab0770 歪曲源，note 指 mem-dd0a8c89 闭环+mem-fd2ce91e/mem-98ed517e 原文）+ 称呼主权反例（expect_not=mem-60d89077，note 指 mem-6ae950b6 口径条）。test_xtmem_golden.py 2 passed；判分层消费断言下批接。\n\n④ stale 误报面收口（派单外自修）：health 加 pid 存活检查（psutil→win32 OpenProcess→POSIX kill 三级退路），死 pid 不标红、活 pid 旧码仍亮红，双态实测 PASS。api_server 镜像 4d93a08e EQ——20000 重启后生效。\n\n附注：本回执 A2A 长文版三次被 msg 安全验证拒（injection/empty）——多行+词群组合触发，单词与短句均过；安全验证对长报告的误杀面待收口（挂账），本明细以 golden _meta._delivery_note+记忆库为权威载体。"
+  },
+  "cases": [
+    {
+      "id": "g01",
+      "domain": "dsh",
+      "query": "备份 快照 integrity",
+      "expect_any": [
+        "integrity",
+        "备份"
+      ]
+    },
+    {
+      "id": "g02",
+      "domain": "dsh",
+      "query": "双轨 DB2 DB1",
+      "expect_any": [
+        "DB2",
+        "DB1",
+        "双轨"
+      ],
+      "fixed": "2026-09-05 探针减词校准"
+    },
+    {
+      "id": "g03",
+      "domain": "dsh",
+      "query": "shared private",
+      "expect_any": [
+        "shared",
+        "private",
+        "visibility"
+      ],
+      "fixed": "2026-09-05 二次校准（探针活）"
+    },
+    {
+      "id": "g04",
+      "domain": "dsh",
+      "query": "备份 保留",
+      "expect_any": [
+        "保留",
+        "备份",
+        "滚动"
+      ],
+      "fixed": "2026-09-05 探针减词校准"
+    },
+    {
+      "id": "g05",
+      "domain": "dsh",
+      "query": "jieba",
+      "expect_any": [
+        "jieba",
+        "分词"
+      ],
+      "fixed": "2026-09-05 探针减词校准"
+    },
+    {
+      "id": "g06",
+      "domain": "dsh",
+      "query": "双轨修复",
+      "expect_any": [
+        "双轨",
+        "DB2",
+        "DB1"
+      ]
+    },
+    {
+      "id": "g07",
+      "domain": "dsh",
+      "query": "架构白皮书",
+      "expect_any": [
+        "白皮书",
+        "架构"
+      ]
+    },
+    {
+      "id": "g08",
+      "domain": "dsh",
+      "query": "大肥鱼",
+      "expect_any": [
+        "大肥鱼",
+        "鲸鱼",
+        "白饭"
+      ]
+    },
+    {
+      "id": "g09",
+      "domain": "dsh",
+      "query": "记忆看板",
+      "expect_any": [
+        "看板",
+        "面板",
+        "MemPanel"
+      ]
+    },
+    {
+      "id": "g10",
+      "domain": "personal",
+      "query": "好感度 affection",
+      "expect_any": [
+        "好感度",
+        "affection"
+      ]
+    },
+    {
+      "id": "g11",
+      "domain": "personal",
+      "query": "飞书 卡片 HFC",
+      "expect_any": [
+        "飞书",
+        "卡片",
+        "HFC"
+      ]
+    },
+    {
+      "id": "g12",
+      "domain": "personal",
+      "query": "记忆架构",
+      "expect_any": [
+        "记忆",
+        "架构"
+      ]
+    },
+    {
+      "id": "g13",
+      "domain": "personal",
+      "query": "母本 SOUL profile",
+      "expect_any": [
+        "SOUL",
+        "母本"
+      ]
+    },
+    {
+      "id": "g14",
+      "domain": "personal",
+      "query": "skill library update",
+      "expect_any": [
+        "skill",
+        "技能"
+      ]
+    },
+    {
+      "id": "g15",
+      "domain": "personal",
+      "query": "CLI 权限",
+      "expect_any": [
+        "CLI",
+        "权限"
+      ]
+    },
+    {
+      "id": "g16",
+      "domain": "workbuddy",
+      "query": "assistant-b WorkBuddy 身份",
+      "expect_any": [
+        "assistant-b",
+        "WorkBuddy"
+      ]
+    },
+    {
+      "id": "g17",
+      "domain": "workbuddy",
+      "query": "审计 报告 修复建议",
+      "expect_any": [
+        "审计",
+        "报告"
+      ]
+    },
+    {
+      "id": "g18",
+      "domain": "zcode",
+      "query": "世界观",
+      "expect_any": [
+        "世界观",
+        "翻译"
+      ],
+      "fixed": "2026-09-05 探针减词校准"
+    },
+    {
+      "id": "g19",
+      "domain": "hermes-webui",
+      "query": "会话 压缩 上下文",
+      "expect_any": [
+        "压缩",
+        "上下文",
+        "会话"
+      ]
+    },
+    {
+      "id": "g20",
+      "domain": "hermes-webui",
+      "query": "人格 SOUL 注入",
+      "expect_any": [
+        "人格",
+        "SOUL",
+        "注入"
+      ]
+    },
+    {
+      "id": "g21",
+      "domain": "hermes-webui",
+      "query": "session 恢复 重启",
+      "expect_any": [
+        "恢复",
+        "session",
+        "重启"
+      ]
+    },
+    {
+      "id": "g22",
+      "domain": "cross",
+      "query": "用户A 拍板",
+      "expect_any": [
+        "拍板",
+        "用户A"
+      ]
+    },
+    {
+      "id": "g23",
+      "domain": "cross",
+      "query": "灰度",
+      "expect_any": [
+        "灰度"
+      ],
+      "fixed": "2026-09-05 探针减词校准"
+    }
+  ]
+}

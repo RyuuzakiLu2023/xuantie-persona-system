@@ -1,0 +1,13 @@
+name: xtmem
+version: "0.2.0"
+description: "XTMEM — shared SQLite-backed memory engine exposed as a Hermes MemoryProvider. Per-profile namespaces, configurable database path, no persona logic."
+# Non-host pip dependencies: a clean venv needs these to run the CLI/plugin.
+pip_dependencies:
+  - jieba
+  - fastapi
+  - uvicorn
+  - httpx
+  - PyYAML
+# Host dependency: hermes-agent (the 0.20.5 host) is provided by the host itself,
+# not by pip. Declared here only as documentation, never installed from this list.
+# host: hermes-agent

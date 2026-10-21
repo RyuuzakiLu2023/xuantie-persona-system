@@ -1,0 +1,25 @@
+{
+  "name": "xtmem",
+  "version": "0.2.0",
+  "description": "XTMEM shared memory for ZCode: MCP tools (recall/store/lookup/mailbox) + UserPromptSubmit injection + Stop observation. Identity and database are configurable.",
+  "author": {
+    "name": "XTMEM Maintainers"
+  },
+  "license": "MIT",
+  "mcpServers": {
+    "xtmem": {
+      "command": "python",
+      "args": [
+        "${ZCODE_PLUGIN_ROOT}/mcp/xtmem_mcp.py"
+      ],
+      "cwd": "${ZCODE_PROJECT_DIR}",
+      "env": {
+        "XTMEM_ACTOR": "zcode",
+        "XTMEM_PLUGIN_ROOT": "${ZCODE_PLUGIN_ROOT}",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONUTF8": "1"
+      }
+    }
+  },
+  "skills": "skills"
+}

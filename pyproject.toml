@@ -1,0 +1,89 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xtmem"
+version = "1.1.0.dev0"
+description = "XTMEM — Multi-role shared memory engine & cross-agent context infrastructure"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "XTMEM Maintainers", email = "maintainers@example.com" }
+]
+keywords = [
+    "memory-system",
+    "agent-memory",
+    "long-term-memory",
+    "multi-agent",
+    "sqlite",
+    "retrieval",
+    "llm",
+    "prompt-cache"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "jieba>=0.42.1",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.22.0",
+    "httpx>=0.24.0",
+    "PyYAML>=6.0",
+    "numpy>=1.24.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "flake8>=6.0.0",
+    "build>=1.0.0",
+]
+
+[project.scripts]
+# ⚠️【不】改回 `xtmem = "xtmem:main"`：main() 只 return dict，打印逻辑不在它里面。
+#   旧写法装出的 exe 运行后 stdout 全空（实测 `xtmem recall` 零输出、退出码随机），
+#   因为 setuptools 生成的入口走 import 路径，永远进不到 `if __name__ == "__main__"` 块。
+#   console_entry 才是「跑 + 打印 + 退出码」的完整入口，见 src/cli/xtmem.py。
+xtmem = "xtmem:console_entry"
+
+[project.urls]
+Homepage = "https://github.com/RyuuzakiLu2023/xuantie-persona-system"
+Documentation = "https://github.com/RyuuzakiLu2023/xuantie-persona-system#readme"
+Repository = "https://github.com/RyuuzakiLu2023/xuantie-persona-system.git"
+Issues = "https://github.com/RyuuzakiLu2023/xuantie-persona-system/issues"
+
+[tool.setuptools]
+py-modules = ["xtmem"]
+packages = ["memory", "xtmem_jobs", "xtmem_hermes"]
+
+[tool.setuptools.package-dir]
+"" = "src/cli"
+"memory" = "src/hermes-plugin/memory"
+"xtmem_jobs" = "src/scripts"
+"xtmem_hermes" = "src/hermes-plugin"
+
+[tool.setuptools.package-data]
+"memory" = ["*.html", "static/**/*"]
+"xtmem_jobs" = ["prompts/*.md"]
+"xtmem_hermes" = ["plugin.yaml", "xtmem.yaml.example"]
+
+# 端接头作为安装资源提供，不再让wheel用户另外寻找遗漏的源码目录。
+[tool.setuptools.data-files]
+"share/xtmem/zcode" = ["src/zcode/marketplace.json", "src/zcode/README.md", "src/zcode/.mcp.json"]
+"share/xtmem/zcode/.zcode-plugin" = ["src/zcode/.zcode-plugin/plugin.json"]
+"share/xtmem/zcode/mcp" = ["src/zcode/mcp/xtmem_mcp.py"]
+"share/xtmem/zcode/hooks" = ["src/zcode/hooks/xtmem_hook.py", "src/zcode/hooks/hooks.json"]
+"share/xtmem/dsh/xtmem-tools" = ["src/dsh/xtmem-tools/index.mjs", "src/dsh/xtmem-tools/memory-now.mjs"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIMOX 记忆系统监控</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'Microsoft YaHei', sans-serif; background: #0f1923; color: #e0e0e0; min-height: 100vh; }
+
+/* 顶部状态条 */
+.header { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: #1a2733; border-bottom: 1px solid #2a3a4a; }
+.header .status-dot { width: 16px; height: 16px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+.header .status-dot.green { background: #4caf50; box-shadow: 0 0 8px #4caf5080; }
+.header .status-dot.yellow { background: #ff9800; box-shadow: 0 0 8px #ff980080; }
+.header .status-dot.red { background: #f44336; box-shadow: 0 0 8px #f4433680; }
+.header .timestamp { font-size: 13px; color: #888; }
+.header .timestamp.stale { color: #f44336; }
+
+/* 三栏布局 */
+.grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; padding: 16px; }
+@media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+
+.card { background: #1a2733; border-radius: 8px; padding: 16px; border: 1px solid #2a3a4a; }
+.card h3 { font-size: 14px; color: #888; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.card .stat { font-size: 28px; font-weight: bold; margin-bottom: 4px; }
+.card .label { font-size: 12px; color: #666; }
+.card .warn { border-color: #f44336; background: #2a1515; }
+.card .info { border-color: #ff9800; background: #2a2015; }
+
+/* 告警条 */
+.alert-bar { padding: 8px 20px; font-size: 13px; text-align: center; display: none; }
+.alert-bar.red { background: #3a1515; color: #f44336; border-bottom: 1px solid #f44336; display: block; }
+.alert-bar.yellow { background: #3a2a15; color: #ff9800; border-bottom: 1px solid #ff9800; display: block; }
+
+/* 图表容器 */
+.chart-box { height: 300px; }
+
+/* 统计行 */
+.stats-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #2a3a4a; }
+.stats-row:last-child { border-bottom: none; }
+.stats-row .val { font-weight: bold; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <span class="status-dot green" id="statusDot"></span>
+    <span id="statusText">系统正常</span>
+  </div>
+  <div class="timestamp" id="lastUpdate">最近更新: --</div>
+</div>
+
+<div class="alert-bar" id="alertBar"></div>
+
+<div class="grid">
+  <!-- 左栏：健康总览 -->
+  <div class="card">
+    <h3>健康总览</h3>
+    <div class="stats-row"><span>Prefetch 调用</span><span class="val" id="prefetchCount">--</span></div>
+    <div class="stats-row"><span>Store 写入</span><span class="val" id="storeCount">--</span></div>
+    <div class="stats-row"><span>Chunk 总数</span><span class="val" id="chunkCount">--</span></div>
+    <div class="stats-row"><span>探针 OK</span><span class="val" id="probeOk" style="color:#4caf50">--</span></div>
+    <div class="stats-row"><span>探针 FAIL</span><span class="val" id="probeFail" style="color:#f44336">--</span></div>
+    <div class="stats-row"><span>Superseded</span><span class="val" id="supersededCount">--</span></div>
+  </div>
+
+  <!-- 中栏：分轨与演化 -->
+  <div class="card">
+    <h3>分轨与演化</h3>
+    <div id="trackChart" class="chart-box"></div>
+    <div style="margin-top:12px">
+      <div class="stats-row"><span>演化关系总数</span><span class="val" id="evoTotal">--</span></div>
+      <div class="stats-row"><span>Superseded 比例</span><span class="val" id="supersededRatio">--</span></div>
+    </div>
+  </div>
+
+  <!-- 右栏：趋势 -->
+  <div class="card">
+    <h3>24h 趋势</h3>
+    <div id="trendChart" class="chart-box"></div>
+  </div>
+</div>
+
+<script>
+const API_BASE = window.location.origin;
+let lastProbeResult = null;
+
+// 图表实例
+let trackChart = echarts.init(document.getElementById('trackChart'));
+let trendChart = echarts.init(document.getElementById('trendChart'));
+
+// 告警规则
+function checkAlerts(data) {
+  const alertBar = document.getElementById('alertBar');
+  const statusDot = document.getElementById('statusDot');
+  const statusText = document.getElementById('statusText');
+  const lastUpdate = document.getElementById('lastUpdate');
+  let alerts = [];
+
+  // 分轨检查
+  const trackDist = data.track_distribution || {};
+  if ((trackDist.identity || 0) === 0 && (trackDist.preference || 0) === 0) {
+    alerts.push({ level: 'red', text: '分轨未生效：identity 和 preference 都为 0' });
+  }
+
+  // superseded 比例
+  if ((data.superseded_ratio || 0) > 0.2) {
+    alerts.push({ level: 'yellow', text: '演化过激：superseded 比例超过 20%' });
+  }
+
+  // 状态灯
+  if (alerts.some(a => a.level === 'red')) {
+    statusDot.className = 'status-dot red';
+    statusText.textContent = '系统异常';
+  } else if (alerts.some(a => a.level === 'yellow')) {
+    statusDot.className = 'status-dot yellow';
+    statusText.textContent = '需要注意';
+  } else {
+    statusDot.className = 'status-dot green';
+    statusText.textContent = '系统正常';
+  }
+
+  // 告警条
+  if (alerts.length > 0) {
+    alertBar.className = 'alert-bar ' + alerts[0].level;
+    alertBar.textContent = alerts.map(a => a.text).join(' | ');
+  } else {
+    alertBar.className = 'alert-bar';
+    alertBar.style.display = 'none';
+  }
+}
+
+// 更新健康数据
+async function updateHealth() {
+  try {
+    const [healthRes, statsRes] = await Promise.all([
+      fetch(API_BASE + '/api/memory/health').then(r => r.json()),
+      fetch(API_BASE + '/api/stats').then(r => r.json()),
+    ]);
+
+    // 左栏
+    document.getElementById('prefetchCount').textContent = statsRes.prefetch_count_total || 0;
+    document.getElementById('storeCount').textContent = statsRes.store_count_total || 0;
+    document.getElementById('probeOk').textContent = statsRes.probe_ok_count || 0;
+    document.getElementById('probeFail').textContent = statsRes.probe_fail_count || 0;
+    document.getElementById('supersededCount').textContent = healthRes.superseded_count || 0;
+    document.getElementById('evoTotal').textContent = Object.values(healthRes.evolution || {}).reduce((a, b) => a + b, 0);
+    document.getElementById('supersededRatio').textContent = ((healthRes.superseded_ratio || 0) * 100).toFixed(1) + '%';
+
+    // 分轨饼图
+    const trackDist = healthRes.track_distribution || {};
+    const trackData = [
+      { name: 'identity', value: trackDist.identity || 0, itemStyle: { color: '#e91e63' } },
+      { name: 'preference', value: trackDist.preference || 0, itemStyle: { color: '#2196f3' } },
+      { name: 'emotion', value: trackDist.emotion || 0, itemStyle: { color: '#ff9800' } },
+      { name: 'default', value: trackDist.default || 0, itemStyle: { color: '#607d8b' } },
+    ].filter(d => d.value > 0);
+
+    trackChart.setOption({
+      tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+      series: [{
+        type: 'pie', radius: ['40%', '70%'],
+        label: { color: '#e0e0e0' },
+        data: trackData,
+      }]
+    });
+
+    // 趋势图
+    const timeline = statsRes.timeline || [];
+    const times = timeline.map(t => t.ts ? new Date(t.ts).toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit'}) : '');
+    const prefetchChars = timeline.map(t => t.prefetch_chars || 0);
+    const storeWrites = timeline.map(t => t.store_writes || 0);
+
+    trendChart.setOption({
+      tooltip: { trigger: 'axis' },
+      legend: { data: ['Prefetch 字符数', 'Store 写入'], textStyle: { color: '#888' } },
+      xAxis: { type: 'category', data: times, axisLabel: { color: '#666', rotate: 45 } },
+      yAxis: [
+        { type: 'value', name: '字符数', axisLabel: { color: '#666' } },
+        { type: 'value', name: '写入次数', axisLabel: { color: '#666' } },
+      ],
+      series: [
+        { name: 'Prefetch 字符数', type: 'line', data: prefetchChars, smooth: true, lineStyle: { color: '#2196f3' }, itemStyle: { color: '#2196f3' } },
+        { name: 'Store 写入', type: 'bar', data: storeWrites, yAxisIndex: 1, itemStyle: { color: '#ff9800' } },
+      ],
+      grid: { left: 60, right: 60, bottom: 40 },
+    });
+
+    // 检查告警
+    checkAlerts(healthRes);
+
+    // 更新时间戳
+    const now = new Date();
+    lastUpdate.textContent = '最近更新: ' + now.toLocaleTimeString('zh-CN');
+    lastUpdate.className = 'timestamp';
+
+  } catch (e) {
+    document.getElementById('statusDot').className = 'status-dot red';
+    document.getElementById('statusText').textContent = '连接失败';
+    document.getElementById('lastUpdate').textContent = '最近更新: 连接失败';
+    document.getElementById('lastUpdate').className = 'timestamp stale';
+  }
+}
+
+// 响应式
+window.addEventListener('resize', () => {
+  trackChart.resize();
+  trendChart.resize();
+});
+
+// 轮询
+updateHealth();
+setInterval(updateHealth, 15000);
+</script>
+</body>
+</html>

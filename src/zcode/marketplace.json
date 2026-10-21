@@ -1,0 +1,14 @@
+{
+  "name": "xtmem-local",
+  "plugins": [
+    {
+      "name": "xtmem",
+      "source": ".",
+      "version": "0.2.0",
+      "description": "XTMEM shared memory for ZCode: MCP tools + prompt-time injection + stop-time observation. Identity and database are configurable.",
+      "author": {
+        "name": "XTMEM Maintainers"
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+node_modules/
+__pycache__/
+*.pyc
+.sync-state.json
+*.cbak*
+*.bak
+.backup/
+.env
+*.db
+*.sqlite*
+.env.local
+frontend/
+dist/
+build/
+*.egg-info/
+.venv/
+
