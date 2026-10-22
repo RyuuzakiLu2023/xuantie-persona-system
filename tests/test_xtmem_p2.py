@@ -12,6 +12,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 import conftest
 
 from memory.utils import compute_content_hash, compute_embedding_cache_key
@@ -109,7 +111,12 @@ def test_p213_ns_map_targeted_query():
 
 
 def test_p214_archived_modules():
+    # ⚠️ 公开仓【不】含内部 memory/_archived 目录（只在内部开发树里），原断言等于
+    #    在公开包上检查一个注定不存在的东西 → 公开仓必然 1 failed（P1-1）。
+    #    目录不在就 skip 并说明原因，【不】改成"随便断言点别的"糊过去。
     archived = Path(PLUGIN_DIR) / "memory" / "_archived"
+    if not archived.exists():
+        pytest.skip("internal archived directory not in public release")
     assert (archived / "integration.py").exists()
     assert (archived / "auto_dream.py").exists()
     assert (archived / "core_memory.py").exists()

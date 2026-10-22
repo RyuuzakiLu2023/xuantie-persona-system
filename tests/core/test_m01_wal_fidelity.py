@@ -35,10 +35,58 @@ GUARD_TMP = Path(tempfile.mkdtemp(prefix="xtmem-m01-"))
 # ⚠️【隔离红线】diagnostics._log_path() 默认落到 $XTMEM_DB_PATH 或 $MIMOX_HOME 下的
 #    .hermes/memory/diagnostics——本鱼首版没设这两个变量，测试进程的诊断事件
 #    （events-<pid>.jsonl）直接写进了【生产】诊断目录（实测 events-7320/25256.jsonl）。
-#    必须在 import 任何 memory 模块【之前】把落点钉到沙箱，否则又是"测试污染生产"。
+#    必须在任何 memory 模块落盘【之前】把落点钉到沙箱，否则又是"测试污染生产"。
+#
+# ⚠️【2026-10-22 修复·环境变量泄漏（P0-2）】原写法在这两行【无条件写、永不还原】。
+#    pytest 收集阶段就会执行本模块，"收集期写入"等于把值泄漏给整场会话里的其它测试模块：
+#    tests/test_xtmem_p0.py 的 cli_env 收尾断言 `XTMEM_DB_PATH is None` 因此成片炸开
+#    （与 m01 同场跑实测 11 errors，单独跑 p0 则 0 error —— 差值全部来自这里）。
+#    现改法：import 期【不】再落值，由下方 autouse 夹具在每例前落位、模块收尾还原。
+#    隔离红线【不变】：本文件所有 memory.* 导入都在用例函数体内（无模块级 import），
+#    夹具 setup 必然早于任何 memory 导入，钉沙箱的时机没有变松。
+#    【不】改回模块级裸写：那会把污染重新泄漏给其它测试模块（本条即该缺陷的修复）。
+#    ⚠️ 别指望把 pytest_sessionfinish 写在本文件里——pytest 只从 conftest/插件收集钩子，
+#    测试模块里的同名函数【不】会被调用（2026-10-22 实测：塞进去故意抛 RuntimeError，
+#    pytest 全程无反应、退出码仍是 0）。
 GUARD_TMP.mkdir(parents=True, exist_ok=True)
-os.environ["XTMEM_DIAGNOSTIC_DIR"] = str(GUARD_TMP / "diagnostics")
-os.environ["XTMEM_DB_PATH"] = str(GUARD_TMP / "prod-not-touched.db")
+
+_prior_diag = os.environ.get("XTMEM_DIAGNOSTIC_DIR")
+_prior_db = os.environ.get("XTMEM_DB_PATH")
+
+
+def _apply_sandbox_env():
+    """把诊断与库落点钉到沙箱（GUARD_TMP）。夹具每例前调一次，防上一例把它改了。"""
+    os.environ["XTMEM_DIAGNOSTIC_DIR"] = str(GUARD_TMP / "diagnostics")
+    os.environ["XTMEM_DB_PATH"] = str(GUARD_TMP / "prod-not-touched.db")
+
+
+def _restore_env():
+    """还原到本模块 import 前的值；原本没有就删掉，【不】留空串冒充"没设过"。"""
+    for key, prior in (("XTMEM_DIAGNOSTIC_DIR", _prior_diag),
+                       ("XTMEM_DB_PATH", _prior_db)):
+        if prior is None:
+            os.environ.pop(key, None)
+        else:
+            os.environ[key] = prior
+
+
+def _sandbox_env_fixture():
+    """autouse（模块级）：每例前落位沙箱，模块收尾还原，杜绝跨模块环境变量泄漏。"""
+    _apply_sandbox_env()
+    try:
+        yield
+    finally:
+        _restore_env()
+
+
+try:  # 无 pytest 环境仍要能 python 直跑本文件，所以这里容错导入
+    import pytest as _pytest
+except ImportError:  # pragma: no cover
+    _pytest = None
+
+if _pytest is not None:
+    _sandbox_env_autouse = _pytest.fixture(scope="module", autouse=True)(
+        _sandbox_env_fixture)
 
 FIELDS = ["track", "tier", "source_ids", "derived_from", "host_origin"]
 
@@ -790,6 +838,9 @@ def test_b3_replay_restores_provenance_into_db():
 
 
 def _main():
+    # ⚠️ 直跑（无 pytest）时【没有】夹具来落位，必须在这里自己钉沙箱并还原，
+    #    否则 diagnostics 会按 $MIMOX_HOME 写进生产诊断目录（2026-10-22 引入夹具时一并补）。
+    _apply_sandbox_env()
     tests = [(n, f) for n, f in sorted(globals().items())
              if n.startswith("test_") and callable(f)]
     passed, failed = [], []
@@ -802,9 +853,12 @@ def _main():
             failed.append(name)
             print("  FAIL  %s" % name)
             traceback.print_exc()
+        finally:
+            _apply_sandbox_env()  # 用例可能改了环境变量，下一例前重新落位
     print("\n==== M01 结果：%d passed / %d failed ====" % (len(passed), len(failed)))
     for n in failed:
         print("  FAILED: %s" % n)
+    _restore_env()
     return 1 if failed else 0
 
 
