@@ -571,6 +571,30 @@ def process_start_time(pid: Any) -> Optional[float]:
         return float(psutil.Process(value).create_time())
     except Exception:
         pass
+    if os.name == "posix":
+        try:
+            # 优先从 /proc/<pid>/stat 读取进程启动时间（零外部依赖，原生 Linux 兜底）
+            # starttime 是第 22 个字段（从1开始编号，避开 comm 中的空格与括号）
+            with open(f"/proc/{value}/stat", "r", encoding="utf-8") as f:
+                content = f.read()
+            after_comm = content[content.rfind(")") + 2:].split()
+            starttime_ticks = float(after_comm[19])
+
+            btime = 0.0
+            with open("/proc/stat", "r", encoding="utf-8") as f:
+                for line in f:
+                    if line.startswith("btime "):
+                        btime = float(line.split()[1])
+                        break
+            clock_ticks = (
+                os.sysconf(os.sysconf_names["SC_CLK_TCK"])
+                if hasattr(os, "sysconf") and "SC_CLK_TCK" in getattr(os, "sysconf_names", {})
+                else 100.0
+            )
+            if btime > 0:
+                return btime + (starttime_ticks / clock_ticks)
+        except Exception:
+            pass
     if os.name == "nt":
         try:
             import ctypes
